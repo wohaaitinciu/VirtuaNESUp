@@ -1,15 +1,15 @@
-//
-// ROMƒwƒbƒ_‚ÌC³(NESToy‚Å‚ÌŠÔˆá‚¢C³‚È‚Ç)‹y‚ÑROMƒpƒbƒ`
+ï»¿//
+// ROMãƒ˜ãƒƒãƒ€ã®ä¿®æ­£(NESToyã§ã®é–“é•ã„ä¿®æ­£ãªã©)åŠã³ROMãƒ‘ãƒƒãƒ
 //
 
 // Mapper 000
-if( crc == 0x57970078 ) {	// F-1 Race(J) –³—–î—ƒpƒbƒ`(^^;
+if( crc == 0x57970078 ) {	// F-1 Race(J) ç„¡ç†çŸ¢ç†ãƒ‘ãƒƒãƒ(^^;
 	lpPRG[0x078C] = 0x6C;
 	lpPRG[0x3FE1] = 0xFF;
 	lpPRG[0x3FE6] = 0x00;
 }
 if( crc == 0xaf2bbcbc		// Mach Rider(JU)
- || crc == 0x3acd4bf1		// Mach Rider(Alt)(JU) –³—–î—ƒpƒbƒ`(^^;
+ || crc == 0x3acd4bf1		// Mach Rider(Alt)(JU) ç„¡ç†çŸ¢ç†ãƒ‘ãƒƒãƒ(^^;
  || crc == 0x8bbe9bec ) {
 	lpPRG[0x090D] = 0x6E;
 	lpPRG[0x7FDF] = 0xFF;
@@ -22,7 +22,7 @@ if( crc == 0xe16bb5fe ) {	// Zippy Race(J)
 	header.control1 &= 0xf6;
 }
 if( crc == 0x85534474 ) {	// Lode Runner(J)
-	lpPRG[0x29E9] = 0xEA;	// ƒZ[ƒuƒƒjƒ…[‚ğo‚·ƒpƒbƒ`
+	lpPRG[0x29E9] = 0xEA;	// ã‚»ãƒ¼ãƒ–ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’å‡ºã™ãƒ‘ãƒƒãƒ
 	lpPRG[0x29EA] = 0xEA;
 	lpPRG[0x29F8] = 0xEA;
 	lpPRG[0x29F9] = 0xEA;
@@ -43,21 +43,21 @@ if( crc == 0x7831b2ff		// America Daitouryou Senkyo(J)
  || crc == 0x1e0c7ea3 ) {	// AD&D Dragons of Flame(J)
 	header.control1 |= ROM_SAVERAM;
 }
-if( crc == 0x1995ac4e ) {	// Ferrari Grand Prix Challenge(J) –³—–î—ƒpƒbƒ`(^^;
+if( crc == 0x1995ac4e ) {	// Ferrari Grand Prix Challenge(J) ç„¡ç†çŸ¢ç†ãƒ‘ãƒƒãƒ(^^;
 	lpPRG[0x1F7AD] = 0xFF;
 	lpPRG[0x1F7BC] = 0x00;
 }
 
-if( crc == 0x20d22251 ) {	// Top rider(J) –³—–î—ƒpƒbƒ`(^^;
+if( crc == 0x20d22251 ) {	// Top rider(J) ç„¡ç†çŸ¢ç†ãƒ‘ãƒƒãƒ(^^;
 	lpPRG[0x1F17E] = 0xEA;
 	lpPRG[0x1F17F] = 0xEA;
 }
 
-if( crc == 0x11469ce3 ) {	// Viva! Las Vegas(J) –³—–î—ƒpƒbƒ`(^^;
+if( crc == 0x11469ce3 ) {	// Viva! Las Vegas(J) ç„¡ç†çŸ¢ç†ãƒ‘ãƒƒãƒ(^^;
 	lpCHR[0x0000] = 0x01;
 }
 
-if( crc == 0x3fccdc7b ) {	// Baseball Star - Mezase Sankanou!!(J) –³—–î—ƒpƒbƒ`(^^;
+if( crc == 0x3fccdc7b ) {	// Baseball Star - Mezase Sankanou!!(J) ç„¡ç†çŸ¢ç†ãƒ‘ãƒƒãƒ(^^;
 	lpPRG[0x0F666] = 0x9D;
 }
 
@@ -360,8 +360,8 @@ if( mapper == 99 || mapper == 151 ) {
 	header.control2 |= ROM_VSUNISYSTEM;
 }
 
-//À©Õ¹ĞŞÕı
-if(  crc == 0x78fb3ed6 )//¼×A
+//ï¿½ï¿½Õ¹ï¿½ï¿½ï¿½ï¿½
+if(  crc == 0x78fb3ed6 )//ï¿½ï¿½A
 {
 	mapper = 74;
 }
@@ -370,7 +370,7 @@ if(  crc == 0x02c41438 )
 	mapper = 176;
 }
 
-if(  crc == 0x37ae04a8 )//¶ÄÉñ
+if(  crc == 0x37ae04a8 )//ï¿½ï¿½ï¿½ï¿½
 {
 	mapper = 191;
 }
@@ -378,55 +378,55 @@ if(  crc == 0x37ae04a8 )//¶ÄÉñ
 if(  crc == 0x9767dc74
    ||crc == 0xff93eff0
    ||crc == 0x9fb1ee82
-   ||crc == 0x1ee6d43b )//½ğÓ¹
+   ||crc == 0x1ee6d43b )//ï¿½ï¿½Ó¹
 {
 	mapper = 192;
 }
 
 if(  crc == 0xeae675ea
    ||crc == 0x6bab54b7 
-   ||crc == 0x7c896b5e )//µÚ¶ş´Î»úÆ÷ÈË´óÕ½
+   ||crc == 0x7c896b5e )//ï¿½Ú¶ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ë´ï¿½Õ½
 {
 	mapper = 194;
 }
 
-if(  crc == 0xb1b32c8b //¶ÄÉñ
+if(  crc == 0xb1b32c8b //ï¿½ï¿½ï¿½ï¿½
    ||crc == 0xe2b43a70 
    ||crc == 0x3f3036d7 
    ||crc == 0x1a13ba25 
    ||crc == 0xc69233dc
-   ||crc == 0xdf993993 //ÌìÊ¹Ö®Òí2
+   ||crc == 0xdf993993 //ï¿½ï¿½Ê¹Ö®ï¿½ï¿½2
    ||crc == 0xae185a13
-   ||crc == 0xf60beecb //×ãÇòĞ¡½«2
-   ||crc == 0xc856f188 )//ÌìÉñÖ®½£
+   ||crc == 0xf60beecb //ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½2
+   ||crc == 0xc856f188 )//ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½
 {
 	mapper = 195;
 }
 
 if(  crc == 0x9993304c
-   ||crc == 0x50e9c2b5 )//»ìãçÊÀ¼Í
+   ||crc == 0x50e9c2b5 )//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 {
 	//Mirroring should be set to "Horizontal".  
 	//PAL
 	mapper = 195;
 }
 
-if(  crc == 0xe80d8741 )//Èı¹úÖ¾2
+if(  crc == 0xe80d8741 )//ï¿½ï¿½ï¿½ï¿½Ö¾2
 {
 	mapper = 199;
 }
-if(  crc == 0xb5e83c9a//ĞÇ¼ÊÕù°Ô
-   ||crc == 0xfb2b6b10)//·´¿Ö¾«Ó¢
+if(  crc == 0xb5e83c9a//ï¿½Ç¼ï¿½ï¿½ï¿½ï¿½ï¿½
+   ||crc == 0xfb2b6b10)//ï¿½ï¿½ï¿½Ö¾ï¿½Ó¢
 {
 	mapper = 241;
 }
 
-//ÌØÊâ²¹¶¡,WXNÖ§³Ö´úÂë
+//ï¿½ï¿½ï¿½â²¹ï¿½ï¿½,WXNÖ§ï¿½Ö´ï¿½ï¿½ï¿½
 //WAIXING_FS005
-if(  crc == 0xc768098b//ÈıÏÀÎåÒå
-   ||crc == 0x49f22159//³¬¼¶´ó¸»ÎÌ
-   ||crc == 0xf29c8186//´ó¸»ÎÌ2
-   ||crc == 0xf354d847//¸ñÀ¼µÙÑÇ
+if(  crc == 0xc768098b//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   ||crc == 0x49f22159//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   ||crc == 0xf29c8186//ï¿½ï¿½ï¿½ï¿½2
+   ||crc == 0xf354d847//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    )
 {
 	bUnif = 1;
@@ -435,7 +435,7 @@ if(  crc == 0xc768098b//ÈıÏÀÎåÒå
 	pboardname[0] = 0;
 }
 
-if(  crc == 0x8eb4bb51//³èÎïºì
+if(  crc == 0x8eb4bb51//ï¿½ï¿½ï¿½ï¿½ï¿½
    )
 {
 	mapper= 164;

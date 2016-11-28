@@ -1,4 +1,4 @@
-//
+ï»¿//
 // DirectDraw class
 //
 #include "DebugOut.h"
@@ -8,7 +8,7 @@
 #include "MMU.h"
 
 extern BOOL g_bSan2;
-extern unsigned char pSan2Font[64*1024];//¶¨Òå64KµÄ×Ö¿â¿Õ¼ä
+extern unsigned char pSan2Font[64*1024];//å®šä¹‰64Kçš„å­—åº“ç©ºé—´
 
 #define MIN_GROUP 0x6 
 #define MIN_INDEX 0x40 
@@ -142,7 +142,7 @@ CDirectDraw::BLTFUNC	CDirectDraw::nxLq2xBltTable[] = {
 
 
 //////////////////////////////////////////////////////////////////////
-// ƒfƒtƒHƒ‹ƒgƒpƒŒƒbƒg
+// åƒ¨åƒ¼åƒ…å„–åƒ©åƒ·å„—åƒ¢åƒ©
 //////////////////////////////////////////////////////////////////////
 CDirectDraw::PALBUF	CDirectDraw::m_PalDefault[] = {
 	0x7F, 0x7F, 0x7F, 0x20, 0x00, 0xB0, 0x28, 0x00, 0xB8, 0x60, 0x10, 0xA0, 0x98, 0x20, 0x78, 0xB0,
@@ -163,7 +163,7 @@ CDirectDraw::PALBUF	CDirectDraw::m_PalDefault[] = {
 };
 
 //////////////////////////////////////////////////////////////////////
-// ƒLƒƒƒ‰ƒNƒ^
+// åƒ‰å„å„”åƒ‹åƒ
 //////////////////////////////////////////////////////////////////////
 static	BYTE	lzSight[] = {
 #include "lzSight.h"
@@ -175,7 +175,7 @@ static	BYTE	lzTVlayer[] = {
 #include "lzTVlayer.h"
 };
 
-// ƒƒ‚ƒŠ‚©‚ç‚PƒoƒCƒgæ‚Á‚Ä‚­‚é
+// å„Šå„Œå„•åå‚œä¾¾åƒ¶åƒ€åƒ©åº¢å­å°å”å‚
 static __inline INT	mgetc( LPBYTE& inbuf, INT& bufsize )
 {
 	if( bufsize <= 0 )
@@ -185,7 +185,7 @@ static __inline INT	mgetc( LPBYTE& inbuf, INT& bufsize )
 }
 
 //
-// LZSS‰ğ“€ƒ‹[ƒ`ƒ“
+// LZSSå¤æ¥å„–ä¹•åƒ å„
 //
 #define	N	4096
 #define	F	18
@@ -236,7 +236,7 @@ INT	outsize = 0;
 }
 
 //////////////////////////////////////////////////////////////////////
-// \’z/Á–Å
+// å³”æŠ¸/å¾šæŸµ
 //////////////////////////////////////////////////////////////////////
 
 CDirectDraw::CDirectDraw()
@@ -295,16 +295,16 @@ CDirectDraw::CDirectDraw()
 	// Filter
 	m_nBltFilter = 0;
 
-	// ƒfƒtƒHƒ‹ƒg‰ğ‘œ“x
+	// åƒ¨åƒ¼åƒ…å„–åƒ©å¤æ†¸æ™
 	m_dwDisplayWidth  = 640;
 	m_dwDisplayHeight = 480;
 	m_dwDisplayDepth  = 16;
-	m_dwDisplayRate   = 0;	// ƒŠƒtƒŒƒbƒVƒ…ƒŒ[ƒgw’è–³‚µ
+	m_dwDisplayRate   = 0;	// å„•åƒ¼å„—åƒ¢åƒ”å„å„—ä¹•åƒ©å·œæ•æŸåŸ
 
 	// LineColormode
 	::memset( m_LineColormode, 0, sizeof(m_LineColormode) );
 
-	// ƒpƒŒƒbƒg
+	// åƒ·å„—åƒ¢åƒ©
 	m_nPaletteMode = 0;
 	m_bMonoMode = FALSE;
 
@@ -317,7 +317,7 @@ CDirectDraw::CDirectDraw()
 	ZEROMEMORY( m_mnPalette, sizeof(m_mnPalette) );
 	ZEROMEMORY( m_msPalette, sizeof(m_msPalette) );
 
-	// ‚»‚Ì‘¼
+	// å¦åºæ‡ 
 	m_bDiskAccessLamp = FALSE;
 
 	ZEROMEMORY( m_szInfo, sizeof(m_szInfo) );
@@ -374,31 +374,31 @@ CDirectDraw::~CDirectDraw()
 }
 
 //////////////////////////////////////////////////////////////////////
-// ƒƒ“ƒoŠÖ”
+// å„Šå„åƒ¶å¨­æ‚¢
 //////////////////////////////////////////////////////////////////////
 
-// ƒR[ƒ‹ƒoƒbƒNŠÖ”
+// åƒä¹•å„–åƒ¶åƒ¢åƒ‹å¨­æ‚¢
 HRESULT	WINAPI	CDirectDraw::EnumModesCallback( LPDDSURFACEDESC2 lpDDSurfaceDesc, LPVOID lpContext )
 {
-	// Thisƒ|ƒCƒ“ƒ^‚ğó‚¯æ‚é
+	// Thiså„„åƒ€å„åƒå‚ªåº´å—åº¢å‚
 	CDirectDraw* pDD = (CDirectDraw*)lpContext;
 
-	// 256x240ˆÈ‰º‚Ì‰ğ‘œ“x‚ÍœŠO(ex. 320x200)
+	// 256x240åŸ²å£“åºå¤æ†¸æ™å¼å½å¥œ(ex. 320x200)
 	if( lpDDSurfaceDesc->dwWidth < 256 || lpDDSurfaceDesc->dwHeight < 240 )
 		return	DDENUMRET_OK;
 
-	// 8,16,24,32bitˆÈŠO‚ÍœŠO(4bit‚ª‚ ‚é‚Ë^^;)
+	// 8,16,24,32bitåŸ²å¥œå¼å½å¥œ(4bitå‘åå‚å¹^^;)
 	if( !(lpDDSurfaceDesc->ddpfPixelFormat.dwRGBBitCount == 8
 	   || lpDDSurfaceDesc->ddpfPixelFormat.dwRGBBitCount == 16
 	   || lpDDSurfaceDesc->ddpfPixelFormat.dwRGBBitCount == 24
 	   || lpDDSurfaceDesc->ddpfPixelFormat.dwRGBBitCount == 32) )
 		return	DDENUMRET_OK;
 
-	// ƒXƒNƒGƒAƒTƒCƒY‚Ì‰ğ‘œ“xˆÈŠO‚ÍœŠO(ex. 640x400) (1280x1024‚Í‘I‘ğ‰Â”\‚É)
+	// åƒ—åƒ‹åƒ„å‚¾åƒ’åƒ€åƒ˜åºå¤æ†¸æ™åŸ²å¥œå¼å½å¥œ(ex. 640x400) (1280x1024å¼æ…–æˆ°å£œæ“»åµ)
 //	if( lpDDSurfaceDesc->dwWidth*3 != lpDDSurfaceDesc->dwHeight*4 && !(lpDDSurfaceDesc->dwWidth == 1280 && lpDDSurfaceDesc->dwHeight == 1024) )
 //		return	DDENUMRET_OK;
 
-	// ƒTƒCƒY^ƒrƒbƒg[“x^ƒŠƒtƒŒƒbƒVƒ…ƒŒ[ƒg^ƒsƒNƒZƒ‹ƒtƒH[ƒ}ƒbƒg‚ÌƒRƒs[
+	// åƒ’åƒ€åƒ˜ä¹›åƒ¹åƒ¢åƒ©æ€ºæ™ä¹›å„•åƒ¼å„—åƒ¢åƒ”å„å„—ä¹•åƒ©ä¹›åƒºåƒ‹åƒ™å„–åƒ¼åƒ…ä¹•å„…åƒ¢åƒ©åºåƒåƒºä¹•
 	DISPLAYMODE	mode;
 	mode.dwWidth  = lpDDSurfaceDesc->dwWidth;
 	mode.dwHeight = lpDDSurfaceDesc->dwHeight;
@@ -406,7 +406,7 @@ HRESULT	WINAPI	CDirectDraw::EnumModesCallback( LPDDSURFACEDESC2 lpDDSurfaceDesc,
 	mode.dwRate   = lpDDSurfaceDesc->dwRefreshRate;
 	pDD->m_DisplayModes.push_back( mode );
 
-	// —ñ‹“”‚ª’´‚¦‚½ê‡‚ÍƒLƒƒƒ“ƒZƒ‹
+	// æ¥å«‡æ‚¢å‘æŒ»åŠå¨å¿œå´Œå¼åƒ‰å„å„åƒ™å„–
 	if( ++pDD->m_DisplayModeNum > CDirectDraw::DD_DISPLAYMODEMAX-1 ) {
 //		DEBUGOUT( "CDirectDraw:Maximum display modes over.\n" );
 		return	DDENUMRET_CANCEL;
@@ -414,11 +414,11 @@ HRESULT	WINAPI	CDirectDraw::EnumModesCallback( LPDDSURFACEDESC2 lpDDSurfaceDesc,
 	return	DDENUMRET_OK;
 }
 
-// DirectDraw‚Ì‰Šú‰»
+// DirectDrawåºå¼¶å©œå£”
 BOOL	CDirectDraw::InitialDDraw( HWND hWnd )
 {
 	try {
-		// DirectDrawƒIƒuƒWƒFƒNƒg‚Ìì¬
+		// DirectDrawåƒ†åƒ½åƒ•åƒƒåƒ‹åƒ©åºå¶Œæƒ‰
 
 #if	!DYNDLL
 #if	!COMUSE
@@ -434,10 +434,10 @@ BOOL	CDirectDraw::InitialDDraw( HWND hWnd )
 			}
 		}
 #else
-		// COM“I—˜—p(ƒ‰ƒCƒuƒ‰ƒŠ‚ğƒŠƒ“ƒN‚·‚é‚¾‚¯‚Å‹N“®‚ª’x‚­‚È‚é‚Ì‚Å...)
+		// COMæ‘æ£™æ¢¡(å„”åƒ€åƒ½å„”å„•å‚ªå„•å„åƒ‹å¡å‚å©å—å±å©²æ‘¦å‘æŠ¶å”å´å‚åºå±...)
 //		COM::AddRef();
 
-		// CLSID_DirectDraw‚Å‚Í–³‚­CLSID_DirectDraw7‚ğg‚í‚È‚¢‚Æ‘Ê–Ú
+		// CLSID_DirectDrawå±å¼æŸå”CLSID_DirectDraw7å‚ªå·Šå‚¢å´å„å²æ‡¯æ š
 		if( ::CoCreateInstance( CLSID_DirectDraw7, NULL, CLSCTX_ALL, IID_IDirectDraw7, (LPVOID*)&m_lpDD ) != S_OK ) {
 			m_lpDD = NULL;
 			throw	"CDirectDraw:DirectX 7.0 or greater is required.";
@@ -452,7 +452,7 @@ BOOL	CDirectDraw::InitialDDraw( HWND hWnd )
 		}
 #endif
 #else
-		// DLL‚ğ“®“Iƒ[ƒh‚µ‚Ä—˜—p
+		// DLLå‚ªæ‘¦æ‘å„˜ä¹•åƒªåŸå°æ£™æ¢¡
 		if( !(m_hDDraw = ::LoadLibrary( "DDRAW.DLL" )) ) {
 			throw	"CDirectDraw:DirectX 7.0 or greater is required.";
 		}
@@ -478,7 +478,7 @@ typedef HRESULT(WINAPI * DIRECTDRAWCREATEEX)( GUID*, VOID**, REFIID, IUnknown* )
 			}
 		}
 #endif
-		// ƒ‚ƒjƒ^‰ğ‘œ“x‚Ì’²¸
+		// å„Œåƒ¯åƒå¤æ†¸æ™åºæŒ·åµ
 		DDSURFACEDESC2	ddsd;
 		ZEROMEMORY( &ddsd, sizeof(DDSURFACEDESC2) );
 		ddsd.dwSize = sizeof(DDSURFACEDESC2);
@@ -488,7 +488,7 @@ typedef HRESULT(WINAPI * DIRECTDRAWCREATEEX)( GUID*, VOID**, REFIID, IUnknown* )
 		if( ddsd.ddpfPixelFormat.dwRGBBitCount < 8 )
 			throw	"CDirectDraw:Unsupported display mode.";
 
-		// —˜—p‰Â”\‚ÈƒfƒBƒXƒvƒŒƒCƒ‚[ƒh‚Ìæ“¾
+		// æ£™æ¢¡å£œæ“»å´åƒ¨å‚¿åƒ—åƒ¾å„—åƒ€å„Œä¹•åƒªåºåº¢æ‘¼
 		m_DisplayModeNum = 0;
 		if( m_lpDD->EnumDisplayModes(DDEDM_REFRESHRATES, NULL, (LPVOID)this, (LPDDENUMMODESCALLBACK2)EnumModesCallback) != DD_OK )
 			throw	"CDirectDraw:EnumDisplayModes failed.";
@@ -497,7 +497,7 @@ typedef HRESULT(WINAPI * DIRECTDRAWCREATEEX)( GUID*, VOID**, REFIID, IUnknown* )
 
 		m_hWnd = hWnd;
 
-		// ƒfƒtƒHƒ‹ƒgƒpƒŒƒbƒgİ’è
+		// åƒ¨åƒ¼åƒ…å„–åƒ©åƒ·å„—åƒ¢åƒ©æ„æ•
 		memcpy( m_PaletteBuf, m_PalDefault, sizeof(m_PalDefault) );
 
 		// Render screen
@@ -529,7 +529,7 @@ typedef HRESULT(WINAPI * DIRECTDRAWCREATEEX)( GUID*, VOID**, REFIID, IUnknown* )
 	return	TRUE;
 }
 
-// DirectDraw‚ÌŠJ•ú
+// DirectDrawåºå¥æ›»
 void	CDirectDraw::ReleaseDDraw()
 {
 	ReleaseSurface();
@@ -553,7 +553,7 @@ void	CDirectDraw::ReleaseDDraw()
 //	m_hWnd = NULL;
 }
 
-// ƒT[ƒtƒFƒX‚Ì‰Šú‰»
+// åƒ’ä¹•åƒ¼åƒƒåƒ—åºå¼¶å©œå£”
 BOOL	CDirectDraw::InitialSurface( BOOL bScreenMode )
 {
 INT	i;
@@ -570,12 +570,12 @@ DDBLTFX		ddbltfx;
 		m_bMessage = FALSE;
 
 		if( !m_bScreenMode ) {
-		// ƒEƒCƒ“ƒhƒE
-			// ‹¦’²ƒ‚[ƒh
+		// åƒ‚åƒ€å„åƒªåƒ‚
+			// å«¤æŒ·å„Œä¹•åƒª
 			if( m_lpDD->SetCooperativeLevel( m_hWnd, DDSCL_NORMAL ) != DD_OK )
 				throw	"CDirectDraw:SetCooperativeLevel failed.";
 
-			// ƒvƒ‰ƒCƒ}ƒŠƒT[ƒtƒFƒX
+			// åƒ¾å„”åƒ€å„…å„•åƒ’ä¹•åƒ¼åƒƒåƒ—
 			ZEROMEMORY( &ddsd, sizeof(DDSURFACEDESC2) );
 			ddsd.dwSize = sizeof(DDSURFACEDESC2);
 			ddsd.dwFlags = DDSD_CAPS;
@@ -583,7 +583,7 @@ DDBLTFX		ddbltfx;
 			if( m_lpDD->CreateSurface( &ddsd, &m_lpDDPrimary, NULL ) != DD_OK )
 				throw	"CDirectDraw:CreateSurface failed.";
 
-			// ƒNƒŠƒbƒp[‚Ìì¬
+			// åƒ‹å„•åƒ¢åƒ·ä¹•åºå¶Œæƒ‰
 			if( m_lpDD->CreateClipper( 0, &m_lpDDClipper, NULL ) != DD_OK )
 				throw	"CDirectDraw:CreateClipper failed.";
 
@@ -591,16 +591,16 @@ DDBLTFX		ddbltfx;
 			m_lpDDPrimary->SetClipper( m_lpDDClipper );
 			RELEASE( m_lpDDClipper );
 		} else {
-		// ƒtƒ‹ƒXƒNƒŠ[ƒ“
-			// ”r‘¼ƒ‚[ƒh
+		// åƒ¼å„–åƒ—åƒ‹å„•ä¹•å„
+			// æ””æ‡ å„Œä¹•åƒª
 			if( m_lpDD->SetCooperativeLevel( m_hWnd, DDSCL_ALLOWREBOOT|DDSCL_EXCLUSIVE|DDSCL_FULLSCREEN ) != DD_OK )
 				throw	"CDirectDraw:SetCooperativeLevel error";
 
-			// ‰æ–Ê‰ğ‘œ“x‚Ìİ’è
+			// å¤‹æŸºå¤æ†¸æ™åºæ„æ•
 			if( m_lpDD->SetDisplayMode( m_dwDisplayWidth, m_dwDisplayHeight,
 						    m_dwDisplayDepth, m_dwDisplayRate,
 							DDSDM_STANDARDVGAMODE ) != DD_OK ) {
-				// ¸”s‚µ‚½‚çƒŠƒtƒŒƒbƒVƒ…ƒŒ[ƒgw’è‚ğ–³‚­‚µ‚Ä‚à‚¤ˆê“x‚â‚Á‚Ä‚İ‚é
+				// å¹æ”•åŸå¨å‚œå„•åƒ¼å„—åƒ¢åƒ”å„å„—ä¹•åƒ©å·œæ•å‚ªæŸå”åŸå°å‚•å†å ¦æ™å‚—å­å°å‚’å‚
 				if( m_lpDD->SetDisplayMode( m_dwDisplayWidth, m_dwDisplayHeight,
 							    m_dwDisplayDepth, 0,
 								DDSDM_STANDARDVGAMODE ) != DD_OK ) {
@@ -610,7 +610,7 @@ DDBLTFX		ddbltfx;
 				}
 			}
 
-			// ƒvƒ‰ƒCƒ}ƒŠƒT[ƒtƒFƒX‚ÆƒoƒbƒNƒT[ƒtƒFƒX‚Ìì¬
+			// åƒ¾å„”åƒ€å„…å„•åƒ’ä¹•åƒ¼åƒƒåƒ—å²åƒ¶åƒ¢åƒ‹åƒ’ä¹•åƒ¼åƒƒåƒ—åºå¶Œæƒ‰
 			ZEROMEMORY( &ddsd, sizeof(DDSURFACEDESC2) );
 			ddsd.dwSize = sizeof(DDSURFACEDESC2);
 			ddsd.dwFlags = DDSD_CAPS | DDSD_BACKBUFFERCOUNT;
@@ -635,21 +635,21 @@ DDBLTFX		ddbltfx;
 			ddsd.ddsCaps.dwCaps = DDSCAPS_OFFSCREENPLAIN | DDSCAPS_VIDEOMEMORY;
 		} else {
 			ddsd.ddsCaps.dwCaps = DDSCAPS_OFFSCREENPLAIN | DDSCAPS_SYSTEMMEMORY;
-			m_bForceWrite = TRUE;	// ‘½’iƒŒƒ“ƒ_ƒŠƒ“ƒO‚µ‚È‚¢
+			m_bForceWrite = TRUE;	// æ‡¡æŠœå„—å„åƒŸå„•å„åƒŒåŸå´å„
 		}
 		ddsd.dwWidth   = SCREEN_WIDTH*2;
 		ddsd.dwHeight  = SCREEN_HEIGHT*2;
 		if( m_lpDD->CreateSurface(&ddsd, &m_lpDDRender, NULL) != DD_OK ) {
-			// ƒVƒXƒeƒ€ƒƒ‚ƒŠ‚É‚àæ‚ê‚È‚¢‚Á‚Ä‚©....
+			// åƒ”åƒ—åƒ¥å„‰å„Šå„Œå„•åµå‚•åº¢å‚Ÿå´å„å­å°å....
 			if( ddsd.ddsCaps.dwCaps & DDSCAPS_SYSTEMMEMORY )
 				throw	"CDirectDraw:CreateSurface failed.";
 
-			// ƒrƒfƒIƒƒ‚ƒŠ‚Éæ‚ê‚È‚¢C‚µ‚å‚¤‚ª‚È‚¢‚Ì‚ÅƒVƒXƒeƒ€ƒƒ‚ƒŠ‚Éæ‚é
+			// åƒ¹åƒ¨åƒ†å„Šå„Œå„•åµåº¢å‚Ÿå´å„å¸ªä¸†åŸå‚šå†å‘å´å„åºå±åƒ”åƒ—åƒ¥å„‰å„Šå„Œå„•åµåº¢å‚
 			ddsd.ddsCaps.dwCaps = DDSCAPS_OFFSCREENPLAIN | DDSCAPS_SYSTEMMEMORY;
 			if( m_lpDD->CreateSurface(&ddsd, &m_lpDDRender, NULL) != DD_OK )
 				throw	"CDirectDraw:CreateSurface failed.";
 
-			m_bForceWrite = TRUE;	// ‘½’iƒŒƒ“ƒ_ƒŠƒ“ƒO‚µ‚È‚¢
+			m_bForceWrite = TRUE;	// æ‡¡æŠœå„—å„åƒŸå„•å„åƒŒåŸå´å„
 		}
 		if( !m_bSystemMemory ) {
 			ddsd.ddsCaps.dwCaps = DDSCAPS_OFFSCREENPLAIN | DDSCAPS_VIDEOMEMORY;
@@ -657,11 +657,11 @@ DDBLTFX		ddbltfx;
 			ddsd.ddsCaps.dwCaps = DDSCAPS_OFFSCREENPLAIN | DDSCAPS_SYSTEMMEMORY;
 		}
 		if( m_lpDD->CreateSurface(&ddsd, &m_lpDDRender2, NULL) != DD_OK ) {
-			// ƒVƒXƒeƒ€ƒƒ‚ƒŠ‚É‚àæ‚ê‚È‚¢‚Á‚Ä‚©....
+			// åƒ”åƒ—åƒ¥å„‰å„Šå„Œå„•åµå‚•åº¢å‚Ÿå´å„å­å°å....
 			if( ddsd.ddsCaps.dwCaps & DDSCAPS_SYSTEMMEMORY )
 				throw	"CDirectDraw:CreateSurface failed.";
 
-			// ƒrƒfƒIƒƒ‚ƒŠ‚Éæ‚ê‚È‚¢C‚µ‚å‚¤‚ª‚È‚¢‚Ì‚ÅƒVƒXƒeƒ€ƒƒ‚ƒŠ‚Éæ‚é
+			// åƒ¹åƒ¨åƒ†å„Šå„Œå„•åµåº¢å‚Ÿå´å„å¸ªä¸†åŸå‚šå†å‘å´å„åºå±åƒ”åƒ—åƒ¥å„‰å„Šå„Œå„•åµåº¢å‚
 			ddsd.ddsCaps.dwCaps = DDSCAPS_OFFSCREENPLAIN | DDSCAPS_SYSTEMMEMORY;
 			if( m_lpDD->CreateSurface(&ddsd, &m_lpDDRender2, NULL) != DD_OK )
 				throw	"CDirectDraw:CreateSurface failed.";
@@ -738,11 +738,11 @@ DDBLTFX		ddbltfx;
 		ddsd.dwWidth   = 512;
 		ddsd.dwHeight  = 480;
 		if( m_lpDD->CreateSurface(&ddsd, &m_lpDDTV, NULL) != DD_OK ) {
-			// ƒVƒXƒeƒ€ƒƒ‚ƒŠ‚É‚àæ‚ê‚È‚¢‚Á‚Ä‚©....
+			// åƒ”åƒ—åƒ¥å„‰å„Šå„Œå„•åµå‚•åº¢å‚Ÿå´å„å­å°å....
 			if( ddsd.ddsCaps.dwCaps & DDSCAPS_SYSTEMMEMORY )
 				throw	"CDirectDraw:CreateSurface failed.";
 
-			// ƒrƒfƒIƒƒ‚ƒŠ‚Éæ‚ê‚È‚¢C‚µ‚å‚¤‚ª‚È‚¢‚Ì‚ÅƒVƒXƒeƒ€ƒƒ‚ƒŠ‚Éæ‚é
+			// åƒ¹åƒ¨åƒ†å„Šå„Œå„•åµåº¢å‚Ÿå´å„å¸ªä¸†åŸå‚šå†å‘å´å„åºå±åƒ”åƒ—åƒ¥å„‰å„Šå„Œå„•åµåº¢å‚
 			ddsd.ddsCaps.dwCaps = DDSCAPS_OFFSCREENPLAIN | DDSCAPS_SYSTEMMEMORY;
 			if( m_lpDD->CreateSurface(&ddsd, &m_lpDDTV, NULL) != DD_OK )
 				throw	"CDirectDraw:CreateSurface failed.";
@@ -821,7 +821,7 @@ DDBLTFX		ddbltfx;
 		SetLZSSChar( lzSight, m_lpDDZapper );
 		SetLZSSChar( lzTVlayer, m_lpDDTV );
 
-		// Ä•`‰æ‚Ìˆ×
+		// åµæ˜¤å¤‹åºå Š
 		m_bDeltaUpdate = TRUE;
 	} catch( char *str ) {
 		ReleaseSurface();
@@ -836,7 +836,7 @@ DDBLTFX		ddbltfx;
 	return	TRUE;
 }
 
-// ƒT[ƒtƒFƒX‚ÌŠJ•ú
+// åƒ’ä¹•åƒ¼åƒƒåƒ—åºå¥æ›»
 BOOL	CDirectDraw::ReleaseSurface( void )
 {
 	if( !m_lpDD )
@@ -859,12 +859,12 @@ BOOL	CDirectDraw::ReleaseSurface( void )
 	return	TRUE;
 }
 
-// ƒT[ƒtƒFƒX‚ÌƒŠƒXƒgƒAƒTƒu
+// åƒ’ä¹•åƒ¼åƒƒåƒ—åºå„•åƒ—åƒ©å‚¾åƒ’åƒ½
 BOOL	CDirectDraw::RestoreSurfaceSub( LPDIRECTDRAWSURFACE7 lpSurface )
 {
 	if( lpSurface ) {
 		if( lpSurface->IsLost() == DDERR_SURFACELOST ) {
-			// ƒƒXƒg‚µ‚Ä‚¢‚½‚çƒŠƒXƒgƒA‚·‚é
+			// å„˜åƒ—åƒ©åŸå°å„å¨å‚œå„•åƒ—åƒ©å‚¾å¡å‚
 //			DEBUGOUT( "CDirectDraw:Restore surface...." );
 			if( lpSurface->Restore() == DD_OK ) {
 //				DEBUGOUT( "Ok.\n" );
@@ -877,7 +877,7 @@ BOOL	CDirectDraw::RestoreSurfaceSub( LPDIRECTDRAWSURFACE7 lpSurface )
 	return	TRUE;
 }
 
-// ƒT[ƒtƒFƒX‚ÌƒŠƒXƒgƒA
+// åƒ’ä¹•åƒ¼åƒƒåƒ—åºå„•åƒ—åƒ©å‚¾
 BOOL	CDirectDraw::RestoreSurface()
 {
 	if( !m_lpDD ) return FALSE;
@@ -887,7 +887,7 @@ BOOL	CDirectDraw::RestoreSurface()
 
 	BOOL	bRet = TRUE;
 
-	// ƒƒXƒg‚µ‚Ä‚½‚ç“à—e‚Í¸‚í‚ê‚Ä‚¢‚é‚Ì‚Å•`‰æ‚ğƒLƒƒƒ“ƒZƒ‹‚µ‚Ä‚Ë
+	// å„˜åƒ—åƒ©åŸå°å¨å‚œæ’ªæ¢•å¼å¹å‚¢å‚Ÿå°å„å‚åºå±æ˜¤å¤‹å‚ªåƒ‰å„å„åƒ™å„–åŸå°å¹
 	if( !RestoreSurfaceSub( m_lpDDRender ) ) {
 		bRet = FALSE;
 	}
@@ -914,7 +914,7 @@ BOOL	CDirectDraw::RestoreSurface()
 	}
 
 	if( !bRet ) {
-		// Ä•`‰æ‚Ìˆ×
+		// åµæ˜¤å¤‹åºå Š
 		m_bDeltaUpdate = TRUE;
 	}
 
@@ -922,35 +922,35 @@ BOOL	CDirectDraw::RestoreSurface()
 }
 
 //
-// ƒfƒBƒXƒvƒŒƒCƒ‚[ƒh•ÏXŠJn
+// åƒ¨å‚¿åƒ—åƒ¾å„—åƒ€å„Œä¹•åƒªæ›„å³å¥å·’
 //
 BOOL	CDirectDraw::BeginDisplayChange()
 {
 	if( !m_lpDD )
 		return	FALSE;
 
-	// Šù‚É•ÏX’†‚â‚È‚¢‚©
+	// å©›åµæ›„å³æ‹å‚—å´å„å
 	if( m_bChangeMode )
 		return	FALSE;
 
-	// •ÏX’†‚¶‚á
+	// æ›„å³æ‹å å‚–
 	m_bChangeMode = TRUE;
 
 	if( m_bScreenMode ) {
 		m_lpDD->RestoreDisplayMode();
 	}
 
-	// ƒT[ƒtƒFƒX‚ÌŠJ•ú
+	// åƒ’ä¹•åƒ¼åƒƒåƒ—åºå¥æ›»
 	ReleaseSurface();
 
-	// ‹¦’²ƒ‚[ƒh
+	// å«¤æŒ·å„Œä¹•åƒª
 	m_lpDD->SetCooperativeLevel( NULL, DDSCL_NORMAL );
 
 	return	TRUE;
 }
 
 //
-// ƒfƒBƒXƒvƒŒƒCƒ‚[ƒh•ÏXI—¹‚ÆƒT[ƒtƒFƒX‚ÌÄ\’z
+// åƒ¨å‚¿åƒ—åƒ¾å„—åƒ€å„Œä¹•åƒªæ›„å³å»”æ¤†å²åƒ’ä¹•åƒ¼åƒƒåƒ—åºåµå³”æŠ¸
 //
 BOOL	CDirectDraw::EndDisplayChange()
 {
@@ -973,41 +973,41 @@ BOOL	CDirectDraw::EndDisplayChange()
 }
 
 //
-// WM_DISPLAYCHANGEƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Î‚ê‚é
+// WM_DISPLAYCHANGEåƒ´å„åƒªå„”åå‚œå±‡å½å‚Ÿå‚
 //
 BOOL	CDirectDraw::OnChangeDisplayMode()
 {
-	// ©•ª©g‚Å•ÏX‚µ‚Ä‚¢‚é‚ÍƒLƒƒƒ“ƒZƒ‹
+	// å¸ºæš˜å¸ºæå±æ›„å³åŸå°å„å‚å¸ªå¼åƒ‰å„å„åƒ™å„–
 	if( m_bChangeMode )
 		return	TRUE;
 
-	// DirectDrawƒIƒuƒWƒFƒNƒg‚ª–³‚¯‚ê‚ÎˆÓ–¡–³‚µ
+	// DirectDrawåƒ†åƒ½åƒ•åƒƒåƒ‹åƒ©å‘æŸå—å‚Ÿå½å „æ´æŸåŸ
 	if( !m_lpDD )
 		return	FALSE;
 
 //	DEBUGOUT( "CDirectDraw:OnChangeDisplayMode\n" );
 
-	// ‹¦’²ƒ‚[ƒh‚Ìƒ`ƒFƒbƒN
+	// å«¤æŒ·å„Œä¹•åƒªåºåƒ åƒƒåƒ¢åƒ‹
 	HRESULT	hr = m_lpDD->TestCooperativeLevel();
 
 	if( !m_bScreenMode ) {
-	// ƒEƒCƒ“ƒhƒE
+	// åƒ‚åƒ€å„åƒªåƒ‚
 		if( hr == DDERR_EXCLUSIVEMODEALREADYSET ) {
-			// ‘¼‚É”r‘¼ƒ‚[ƒh–ì˜Y‚ª‚¨‚é‚Ì‚Å‚¨‚µ‚Ü‚¢
+			// æ‡ åµæ””æ‡ å„Œä¹•åƒªæ °æ¦Šå‘åå‚åºå±ååŸå‚‘å„
 //			DEBUGOUT( "CDirectDraw:DDERR_EXCLUSIVEMODEALREADYSET\n" );
-			// ƒŠƒXƒgƒA‚µ‚¿‚á‚¢‚â‚ñ
+			// å„•åƒ—åƒ©å‚¾åŸåªå‚–å„å‚—å‚«
 			m_bNoRestore = TRUE;
 			return	TRUE;
 		} else if( hr == DDERR_WRONGMODE || hr == DD_OK ) {
-			// •’Ê‚ÌƒfƒBƒXƒvƒŒƒCƒ‚[ƒh‚Ì•ÏX(‰½ŒÌ‚©WindowƒƒbƒZ[ƒW‚¾‚ÆDD_OK‚È‚ª‚ ‚é)
+			// æ™›æ åºåƒ¨å‚¿åƒ—åƒ¾å„—åƒ€å„Œä¹•åƒªåºæ›„å³(å£—å±˜åWindowå„Šåƒ¢åƒ™ä¹•åƒ•å©å²DD_OKå´å¸ªå‘åå‚)
 //			DEBUGOUT( "CDirectDraw:DDERR_WRONGMODE\n" );
-			// ƒŠƒXƒgƒA‚µ‚Ä‚¦‚¦‚æ
+			// å„•åƒ—åƒ©å‚¾åŸå°åŠåŠå‚›
 			m_bNoRestore = FALSE;
 
-			// ƒT[ƒtƒFƒX‚ÌŠJ•ú
+			// åƒ’ä¹•åƒ¼åƒƒåƒ—åºå¥æ›»
 			ReleaseSurface();
 
-			// ƒT[ƒtƒFƒX‚Ì‰Šú‰»
+			// åƒ’ä¹•åƒ¼åƒƒåƒ—åºå¼¶å©œå£”
 			BOOL	bRet = InitialSurface( m_bScreenMode );
 
 			if( bRet ) {
@@ -1023,30 +1023,30 @@ BOOL	CDirectDraw::OnChangeDisplayMode()
 		} else if( hr == DDERR_NOEXCLUSIVEMODE ) {
 //			DEBUGOUT( "CDirectDraw:DDERR_NOEXCLUSIVEMODE\n" );
 		} else {
-//			DEBUGOUT( "CDirectDraw:Unknown error. hr=%08X‚½\n", hr );
+//			DEBUGOUT( "CDirectDraw:Unknown error. hr=%08Xå¨\n", hr );
 		}
-		// —Ç‚­•ª‚©‚ç‚ñ‚Ì‚Å‚Æ‚è‚ ‚¦‚¸ƒT[ƒtƒFƒX‚ğƒŠƒXƒgƒA
+		// æ¤™å”æš˜åå‚œå‚«åºå±å²å‚ååŠå¢åƒ’ä¹•åƒ¼åƒƒåƒ—å‚ªå„•åƒ—åƒ©å‚¾
 		m_bNoRestore = FALSE;
 		RestoreSurface();
 
 		return	TRUE;
 	} else {
-	// ƒtƒ‹ƒXƒNƒŠ[ƒ“
+	// åƒ¼å„–åƒ—åƒ‹å„•ä¹•å„
 		if( hr == DDERR_NOEXCLUSIVEMODE ) {
-			// ƒtƒ‹ƒXƒNƒŠ[ƒ“ƒ‚[ƒh‚©‚ç”²‚¯‚½
+			// åƒ¼å„–åƒ—åƒ‹å„•ä¹•å„å„Œä¹•åƒªåå‚œæ•³å—å¨å¸ª
 //			DEBUGOUT( "CDirectDraw:DDERR_NOEXCLUSIVEMODE\n" );
 			return	TRUE;
 		}
 
 		if( hr == DD_OK ) {
-			// ƒŠƒXƒgƒA‚µ‚ë‚Á‚Ä–‚©...
-			// ƒT[ƒtƒFƒX‚ğƒŠƒXƒgƒA
+			// å„•åƒ—åƒ©å‚¾åŸå‚ å­å°å¸ å...
+			// åƒ’ä¹•åƒ¼åƒƒåƒ—å‚ªå„•åƒ—åƒ©å‚¾
 			RestoreSurface();
 
 			return	TRUE;
 		}
 
-		// •s–¾‚ÈŒ´ˆö
+		// æ™„æŸ§å´å°¨å ´
 		return	FALSE;
 	}
 
@@ -1103,7 +1103,7 @@ BOOL	CDirectDraw::IsNowDisplayMode( DWORD dwWidth, DWORD dwHeight, DWORD dwDepth
 	return	FALSE;
 }
 
-// ƒrƒbƒgˆÊ’u‚Ìæ“¾
+// åƒ¹åƒ¢åƒ©åŸµæŠ²åºåº¢æ‘¼
 void	CDirectDraw::GetBitMask( DWORD val, int& shift, int& bits )
 {
 	shift = 0;
@@ -1130,7 +1130,7 @@ static	float	PalConvTbl[][3] = {
 //	1.00f, 1.00f, 1.00f,
 };
 
-// ƒpƒŒƒbƒgƒe[ƒuƒ‹‚ÌŒvZ
+// åƒ·å„—åƒ¢åƒ©åƒ¥ä¹•åƒ½å„–åºå¯å¶¼
 BOOL	CDirectDraw::CalcPaletteTable()
 {
 INT	i, j;
@@ -1180,10 +1180,10 @@ INT	i, j;
 
 			// RGB555
 			if( Rsft > Bsft ) {
-				// RGB555->RGB888‚Ì
+				// RGB555->RGB888åºå¸ª
 				m_cfPalette[j][i] = ((Rn>>(8-5))<<10)|((Gn>>(8-5))<<5)|((Bn>>(8-5))<<0);
 			} else {
-				// BGR555->BGR888‚Ì
+				// BGR555->BGR888åºå¸ª
 				m_cfPalette[j][i] = ((Rn>>(8-5))<<0)|((Gn>>(8-5))<<5)|((Bn>>(8-5))<<10);
 			}
 
@@ -1226,22 +1226,22 @@ INT	i, j;
 
 			// RGB555
 			if( Rsft > Bsft ) {
-				// RGB555->RGB888‚Ì
+				// RGB555->RGB888åºå¸ª
 				m_mfPalette[j][i] = ((Rn>>(8-5))<<10)|((Gn>>(8-5))<<5)|((Bn>>(8-5))<<0);
 			} else {
-				// BGR555->BGR888‚Ì
+				// BGR555->BGR888åºå¸ª
 				m_mfPalette[j][i] = ((Rn>>(8-5))<<0)|((Gn>>(8-5))<<5)|((Bn>>(8-5))<<10);
 			}
 		}
 	}
 
-	// Ä•`‰æ‚Ìˆ×
+	// åµæ˜¤å¤‹åºå Š
 	m_bDeltaUpdate = TRUE;
 
 	return	TRUE;
 }
 
-// ƒpƒŒƒbƒgƒe[ƒuƒ‹‚Ìİ’è
+// åƒ·å„—åƒ¢åƒ©åƒ¥ä¹•åƒ½å„–åºæ„æ•
 void	CDirectDraw::SetPaletteTable( LPBYTE pal )
 {
 	if( pal )
@@ -1254,7 +1254,7 @@ void	CDirectDraw::SetPaletteTable( LPBYTE pal )
 	m_bPaletteUpdate = TRUE;
 }
 
-// ƒpƒŒƒbƒgƒe[ƒuƒ‹‚Ìİ’è
+// åƒ·å„—åƒ¢åƒ©åƒ¥ä¹•åƒ½å„–åºæ„æ•
 void	CDirectDraw::SetPaletteTable( RGBQUAD* rgb )
 {
 	for( INT i = 0; i < 64; i++ ) {
@@ -1268,7 +1268,7 @@ void	CDirectDraw::SetPaletteTable( RGBQUAD* rgb )
 	m_bPaletteUpdate = TRUE;
 }
 
-// ƒpƒŒƒbƒgƒe[ƒuƒ‹‚Ìæ“¾
+// åƒ·å„—åƒ¢åƒ©åƒ¥ä¹•åƒ½å„–åºåº¢æ‘¼
 void	CDirectDraw::GetPaletteTable( RGBQUAD* rgb )
 {
 	for( INT i = 0; i < 64; i++ ) {
@@ -1279,44 +1279,44 @@ void	CDirectDraw::GetPaletteTable( RGBQUAD* rgb )
 	}
 }
 
-// ƒpƒŒƒbƒgƒtƒ@ƒCƒ‹‚ÌXV
+// åƒ·å„—åƒ¢åƒ©åƒ¼å‚½åƒ€å„–åºå³æ€´
 void	CDirectDraw::SetPaletteFile( LPCTSTR fname )
 {
-	// ƒpƒŒƒbƒgƒtƒ@ƒCƒ‹‚ÌXV
+	// åƒ·å„—åƒ¢åƒ©åƒ¼å‚½åƒ€å„–åºå³æ€´
 	if( strlen( fname ) > 0 ) {
 		FILE	*fp;
 		if( (fp = ::fopen( fname, "rb" )) ) {
 			BYTE	palbuf[192];
-			// ƒTƒCƒY•ª“Ç‚İ‚İ
+			// åƒ’åƒ€åƒ˜æš˜æ’‰å‚’å´¬å‚’
 			if( ::fread( palbuf, 192, 1, fp ) == 1 ) {
-				// ƒpƒŒƒbƒg‚Ì•ÏX‚ÆŒvZ
+				// åƒ·å„—åƒ¢åƒ©åºæ›„å³å²å¯å¶¼
 				SetPaletteTable( palbuf );
 			} else {
-				// “Ç‚İ‚«‚ê‚È‚©‚Á‚½‚ÍƒfƒtƒHƒ‹ƒg
+				// æ’‰å‚’å’å‚Ÿå´åå­å¨å¸ªå¼åƒ¨åƒ¼åƒ…å„–åƒ©
 				SetPaletteTable( (LPBYTE)NULL );
 			}
 			FCLOSE(fp);
 		} else {
-			// ŠJ‚¯‚È‚©‚Á‚½‚ÍƒfƒtƒHƒ‹ƒg
+			// å¥å—å´åå­å¨å¸ªå¼åƒ¨åƒ¼åƒ…å„–åƒ©
 			SetPaletteTable( (LPBYTE)NULL );
 		}
 	} else {
-		// –¼‘O‚ª–³‚¢‚ÍƒfƒtƒHƒ‹ƒg
+		// æŸ¤æ…œå‘æŸå„å¸ªå¼åƒ¨åƒ¼åƒ…å„–åƒ©
 		SetPaletteTable( (LPBYTE)NULL );
 	}
 }
 
-// ƒtƒ‹ƒXƒNƒŠ[ƒ“ƒ‚[ƒh‚Å‚ÌGDIƒEƒCƒ“ƒhƒE•\¦İ’è
+// åƒ¼å„–åƒ—åƒ‹å„•ä¹•å„å„Œä¹•åƒªå±åºGDIåƒ‚åƒ€å„åƒªåƒ‚æ˜å¸µæ„æ•
 BOOL	CDirectDraw::SetFullScreenGDI( BOOL bMode )
 {
-	// ”O‚Ìˆ×ƒ`ƒFƒbƒN
+	// æ“®åºå Šåƒ åƒƒåƒ¢åƒ‹
 	if( !m_lpDD || !m_lpDDPrimary )
 		return	FALSE;
 
 	if( m_bScreenMode ) {
 		if( !m_bGDI ) {
 			if( bMode ) {
-				RELEASE( m_lpDDClipper ); // ˆê‰
+				RELEASE( m_lpDDClipper ); // å ¦å¢³
 				if( m_lpDD->CreateClipper(0, &m_lpDDClipper, NULL) == DD_OK ) {
 					m_lpDDClipper->SetHWnd( 0, m_hWnd );
 					m_lpDDPrimary->SetClipper( m_lpDDClipper );
@@ -1361,7 +1361,7 @@ void	CDirectDraw::RealizePalette()
 	}
 }
 
-// •`‰æ(WindowsƒƒbƒZ[ƒW—p)
+// æ˜¤å¤‹(Windowså„Šåƒ¢åƒ™ä¹•åƒ•æ¢¡)
 void	CDirectDraw::OnScreenDraw()
 {
 	if( !m_bScreenMode ) {
@@ -1386,7 +1386,7 @@ void	CDirectDraw::SetPaletteMode( INT nMode, BOOL bMono )
 	m_bMonoMode    = bMono;
 }
 
-// •\¦’†‚ÌƒpƒŒƒbƒgƒe[ƒuƒ‹‚Ìæ“¾
+// æ˜å¸µæ‹åºåƒ·å„—åƒ¢åƒ©åƒ¥ä¹•åƒ½å„–åºåº¢æ‘¼
 void	CDirectDraw::GetPaletteData( RGBQUAD* rgb )
 {
 	if( !m_bMonoMode ) {
@@ -1426,11 +1426,11 @@ DDSURFACEDESC2	ddsd;
 	if( !RestoreSurface() )
 		return;
 
-	//ÔÚ´ËÖ®Ç°£¬m_lpRenderÒÑ¾­±»Ğ´ÈëÁËÄÚÈİ£¬ºóÃæµÄ²¿·ÖÖ»ÊÇ½«Ëü·ÅÉÏ£ä£ø±íÃæ
+	//åœ¨æ­¤ä¹‹å‰ï¼Œm_lpRenderå·²ç»è¢«å†™å…¥äº†å†…å®¹ï¼Œåé¢çš„éƒ¨åˆ†åªæ˜¯å°†å®ƒæ”¾ä¸Šï½„ï½˜è¡¨é¢
 	LPBYTE	lpRdr = m_lpRender+8;
 	
 	if(g_bSan2)
-	ViewChars(lpRdr);//Ôö¼Ó£¬°ÔÍõ´óÂ½
+	ViewChars(lpRdr);//å¢åŠ ï¼Œéœ¸ç‹å¤§é™†
 
 
 	ZEROMEMORY( &ddsd, sizeof(DDSURFACEDESC2) );
@@ -1532,7 +1532,7 @@ DDSURFACEDESC2	ddsd;
 	ddsd.dwSize  = sizeof(DDSURFACEDESC2);
 
 	if( m_bForceWrite ) {
-	// ‘½’iƒŒƒ“ƒ_ƒŠƒ“ƒO–³‚µ
+	// æ‡¡æŠœå„—å„åƒŸå„•å„åƒŒæŸåŸ
 		if( m_lpDDRender->Lock( NULL, &ddsd, 0, NULL ) == DD_OK ) {
 			switch( ddsd.ddpfPixelFormat.dwRGBBitCount ) {
 				case	8:
@@ -1580,7 +1580,7 @@ DDSURFACEDESC2	ddsd;
 		}
 	}
 
-	// TV˜g
+	// TVæ¦
 	if( m_bTVFrameMode ) {
 		m_lpDDRender->Blt( &rcW, m_lpDDTV, NULL, DDBLT_KEYSRC, NULL );
 	}
@@ -2029,7 +2029,7 @@ void	CDirectDraw::RenderString( INT x, INT y, LPCSTR str )
 	}
 }
 
-// LZSS BMP‚©‚çƒT[ƒtƒFƒX‚Ö‚ÌƒRƒs[
+// LZSS BMPåå‚œåƒ’ä¹•åƒ¼åƒƒåƒ—å‚Šåºåƒåƒºä¹•
 void	CDirectDraw::SetLZSSChar( LPBYTE lpLZ, LPDIRECTDRAWSURFACE7 lpDDSurface )
 {
 LPBYTE	lpBuf = NULL;
@@ -2053,7 +2053,7 @@ HDC	hDC;
 	ddsd.dwSize = sizeof(DDSURFACEDESC2);
 	lpDDSurface->GetSurfaceDesc(&ddsd);
 
-	// BMP‚Í‚‚³‚ªƒ}ƒCƒiƒX‚È–‚ª‚ ‚é‚Ì‚Å....
+	// BMPå¼å´…åå‘å„…åƒ€åƒ«åƒ—å´å¸ å‘åå‚åºå±....
 	LONG	height = pbi->biHeight;
 	if( height < 0 )
 		height = -height;
@@ -2079,10 +2079,10 @@ BYTE	CDirectDraw::GetPixel( INT x, INT y )
 #include "Render.h"
 
 
-void	CDirectDraw::ViewChars( unsigned char * lpRdr )	//ÊéĞ´¸¡¶¯µÄÎÄ±¾
+void	CDirectDraw::ViewChars( unsigned char * lpRdr )	//ä¹¦å†™æµ®åŠ¨çš„æ–‡æœ¬
 {
 
-	//·ÃÎÊCPU_BACKUP[]Êı×é¿ÉÒÔ»ñµÃ±¸·İµÄÄÚ´æ(0-ff)ÄÚÈİ
+	//è®¿é—®CPU_BACKUP[]æ•°ç»„å¯ä»¥è·å¾—å¤‡ä»½çš„å†…å­˜(0-ff)å†…å®¹
 
 	unsigned char tileid=0, bktileid=1,count=0,offset=0;
 	unsigned int i, j = 0,pos=0;
@@ -2094,7 +2094,7 @@ void	CDirectDraw::ViewChars( unsigned char * lpRdr )	//ÊéĞ´¸¡¶¯µÄÎÄ±¾
 		
 	switch(CPU_BACKUP[0x60])
 		{
-			case 0x1	:	//³ÇÄÚÎä½«×ÊÁÏ
+			case 0x1	:	//åŸå†…æ­¦å°†èµ„æ–™
 				if(CPU_BACKUP[0xBA] == 0x08)
 				{
 					if(CPU_BACKUP[0x6A] == 0x70)
@@ -2128,7 +2128,7 @@ void	CDirectDraw::ViewChars( unsigned char * lpRdr )	//ÊéĞ´¸¡¶¯µÄÎÄ±¾
 					}
 				}
 				break;
-			case 0x3	:	//È«¹úµØÍ¼
+			case 0x3	:	//å…¨å›½åœ°å›¾
 				if(CPU_BACKUP[0xBA] == 0x08)
 				{
 					Line_Start = 0x280/0x20;
@@ -2139,7 +2139,7 @@ void	CDirectDraw::ViewChars( unsigned char * lpRdr )	//ÊéĞ´¸¡¶¯µÄÎÄ±¾
 					}
 				}
 				break;
-			case 0x5	:	//´óÕ½³¡£¬Õ½¶·×Ü½á
+			case 0x5	:	//å¤§æˆ˜åœºï¼Œæˆ˜æ–—æ€»ç»“
 				if(CPU_BACKUP[0xBA] == 0x08)
 				{
 					if(CPU_BACKUP[0xAF] == 0x08)
@@ -2148,8 +2148,8 @@ void	CDirectDraw::ViewChars( unsigned char * lpRdr )	//ÊéĞ´¸¡¶¯µÄÎÄ±¾
 					}
 					else
 					{
-						Line_Start = 20;			//É¨ÃèÏß¿ªÊ¼ĞĞÊı
-						gridy = 32 - Line_Start;	//ÃüÃû±í¶ÔÉ¨ÃèÏßµÄÆ«ÒÆ
+						Line_Start = 20;			//æ‰«æçº¿å¼€å§‹è¡Œæ•°
+						gridy = 32 - Line_Start;	//å‘½åè¡¨å¯¹æ‰«æçº¿çš„åç§»
 					}
 					if(CPU_BACKUP[0xBB] != 0x09)
 					{
@@ -2168,7 +2168,7 @@ void	CDirectDraw::ViewChars( unsigned char * lpRdr )	//ÊéĞ´¸¡¶¯µÄÎÄ±¾
 					}
 				}
 				break;
-			case 0x7	:	//ÓÃ¼Æ
+			case 0x7	:	//ç”¨è®¡
 				if(CPU_BACKUP[0xBA] == 0x08)
 				{
 					Line_Start = 1 + LINESKIP(0) + LINESKIP(1) + LINESKIP(2) + LINESKIP(3);
@@ -2228,7 +2228,7 @@ void	CDirectDraw::ViewChars( unsigned char * lpRdr )	//ÊéĞ´¸¡¶¯µÄÎÄ±¾
 			}
 			tileid = VRAM[pos + BASE_VRAM - 0x2000];
 			
-			//ºº×ÖÏÔÊ¾
+			//æ±‰å­—æ˜¾ç¤º
 			if(tileid < MAX_GROUP)
 			{
 				bktileid = tileid;
@@ -2244,7 +2244,7 @@ void	CDirectDraw::ViewChars( unsigned char * lpRdr )	//ÊéĞ´¸¡¶¯µÄÎÄ±¾
 			}
 			else if(((tileid < MAX_INDEX_R) && (F_SPECIAL == 0)) || ((F_SPECIAL == 1) && (tileid > 0xC7)))
 			{
-				//·ÃÎÊÊôĞÔ±í£¬»ñµÃÎÄ×ÖÑÕÉ«
+				//è®¿é—®å±æ€§è¡¨ï¼Œè·å¾—æ–‡å­—é¢œè‰²
 				int ataddr;
 				ataddr = 0x03C0 + ((j-(j&3))<<1) + (i>>2);
 				unsigned char atbyte = VRAM[ataddr];

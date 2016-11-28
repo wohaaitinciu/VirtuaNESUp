@@ -1,4 +1,4 @@
-/*
+﻿/*
 class	Mapper134 : public Mapper
 {
 public:

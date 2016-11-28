@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 //                                                                      //
 //      NES Emulation core                                              //
 //                                                           Norix      //
@@ -235,10 +235,10 @@ NES::NES( const char* fname )
 				)
 			)
 		{
-			// –¢ƒTƒ|[ƒg‚Ìƒ}ƒbƒp[‚Å‚·
+			// æœªã‚µãƒãƒ¼ãƒˆã®ãƒãƒƒãƒ‘ãƒ¼ã§ã™
 			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_UNSUPPORTMAPPER );
 			if(rom->IsUnifMapper())
-			sprintf( szErrorString, "%s Õâ¸ö UNIF °å×ÓÔİÊ±Ã»ÓĞ±»Ö§³Ö£¬\nÇëÁªÏµ tensai_wang@msn.com ¸Ä½ø\n\nĞ»Ğ»Ê¹ÓÃ", rom->GetBoardName() );
+			sprintf( szErrorString, "%s ï¿½ï¿½ï¿½ UNIF ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ã»ï¿½Ğ±ï¿½Ö§ï¿½Ö£ï¿½\nï¿½ï¿½ï¿½ï¿½Ïµ tensai_wang@msn.com ï¿½Ä½ï¿½\n\nĞ»Ğ»Ê¹ï¿½ï¿½", rom->GetBoardName() );
 			else
 			sprintf( szErrorString, szErrStr, rom->GetMapperNo() );
 			throw	szErrorString;
@@ -273,7 +273,7 @@ NES::NES( const char* fname )
 		LoadDISK();
 
 		{
-		// PadƒNƒ‰ƒX“à‚¾‚Æ‰Šú‰»ƒ^ƒCƒ~ƒ“ƒO‚ª’x‚¢‚Ì‚Å‚±‚±‚Å
+		// Padã‚¯ãƒ©ã‚¹å†…ã ã¨åˆæœŸåŒ–ã‚¿ã‚¤ãƒŸãƒ³ã‚°ãŒé…ã„ã®ã§ã“ã“ã§
 		DWORD	crc = rom->GetPROM_CRC();
 		if( crc == 0xe792de94		// Best Play - Pro Yakyuu (New) (J)
 		 || crc == 0xf79d684a		// Best Play - Pro Yakyuu (Old) (J)
@@ -297,7 +297,7 @@ NES::NES( const char* fname )
 
 		LoadTurboFile();
 
-		// VS-Unisystem‚ÌƒfƒtƒHƒ‹ƒgİ’è
+		// VS-Unisystemã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨­å®š
 		if( rom->IsVSUNISYSTEM() ) {
 		DWORD	crc = rom->GetPROM_CRC();
 
@@ -312,13 +312,13 @@ NES::NES( const char* fname )
 
 		Reset();
 
-		// ƒQ[ƒ€ŒÅ—L‚ÌƒfƒtƒHƒ‹ƒgƒIƒvƒVƒ‡ƒ“‚ğİ’è(İ’è–ß‚·‚Ég‚¤ˆ×)
+		// ã‚²ãƒ¼ãƒ å›ºæœ‰ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’è¨­å®š(è¨­å®šæˆ»ã™æ™‚ã«ä½¿ã†ç‚º)
 		GameOption.defRenderMethod = (INT)GetRenderMethod();
 		GameOption.defIRQtype      = (INT)GetIrqType();
 		GameOption.defFrameIRQ     = GetFrameIRQmode();
 		GameOption.defVideoMode    = GetVideoMode();
 
-		// İ’è‚ğƒ[ƒh‚µ‚Äİ’è‚·‚é(ƒGƒ“ƒgƒŠ‚ª–³‚¯‚ê‚ÎƒfƒtƒHƒ‹ƒg‚ª“ü‚é)
+		// è¨­å®šã‚’ãƒ­ãƒ¼ãƒ‰ã—ã¦è¨­å®šã™ã‚‹(ã‚¨ãƒ³ãƒˆãƒªãŒç„¡ã‘ã‚Œã°ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãŒå…¥ã‚‹)
 		if( rom->GetMapperNo() != 20 ) {
 			GameOption.Load( rom->GetPROM_CRC() );
 		} else {
@@ -345,7 +345,7 @@ NES::NES( const char* fname )
 		DELETEPTR( rom );
 		DELETEPTR( mapper );
 
-		// •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½
+		// ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
@@ -435,14 +435,14 @@ void	NES::Reset()
 	VROM_4K_SIZE = rom->GetVROM_SIZE()*2;
 	VROM_8K_SIZE = rom->GetVROM_SIZE();
 
-	// ƒfƒtƒHƒ‹ƒgƒoƒ“ƒN
+	// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒãƒ³ã‚¯
 	if( VROM_8K_SIZE ) {
 		SetVROM_8K_Bank( 0 );
 	} else {
 		SetCRAM_8K_Bank( 0 );
 	}
 
-	// ƒ~ƒ‰[
+	// ãƒŸãƒ©ãƒ¼
 	if( rom->Is4SCREEN() ) {
 		SetVRAM_Mirror( VRAM_MIRROR4 );
 	} else if( rom->IsVMIRROR() ) {
@@ -546,19 +546,19 @@ void	NES::EmulationCPU_BeforeNMI( INT cycles )
 }
 
 /*
-	•`‰æƒV[ƒPƒ“ƒX
-	0		ƒ_ƒ~[ƒXƒLƒƒƒ“ƒ‰ƒCƒ“(•`‰æ‚µ‚È‚¢)
-	1 - 239		•`‰æ
-	240		ƒ_ƒ~[ƒXƒLƒƒƒ“ƒ‰ƒCƒ“,VBLANKƒtƒ‰ƒOON
-	241		VINTŠúŠÔ,NMI”­¶
-	242-261		VINTŠúŠÔ
-	261		VINTŠúŠÔ,VBLANKƒtƒ‰ƒOOFF
+	æç”»ã‚·ãƒ¼ã‚±ãƒ³ã‚¹
+	0		ãƒ€ãƒŸãƒ¼ã‚¹ã‚­ãƒ£ãƒ³ãƒ©ã‚¤ãƒ³(æç”»ã—ãªã„)
+	1 - 239		æç”»
+	240		ãƒ€ãƒŸãƒ¼ã‚¹ã‚­ãƒ£ãƒ³ãƒ©ã‚¤ãƒ³,VBLANKãƒ•ãƒ©ã‚°ON
+	241		VINTæœŸé–“,NMIç™ºç”Ÿ
+	242-261		VINTæœŸé–“
+	261		VINTæœŸé–“,VBLANKãƒ•ãƒ©ã‚°OFF
 */
 void	NES::EmulateFrame( BOOL bDraw )
 {
 INT	scanline = 0;
 
-	// NSFƒvƒŒƒCƒ„‚Ì
+	// NSFãƒ—ãƒ¬ã‚¤ãƒ¤ã®æ™‚
 	if( rom->IsNSF() ) {
 		EmulateNSF();
 		return;
@@ -569,7 +569,7 @@ INT	scanline = 0;
 	//
 	NES_scanline = scanline;
 
-	//±¸·İ£Ã£Ğ£ÕÄÚ´æ
+	//ï¿½ï¿½ï¿½İ£Ã£Ğ£ï¿½ï¿½Ú´ï¿½
 	memcpy(CPU_BACKUP, CPU_MEM_BANK[0], 256);
 
 	if( RenderMethod != TILE_RENDER ) {
@@ -578,7 +578,7 @@ INT	scanline = 0;
 			ppu->SetRenderScanline( scanline );
 
 			if( scanline == 0 ) {
-			// ƒ_ƒ~[ƒXƒLƒƒƒ“ƒ‰ƒCƒ“
+			// ãƒ€ãƒŸãƒ¼ã‚¹ã‚­ãƒ£ãƒ³ãƒ©ã‚¤ãƒ³
 				if( RenderMethod < POST_RENDER ) {
 					EmulationCPU( nescfg->ScanlineCycles );
 					ppu->FrameStart();
@@ -611,10 +611,10 @@ INT	scanline = 0;
 							}
 						}
 					}
-					ppu->ScanlineNext();				// ‚±‚ê‚ÌˆÊ’u‚Åƒ‰ƒXƒ^[Œn‚Í‰æ–Ê‚ªˆá‚¤
+					ppu->ScanlineNext();				// ã“ã‚Œã®ä½ç½®ã§ãƒ©ã‚¹ã‚¿ãƒ¼ç³»ã¯ç”»é¢ãŒé•ã†
 					if( RenderMethod == PRE_ALL_RENDER )
 						EmulationCPU( nescfg->ScanlineCycles );
-//					ppu->ScanlineNext();				// ‚±‚ê‚ÌˆÊ’u‚Åƒ‰ƒXƒ^[Œn‚Í‰æ–Ê‚ªˆá‚¤
+//					ppu->ScanlineNext();				// ã“ã‚Œã®ä½ç½®ã§ãƒ©ã‚¹ã‚¿ãƒ¼ç³»ã¯ç”»é¢ãŒé•ã†
 					mapper->HSync( scanline );
 					ppu->ScanlineStart();
 				} else {
@@ -654,7 +654,7 @@ INT	scanline = 0;
 			} else if( scanline <= nescfg->TotalScanlines-1 ) {
 				pad->VSync();
 
-				// VBLANKŠúŠÔ
+				// VBLANKæœŸé–“
 				if( scanline == nescfg->TotalScanlines-1 ) {
 					ppu->VBlankEnd();
 				}
@@ -699,7 +699,7 @@ INT	scanline = 0;
 			ppu->SetRenderScanline( scanline );
 
 			if( scanline == 0 ) {
-			// ƒ_ƒ~[ƒXƒLƒƒƒ“ƒ‰ƒCƒ“
+			// ãƒ€ãƒŸãƒ¼ã‚¹ã‚­ãƒ£ãƒ³ãƒ©ã‚¤ãƒ³
 				// H-Draw (4fetches*32)
 				EmulationCPU( FETCH_CYCLES*128 );
 				ppu->FrameStart();
@@ -710,7 +710,7 @@ INT	scanline = 0;
 				ppu->ScanlineStart();
 				EmulationCPU( FETCH_CYCLES*10+nescfg->ScanlineEndCycles );
 			} else if( scanline < 240 ) {
-			// ƒXƒNƒŠ[ƒ“•`‰æ(Scanline 1`239)
+			// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³æç”»(Scanline 1ï½239)
 				if( bDraw ) {
 					ppu->Scanline( scanline, Config.graphics.bAllSprite, Config.graphics.bLeftClip );
 					ppu->ScanlineNext();
@@ -751,7 +751,7 @@ INT	scanline = 0;
 					}
 				}
 			} else if( scanline == 240 ) {
-			// ƒ_ƒ~[ƒXƒLƒƒƒ“ƒ‰ƒCƒ“ (Scanline 240)
+			// ãƒ€ãƒŸãƒ¼ã‚¹ã‚­ãƒ£ãƒ³ãƒ©ã‚¤ãƒ³ (Scanline 240)
 				mapper->VSync();
 
 				EmulationCPU( nescfg->HDrawCycles );
@@ -762,7 +762,7 @@ INT	scanline = 0;
 			} else if( scanline <= nescfg->TotalScanlines-1 ) {
 				pad->VSync();
 
-			// VBLANKŠúŠÔ
+			// VBLANKæœŸé–“
 				if( scanline == nescfg->TotalScanlines-1 ) {
 					ppu->VBlankEnd();
 				}
@@ -850,12 +850,12 @@ R6502	reg;
 			reg.P  = Z_FLAG|R_FLAG|I_FLAG;
 			cpu->SetContext( reg );
 
-			// ˆÀ‘S‘Îô‚ğŒ“‚Ë‚Ä‚ ‚¦‚Äƒ‹[ƒv‚É(1•b•ª)
+			// å®‰å…¨å¯¾ç­–ã‚’å…¼ã­ã¦ã‚ãˆã¦ãƒ«ãƒ¼ãƒ—ã«(1ç§’åˆ†)
 			for( INT i = 0; i < nescfg->TotalScanlines*60; i++ ) {
 				EmulationCPU( nescfg->ScanlineCycles );
 				cpu->GetContext( reg );
 
-				// –³ŒÀƒ‹[ƒv‚É“ü‚Á‚½‚±‚Æ‚ğŠm”F‚µ‚½‚ç”²‚¯‚é
+				// ç„¡é™ãƒ«ãƒ¼ãƒ—ã«å…¥ã£ãŸã“ã¨ã‚’ç¢ºèªã—ãŸã‚‰æŠœã‘ã‚‹
 				if( reg.PC == 0x4700 ) {
 					break;
 				}
@@ -865,7 +865,7 @@ R6502	reg;
 		}
 
 		cpu->GetContext( reg );
-		// –³ŒÀƒ‹[ƒv‚É“ü‚Á‚Ä‚¢‚½‚çÄİ’è‚·‚é
+		// ç„¡é™ãƒ«ãƒ¼ãƒ—ã«å…¥ã£ã¦ã„ãŸã‚‰å†è¨­å®šã™ã‚‹
 		if( reg.PC == 0x4700 ) {
 			reg.PC = 0x4720;	// Play Address
 			reg.A  = 0;
@@ -878,7 +878,7 @@ R6502	reg;
 		}
 	} else {
 		cpu->GetContext( reg );
-		reg.PC = 0x4700;	// –³ŒÀƒ‹[ƒv
+		reg.PC = 0x4700;	// ç„¡é™ãƒ«ãƒ¼ãƒ—
 		reg.S  = 0xFF;
 		cpu->SetContext( reg );
 
@@ -929,7 +929,7 @@ BYTE	NES::Read( WORD addr )
 			return	mapper->Read( addr );
 	}
 
-	return	0x00;	// Warning—\–h
+	return	0x00;	// Warningäºˆé˜²
 }
 
 void	NES::Write( WORD addr, BYTE data )
@@ -1032,7 +1032,7 @@ void	NES::WriteReg( WORD addr, BYTE data )
 			pad->Write( addr, data );
 			apu->Write( addr, data );
 			break;
-		// VirtuaNESŒÅ—Lƒ|[ƒg
+		// VirtuaNESå›ºæœ‰ãƒãƒ¼ãƒˆ
 		case	0x18:
 			apu->Write( addr, data );
 			break;
@@ -1105,7 +1105,7 @@ void	NES::LoadSRAM()
 	try
 	{
 		if( !(fp = ::fopen( tempstr.c_str(), "rb" )) ) {
-			// xxx ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ
+			// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
 			sprintf( szErrorString, szErrStr, tempstr.c_str() );
 			throw	szErrorString;
@@ -1114,7 +1114,7 @@ void	NES::LoadSRAM()
 		DEBUGOUT( "Loading SAVERAM..." );
 
 		LONG	size;
-		// ƒtƒ@ƒCƒ‹ƒTƒCƒYæ“¾
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºå–å¾—
 		::fseek( fp, 0, SEEK_END );
 		size = ftell( fp );
 		::fseek( fp, 0, SEEK_SET );
@@ -1134,7 +1134,7 @@ void	NES::LoadSRAM()
 	} catch(...) {
 		FCLOSE( fp );
 		DEBUGOUT( "Loading SAVERAM Error.\n" );
-		// •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½
+		// ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
@@ -1172,14 +1172,14 @@ INT	i;
 		try
 		{
 			if( !(fp = ::fopen( tempstr.c_str(), "wb" )) ) {
-				// xxx ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ
+				// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 				LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
 				sprintf( szErrorString, szErrStr, tempstr.c_str() );
 				throw	szErrorString;
 			}
 
 			if( ::fwrite( WRAM, SAVERAM_SIZE, 1, fp ) != 1 ) {
-				// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 			}
 
@@ -1193,7 +1193,7 @@ INT	i;
 		} catch(...) {
 			DEBUGOUT( "Writing SAVERAM Error.\n" );
 			FCLOSE( fp );
-			// •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½
+			// ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ
 			throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
 	#endif
 		}
@@ -1227,39 +1227,39 @@ void	NES::LoadDISK()
 	try
 	{
 		if( !(fp = ::fopen( tempstr.c_str(), "rb" )) ) {
-			// xxx ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ
+			// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
 			sprintf( szErrorString, szErrStr, tempstr.c_str() );
 			throw	szErrorString;
 		}
 
 		if( ::fread( &ifh, sizeof(DISKIMGFILEHDR), 1, fp ) != 1 ) {
-			// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 			throw	CApp::GetErrorString( IDS_ERROR_READ );
 		}
 
 		if( ::memcmp( ifh.ID, "VirtuaNES DI", sizeof(ifh.ID) ) == 0 ) {
 			if( ifh.BlockVersion < 0x0100 && ifh.BlockVersion > 0x200 ) {
-				// –¢‘Î‰Œ`®‚Å‚·
+				// æœªå¯¾å¿œå½¢å¼ã§ã™
 				throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 			}
 			Version = ifh.BlockVersion;
 		} else {
-			// –¢‘Î‰Œ`®‚Å‚·
+			// æœªå¯¾å¿œå½¢å¼ã§ã™
 			throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 		}
 
 		if( Version == 0x0100 ) {
-		// Ver0.24ˆÈ‘O
+		// Ver0.24ä»¥å‰
 			if( ifh.DiskNumber > 4 ) {
-				// –¢‘Î‰Œ`®‚Å‚·
+				// æœªå¯¾å¿œå½¢å¼ã§ã™
 				throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 			}
 
 			for( i = 0; i < (INT)ifh.DiskNumber; i++ ) {
 				if( ::fread( &hdr, sizeof(DISKIMGHDR), 1, fp ) != 1 ) {
 					if( i == 0 ) {
-						// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+						// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 						throw	CApp::GetErrorString( IDS_ERROR_READ );
 					} else {
 						break;
@@ -1275,7 +1275,7 @@ void	NES::LoadDISK()
 				} else if( ::memcmp( hdr.ID, "SIDE1B", sizeof(hdr.ID) ) == 0 ) {
 					diskno = 3;
 				} else {
-					// –¢‘Î‰Œ`®‚Å‚·
+					// æœªå¯¾å¿œå½¢å¼ã§ã™
 					throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 				}
 
@@ -1285,13 +1285,13 @@ void	NES::LoadDISK()
 						if( j < 15 ) {
 							if( ::fread( disk, 4*1024, 1, fp ) != 1 ) {
 								bExit = TRUE;
-								// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+								// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 								throw	CApp::GetErrorString( IDS_ERROR_READ );
 							}
 						} else {
 							if( ::fread( disk, 4*1024-36, 1, fp ) != 1 ) {
 								bExit = TRUE;
-								// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+								// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 								throw	CApp::GetErrorString( IDS_ERROR_READ );
 							}
 						}
@@ -1300,7 +1300,7 @@ void	NES::LoadDISK()
 			}
 		} else 
 		if( Version == 0x0200 || Version == 0x0210 ) {
-			// Ver0.30ˆÈ~
+			// Ver0.30ä»¥é™
 			DISKFILEHDR	dfh;
 			LPBYTE	lpDisk = rom->GetPROM();
 			LPBYTE	lpWrite = rom->GetDISK();
@@ -1308,32 +1308,32 @@ void	NES::LoadDISK()
 			DWORD	pos;
 			BYTE	data;
 
-			// ‘‚«Š·‚¦FLAGÁ‹
+			// æ›¸ãæ›ãˆFLAGæ¶ˆå»
 			::ZeroMemory( lpWrite, 16+65500*rom->GetDiskNo() );
 
-			// ƒwƒbƒ_“Ç‚İ’¼‚µ
+			// ãƒ˜ãƒƒãƒ€èª­ã¿ç›´ã—
 			if( ::fseek( fp, 0, SEEK_SET ) ) {
-				// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_READ );
 			}
 			if( ::fread( &dfh, sizeof(DISKFILEHDR), 1, fp ) != 1 ) {
-				// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_READ );
 			}
 
 			if( Config.emulator.bCrcCheck ) {
-				// Œ»İƒ[ƒh’†‚Ìƒ^ƒCƒgƒ‹‚Æˆá‚¤‚©‚ğƒ`ƒFƒbƒN
+				// ç¾åœ¨ãƒ­ãƒ¼ãƒ‰ä¸­ã®ã‚¿ã‚¤ãƒˆãƒ«ã¨é•ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯
 				if( dfh.ProgID  !=       rom->GetGameID()
 				 || dfh.MakerID != (WORD)rom->GetMakerID()
 				 || dfh.DiskNo  != (WORD)rom->GetDiskNo() ) {
-					// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					throw	CApp::GetErrorString( IDS_ERROR_READ );
 				}
 			}
 
 			for( i = 0; i < dfh.DifferentSize; i++ ) {
 				if( ::fread( &pos, sizeof(DWORD), 1, fp ) != 1 ) {
-					// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					bExit = TRUE;
 					throw	CApp::GetErrorString( IDS_ERROR_READ );
 				}
@@ -1355,7 +1355,7 @@ void	NES::LoadDISK()
 	} catch(...) {
 		FCLOSE( fp );
 		DEBUGOUT( "Loading DISKIMAGE Error.\n" );
-		// •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½
+		// ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
@@ -1384,7 +1384,7 @@ void	NES::SaveDISK()
 		ifh.MakerID = (WORD)rom->GetMakerID();
 		ifh.DiskNo  = (WORD)rom->GetDiskNo();
 
-		// ‘Šˆá”‚ğƒJƒEƒ“ƒg
+		// ç›¸é•æ•°ã‚’ã‚«ã‚¦ãƒ³ãƒˆ
 		for( i = 16; i < DiskSize; i++ ) {
 			if( lpWrite[i] )
 				ifh.DifferentSize++;
@@ -1404,14 +1404,14 @@ void	NES::SaveDISK()
 		DEBUGOUT( "Path: %s\n", tempstr.c_str() );
 
 		if( !(fp = ::fopen( tempstr.c_str(), "wb" )) ) {
-			// xxx ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ
+			// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
 			::wsprintf( szErrorString, szErrStr, tempstr.c_str() );
 			throw	szErrorString;
 		}
 
 		if( ::fwrite( &ifh, sizeof(DISKFILEHDR), 1, fp ) != 1 ) {
-			// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 			throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 		}
 
@@ -1422,7 +1422,7 @@ void	NES::SaveDISK()
 
 				// Write File
 				if( ::fwrite( &data, sizeof(DWORD), 1, fp ) != 1 ) {
-					// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 				}
 			}
@@ -1435,7 +1435,7 @@ void	NES::SaveDISK()
 	} catch(...) {
 		FCLOSE( fp );
 		DEBUGOUT( "Saving DISKIMAGE Error.\n" );
-		// •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½
+		// ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
@@ -1461,7 +1461,7 @@ void	NES::LoadTurboFile()
 	try
 	{
 		if( !(fp = ::fopen( tempstr.c_str(), "rb" )) ) {
-			// xxx ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ
+			// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
 			sprintf( szErrorString, szErrStr, tempstr.c_str() );
 			throw	szErrorString;
@@ -1470,7 +1470,7 @@ void	NES::LoadTurboFile()
 		DEBUGOUT( "Loading TURBOFILE..." );
 
 		LONG	size;
-		// ƒtƒ@ƒCƒ‹ƒTƒCƒYæ“¾
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºå–å¾—
 		::fseek( fp, 0, SEEK_END );
 		size = ftell( fp );
 		::fseek( fp, 0, SEEK_SET );
@@ -1491,7 +1491,7 @@ void	NES::LoadTurboFile()
 	} catch(...) {
 		FCLOSE( fp );
 		DEBUGOUT( "Loading TurboFile Error.\n" );
-		// •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½
+		// ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
@@ -1526,14 +1526,14 @@ INT	i;
 		try
 		{
 			if( !(fp = ::fopen( tempstr.c_str(), "wb" )) ) {
-				// xxx ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ
+				// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 				LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
 				sprintf( szErrorString, szErrStr, tempstr.c_str() );
 				throw	szErrorString;
 			}
 
 			if( ::fwrite( ERAM, sizeof(ERAM), 1, fp ) != 1 ) {
-				// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 			}
 
@@ -1547,7 +1547,7 @@ INT	i;
 		} catch(...) {
 			DEBUGOUT( "Writing TurboFile Error.\n" );
 			FCLOSE( fp );
-			// •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½
+			// ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ
 			throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
 	#endif
 		}
@@ -1575,16 +1575,16 @@ FILEHDR2 header;
 		if( Config.emulator.bCrcCheck ) {
 			if( header.BlockVersion >= 0x200 ) {
 				if( rom->GetMapperNo() != 20 ) {
-				// FDSˆÈŠO
+				// FDSä»¥å¤–
 					if( header.Ext0 != rom->GetPROM_CRC() ) {
-						return	IDS_ERROR_ILLEGALSTATECRC;	// ˆá‚¤‚¶‚á‚ñ
+						return	IDS_ERROR_ILLEGALSTATECRC;	// é•ã†ã˜ã‚ƒã‚“
 					}
 				} else {
 				// FDS
 					if( header.Ext0 != rom->GetGameID() ||
 					    header.Ext1 != (WORD)rom->GetMakerID() ||
 					    header.Ext2 != (WORD)rom->GetDiskNo() )
-						return	IDS_ERROR_ILLEGALSTATECRC;	// ˆá‚¤‚¶‚á‚ñ
+						return	IDS_ERROR_ILLEGALSTATECRC;	// é•ã†ã˜ã‚ƒã‚“
 				}
 			}
 		}
@@ -1603,7 +1603,7 @@ BOOL	bRet = FALSE;
 
 	try {
 		if( !(fp = ::fopen( fname, "rb" )) ) {
-			// xxx ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ
+			// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
 			sprintf( szErrorString, szErrStr, fname );
 			throw	szErrorString;
@@ -1621,7 +1621,7 @@ BOOL	bRet = FALSE;
 	} catch(...) {
 		DEBUGOUT( "State load error.\n" );
 		FCLOSE( fp );
-		// •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½
+		// ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
@@ -1638,7 +1638,7 @@ FILE*	fp = NULL;
 
 	try {
 		if( !(fp = ::fopen( fname, "wb" )) ) {
-			// xxx ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ
+			// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
 			sprintf( szErrorString, szErrStr, fname );
 			throw	szErrorString;
@@ -1655,7 +1655,7 @@ FILE*	fp = NULL;
 	} catch(...) {
 		DEBUGOUT( "State save error.\n" );
 		FCLOSE( fp );
-		// •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½
+		// ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
@@ -1683,64 +1683,64 @@ BOOL	NES::ReadState( FILE* fp )
 			if( ::memcmp( fh->ID, "VirtuaNES ST", sizeof(fh->ID) ) == 0 ) {
 				Version = fh->BlockVersion;
 				if( Version == 0x0100 ) {
-				// Ver0.24‚Ü‚Å
+				// Ver0.24ã¾ã§
 					bHeader = TRUE;
-					// ŒÃ‚¢“z‚Íƒ€[ƒr[’†‚Íƒ[ƒho—ˆ‚Ü‚¹‚ñ
+					// å¤ã„å¥´ã¯ãƒ ãƒ¼ãƒ“ãƒ¼ä¸­ã¯ãƒ­ãƒ¼ãƒ‰å‡ºæ¥ã¾ã›ã‚“
 					if( m_bMoviePlay ) {
 						return	FALSE;
 					}
-					// ŒÃ‚¢“z‚ÌFDS‚Íƒ[ƒho—ˆ‚Ü‚¹‚ñ
+					// å¤ã„å¥´ã®FDSã¯ãƒ­ãƒ¼ãƒ‰å‡ºæ¥ã¾ã›ã‚“
 					if( rom->GetMapperNo() == 20 ) {
-						// –¢‘Î‰Œ`®‚Å‚·
+						// æœªå¯¾å¿œå½¢å¼ã§ã™
 						throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 					}
 				} else 
 				if( Version == 0x0200 || Version == 0x0210 ) {
-				// Ver0.30ˆÈ~ Ver0.60ˆÈ~
+				// Ver0.30ä»¥é™ Ver0.60ä»¥é™
 					FILEHDR2 hdr2;
-					// ƒwƒbƒ_•”“Ç‚İ’¼‚µ
+					// ãƒ˜ãƒƒãƒ€éƒ¨èª­ã¿ç›´ã—
 					if( ::fseek( fp, -sizeof(BLOCKHDR), SEEK_CUR ) ) {
-						// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+						// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 						throw	CApp::GetErrorString( IDS_ERROR_READ );
 					}
 					// Read File
 					if( ::fread( &hdr2, sizeof(FILEHDR2), 1, fp ) != 1 ) {
-						// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+						// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 						throw	CApp::GetErrorString( IDS_ERROR_READ );
 					}
 
 #if	0
 					if( Config.emulator.bCrcCheck ) {
-						// Œ»İƒ[ƒh’†‚Ìƒ^ƒCƒgƒ‹‚Æˆá‚¤‚©‚ğƒ`ƒFƒbƒN
+						// ç¾åœ¨ãƒ­ãƒ¼ãƒ‰ä¸­ã®ã‚¿ã‚¤ãƒˆãƒ«ã¨é•ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯
 						if( rom->GetMapperNo() != 20 ) {
-						// FDSˆÈŠO
+						// FDSä»¥å¤–
 							if( hdr2.Ext0 != rom->GetPROM_CRC() ) {
-								return	FALSE;	// ˆá‚¤‚¶‚á‚ñ
+								return	FALSE;	// é•ã†ã˜ã‚ƒã‚“
 							}
 						} else {
 						// FDS
 							if( hdr2.Ext0 != rom->GetGameID() ||
 							    hdr2.Ext1 != (WORD)rom->GetMakerID() ||
 							    hdr2.Ext2 != (WORD)rom->GetDiskNo() )
-								return	FALSE;	// ˆá‚¤‚¶‚á‚ñ
+								return	FALSE;	// é•ã†ã˜ã‚ƒã‚“
 						}
 					}
 #endif
 
-					// ƒ€[ƒr[’†‚Íƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^‚ÆƒXƒeƒbƒv”‚ğ
-					// •ÏX‚µ‚ÄCƒ€[ƒr[‚ğ‹L˜^ƒ‚[ƒh‚É•ÏX
+					// ãƒ ãƒ¼ãƒ“ãƒ¼ä¸­ã¯ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿ã¨ã‚¹ãƒ†ãƒƒãƒ—æ•°ã‚’
+					// å¤‰æ›´ã—ã¦ï¼Œãƒ ãƒ¼ãƒ“ãƒ¼ã‚’è¨˜éŒ²ãƒ¢ãƒ¼ãƒ‰ã«å¤‰æ›´
 					if( m_bMoviePlay || m_bMovieRec ) {
-						// B‚è’¼‚µ‰Â”\H
+						// æ’®ã‚Šç›´ã—å¯èƒ½ï¼Ÿ
 						if( m_hedMovie.Control & 0x80 ) {
 							if( hdr2.MovieOffset && hdr2.MovieStep ) {
 								if( m_bMoviePlay ) {
-								// Ä¶’†
-									// ƒXƒe[ƒg‚ÌƒXƒeƒbƒv”‚ª‹L˜^‚æ‚èi‚ñ‚Å‚½‚çƒ_ƒ
+								// å†ç”Ÿä¸­
+									// ã‚¹ãƒ†ãƒ¼ãƒˆã®ã‚¹ãƒ†ãƒƒãƒ—æ•°ãŒè¨˜éŒ²ã‚ˆã‚Šé€²ã‚“ã§ãŸã‚‰ãƒ€ãƒ¡
 									if( hdr2.MovieStep > m_hedMovie.MovieStep )
 										return	FALSE;
 								} else {
-								// ‹L˜^’†
-									// ƒXƒe[ƒg‚ÌƒXƒeƒbƒv”‚ªŒ»İ‚æ‚èi‚ñ‚Å‚½‚çƒ_ƒ
+								// è¨˜éŒ²ä¸­
+									// ã‚¹ãƒ†ãƒ¼ãƒˆã®ã‚¹ãƒ†ãƒƒãƒ—æ•°ãŒç¾åœ¨ã‚ˆã‚Šé€²ã‚“ã§ãŸã‚‰ãƒ€ãƒ¡
 									if( hdr2.MovieStep > m_MovieStep )
 										return	FALSE;
 								}
@@ -1749,10 +1749,10 @@ BOOL	NES::ReadState( FILE* fp )
 								m_bMoviePlay = FALSE;
 								m_bMovieRec = TRUE;
 								m_MovieStep = hdr2.MovieStep;
-								m_hedMovie.RecordTimes++;	// B‚è’¼‚µ‰ñ”+1
+								m_hedMovie.RecordTimes++;	// æ’®ã‚Šç›´ã—å›æ•°+1
 								if( ::fseek( m_fpMovie, hdr2.MovieOffset, SEEK_SET ) ) {
-//DEBUGOUT( "MOVIE:STATE LOAD SEEK ¸”s\n" );
-									// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+//DEBUGOUT( "MOVIE:STATE LOAD SEEK å¤±æ•—\n" );
+									// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 									throw	CApp::GetErrorString( IDS_ERROR_READ );
 								}
 							} else {
@@ -1769,7 +1769,7 @@ BOOL	NES::ReadState( FILE* fp )
 		}
 
 		if( !bHeader ) {
-			// –¢‘Î‰Œ`®‚Å‚·
+			// æœªå¯¾å¿œå½¢å¼ã§ã™
 			throw	CApp::GetErrorString( IDS_ERROR_UNSUPPORTFORMAT );
 		}
 
@@ -1809,7 +1809,7 @@ BOOL	NES::ReadState( FILE* fp )
 				if( hdr.BlockVersion < 0x0200 ) {
 					REGSTAT_O	reg;
 					if( ::fread( &reg, sizeof(REGSTAT_O), 1, fp ) != 1 ) {
-						// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+						// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 						throw	CApp::GetErrorString( IDS_ERROR_READ );
 					}
 
@@ -1847,7 +1847,7 @@ BOOL	NES::ReadState( FILE* fp )
 				} else {
 					REGSTAT	reg;
 					if( ::fread( &reg, sizeof(REGSTAT), 1, fp ) != 1 ) {
-						// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+						// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 						throw	CApp::GetErrorString( IDS_ERROR_READ );
 					}
 
@@ -1892,11 +1892,11 @@ BOOL	NES::ReadState( FILE* fp )
 				}
 
 				// APU STATE
-				// ƒLƒ…[‚ğÁ‚·
+				// ã‚­ãƒ¥ãƒ¼ã‚’æ¶ˆã™
 				apu->QueueClear();
 
-// APUƒXƒe[ƒg‚ğ•Û‘¶‚·‚é‚æ‚¤‚É‚µ‚½‚Ì‚Åƒ„ƒ
-//				// DMC‚Í~‚ß‚È‚¢‚Æ‚Ü‚¸‚¢–‚ª‹N‚±‚é
+// APUã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä¿å­˜ã™ã‚‹ã‚ˆã†ã«ã—ãŸã®ã§ãƒ¤ãƒ¡
+//				// DMCã¯æ­¢ã‚ãªã„ã¨ã¾ãšã„äº‹ãŒèµ·ã“ã‚‹
 //				for( i = 0x4010; i <= 0x4013; i++ ) {
 //					apu->Write( i, 0 );
 //				}
@@ -1907,7 +1907,7 @@ BOOL	NES::ReadState( FILE* fp )
 				{
 				RAMSTAT	ram;
 				if( ::fread( &ram, sizeof(RAMSTAT), 1, fp ) != 1 ) {
-					// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					throw	CApp::GetErrorString( IDS_ERROR_READ );
 				}
 				::memcpy( RAM, ram.RAM, sizeof(ram.RAM) );
@@ -1916,7 +1916,7 @@ BOOL	NES::ReadState( FILE* fp )
 				::memcpy( SPRAM, ram.SPRAM, sizeof(ram.SPRAM) );
 				if( rom->IsSAVERAM() ) {
 					if( ::fread( WRAM, SAVERAM_SIZE, 1, fp ) != 1 ) {
-						// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+						// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 						throw	CApp::GetErrorString( IDS_ERROR_READ );
 					}
 				}
@@ -1927,21 +1927,21 @@ BOOL	NES::ReadState( FILE* fp )
 				{
 				MMUSTAT mmu;
 				if( ::fread( &mmu, sizeof(MMUSTAT), 1, fp ) != 1 ) {
-					// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					throw	CApp::GetErrorString( IDS_ERROR_READ );
 				}
 				if( hdr.BlockVersion == 0x100 ) {
-				// ‚¿‚å‚Á‚Æ‘O‚Ìƒo[ƒWƒ‡ƒ“
+				// ã¡ã‚‡ã£ã¨å‰ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³
 					if( mmu.CPU_MEM_TYPE[3] == BANKTYPE_RAM
 					 || mmu.CPU_MEM_TYPE[3] == BANKTYPE_DRAM ) {
 						if( ::fread( CPU_MEM_BANK[3], 8*1024, 1, fp ) != 1 ) {
-							// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+							// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 							throw	CApp::GetErrorString( IDS_ERROR_READ );
 						}
 					} else if( !rom->IsSAVERAM() ) {
 						SetPROM_8K_Bank( 3, mmu.CPU_MEM_PAGE[3] );
 					}
-					// ƒoƒ“ƒN0`3ˆÈŠOƒ[ƒh
+					// ãƒãƒ³ã‚¯0ï½3ä»¥å¤–ãƒ­ãƒ¼ãƒ‰
 					for( i = 4; i < 8; i++ ) {
 						CPU_MEM_TYPE[i] = mmu.CPU_MEM_TYPE[i];
 						CPU_MEM_PAGE[i] = mmu.CPU_MEM_PAGE[i];
@@ -1949,14 +1949,14 @@ BOOL	NES::ReadState( FILE* fp )
 							SetPROM_8K_Bank( i, CPU_MEM_PAGE[i] );
 						} else {
 							if( ::fread( CPU_MEM_BANK[i], 8*1024, 1, fp ) != 1 ) {
-								// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+								// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 								throw	CApp::GetErrorString( IDS_ERROR_READ );
 							}
 						}
 					}
 				} else if( hdr.BlockVersion == 0x200 ) {
-				// ÅVƒo[ƒWƒ‡ƒ“
-					// SRAM‚ª‚ ‚Á‚Ä‚à‘S•”ƒ[ƒh‚µ‚È‚¨‚µ
+				// æœ€æ–°ãƒãƒ¼ã‚¸ãƒ§ãƒ³
+					// SRAMãŒã‚ã£ã¦ã‚‚å…¨éƒ¨ãƒ­ãƒ¼ãƒ‰ã—ãªãŠã—
 					for( i = 3; i < 8; i++ ) {
 						CPU_MEM_TYPE[i] = mmu.CPU_MEM_TYPE[i];
 						CPU_MEM_PAGE[i] = mmu.CPU_MEM_PAGE[i];
@@ -1964,7 +1964,7 @@ BOOL	NES::ReadState( FILE* fp )
 							SetPROM_8K_Bank( i, CPU_MEM_PAGE[i] );
 						} else {
 							if( ::fread( CPU_MEM_BANK[i], 8*1024, 1, fp ) != 1 ) {
-								// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+								// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 								throw	CApp::GetErrorString( IDS_ERROR_READ );
 							}
 						}
@@ -1972,7 +1972,7 @@ BOOL	NES::ReadState( FILE* fp )
 				}
 				// VRAM
 				if( ::fread( VRAM, 4*1024, 1, fp ) != 1 ) {
-					// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					throw	CApp::GetErrorString( IDS_ERROR_READ );
 				}
 
@@ -1980,7 +1980,7 @@ BOOL	NES::ReadState( FILE* fp )
 				for( i = 0; i < 8; i++ ) {
 					if( mmu.CRAM_USED[i] != 0 ) {
 						if( ::fread( &CRAM[0x1000*i], 4*1024, 1, fp ) != 1 ) {
-							// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+							// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 							throw	CApp::GetErrorString( IDS_ERROR_READ );
 						}
 					}
@@ -2004,7 +2004,7 @@ BOOL	NES::ReadState( FILE* fp )
 				{
 				MMCSTAT	mmc;
 				if( ::fread( &mmc, sizeof(MMCSTAT), 1, fp ) != 1 ) {
-					// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					throw	CApp::GetErrorString( IDS_ERROR_READ );
 				}
 				mapper->LoadState( mmc.mmcdata );
@@ -2015,7 +2015,7 @@ BOOL	NES::ReadState( FILE* fp )
 				{
 				CTRSTAT	ctr;
 				if( ::fread( &ctr, sizeof(CTRSTAT), 1, fp ) != 1 ) {
-					// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					throw	CApp::GetErrorString( IDS_ERROR_READ );
 				}
 
@@ -2032,7 +2032,7 @@ BOOL	NES::ReadState( FILE* fp )
 				{
 				SNDSTAT	snd;
 				if( ::fread( &snd, sizeof(SNDSTAT), 1, fp ) != 1 ) {
-					// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					throw	CApp::GetErrorString( IDS_ERROR_READ );
 				}
 				apu->LoadState( snd.snddata );
@@ -2040,7 +2040,7 @@ BOOL	NES::ReadState( FILE* fp )
 				break;
 
 			// Disk Images
-			// Ver0.30ˆÈ~
+			// Ver0.30ä»¥é™
 			case	6:
 				{
 				DISKDATA ddata;
@@ -2050,17 +2050,17 @@ BOOL	NES::ReadState( FILE* fp )
 				LPBYTE	lpDisk  = rom->GetPROM();
 				LPBYTE	lpWrite = rom->GetDISK();
 
-				// ‘‚«Š·‚¦FLAGÁ‹
+				// æ›¸ãæ›ãˆFLAGæ¶ˆå»
 				::ZeroMemory( lpWrite, 16+65500*rom->GetDiskNo() );
 
 				if( ::fread( &ddata, sizeof(DISKDATA), 1, fp ) != 1 ) {
-					// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					throw	CApp::GetErrorString( IDS_ERROR_READ );
 				}
 
 				for( i = 0; i < ddata.DifferentSize; i++ ) {
 					if( ::fread( &pos, sizeof(DWORD), 1, fp ) != 1 ) {
-						// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+						// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 						throw	CApp::GetErrorString( IDS_ERROR_READ );
 					}
 					data = (BYTE)(pos>>24);
@@ -2079,7 +2079,7 @@ BOOL	NES::ReadState( FILE* fp )
 				{
 				EXCTRSTAT exctr;
 				if( ::fread( &exctr, sizeof(EXCTRSTAT), 1, fp ) != 1 ) {
-					// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					throw CApp::GetErrorString( IDS_ERROR_READ );
 				}
 
@@ -2112,7 +2112,7 @@ void	NES::WriteState( FILE* fp )
 		hdr.Ext2 = (WORD)rom->GetDiskNo();
 	}
 
-	// ƒ€[ƒr[Ä¶‚â‹L˜^’†‚Å‚ ‚ê‚Î‚»‚ÌˆÊ’u‚ğ‹L˜^‚·‚é
+	// ãƒ ãƒ¼ãƒ“ãƒ¼å†ç”Ÿã‚„è¨˜éŒ²ä¸­ã§ã‚ã‚Œã°ãã®ä½ç½®ã‚’è¨˜éŒ²ã™ã‚‹
 	if( m_bMoviePlay || m_bMovieRec ) {
 		hdr.MovieStep   = m_MovieStep;
 		hdr.MovieOffset = ::ftell( m_fpMovie );
@@ -2121,7 +2121,7 @@ void	NES::WriteState( FILE* fp )
 
 	// Write File
 	if( ::fwrite( &hdr, sizeof(FILEHDR2), 1, fp ) != 1 )
-		// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 	}
 
@@ -2157,7 +2157,7 @@ void	NES::WriteState( FILE* fp )
 			  reg.cpureg.cpu.FrameIRQ_type,
 			  reg.cpureg.cpu.FrameIRQ,
 			  reg.cpureg.cpu.FrameIRQ_occur );
-	reg.cpureg.cpu.FrameIRQ_cycles = (LONG)cycles;	// QÆ‚ªINT‚Èˆ×i‚§
+	reg.cpureg.cpu.FrameIRQ_cycles = (LONG)cycles;	// å‚ç…§ãŒINTãªç‚ºï¼ˆã‰
 
 	reg.cpureg.cpu.DMA_cycles = (LONG)cpu->GetDmaCycles();
 	reg.cpureg.cpu.emul_cycles = emul_cycles;
@@ -2176,11 +2176,11 @@ void	NES::WriteState( FILE* fp )
 
 	// Write File
 	if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
-		// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 	}
 	if( ::fwrite( &reg, sizeof(REGSTAT), 1, fp ) != 1 ) {
-		// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 	}
 	}
@@ -2199,7 +2199,7 @@ void	NES::WriteState( FILE* fp )
 	::memcpy( ram.SPPAL, SPPAL, sizeof(ram.SPPAL) );
 	::memcpy( ram.SPRAM, SPRAM, sizeof(ram.SPRAM) );
 
-	// S-RAM STATE(g—p/–¢g—p‚ÉŠÖ‚í‚ç‚¸‘¶İ‚·‚ê‚ÎƒZ[ƒu‚·‚é)
+	// S-RAM STATE(ä½¿ç”¨/æœªä½¿ç”¨ã«é–¢ã‚ã‚‰ãšå­˜åœ¨ã™ã‚Œã°ã‚»ãƒ¼ãƒ–ã™ã‚‹)
 	if( rom->IsSAVERAM() ) {
 		size = SAVERAM_SIZE;
 	}
@@ -2211,16 +2211,16 @@ void	NES::WriteState( FILE* fp )
 
 	// Write File
 	if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
-		// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 	}
 	if( ::fwrite( &ram, sizeof(RAMSTAT), 1, fp ) != 1 ) {
-		// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 	}
 	if( rom->IsSAVERAM() ) {
 		if( ::fwrite( WRAM, SAVERAM_SIZE, 1, fp ) != 1 )
-			// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 			throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 		}
 	}
@@ -2235,9 +2235,9 @@ void	NES::WriteState( FILE* fp )
 
 	size = 0;
 	// SAVE CPU MEMORY BANK DATA
-	// BANK0,1,2‚Íƒoƒ“ƒNƒZ[ƒu‚ÉŠÖŒW‚È‚µ
-	// VirtuaNES0.30‚©‚ç
-	// ƒoƒ“ƒN‚R‚ÍSRAMg—p‚ÉŠÖ‚í‚ç‚¸ƒZ[ƒu
+	// BANK0,1,2ã¯ãƒãƒ³ã‚¯ã‚»ãƒ¼ãƒ–ã«é–¢ä¿‚ãªã—
+	// VirtuaNES0.30ã‹ã‚‰
+	// ãƒãƒ³ã‚¯ï¼“ã¯SRAMä½¿ç”¨ã«é–¢ã‚ã‚‰ãšã‚»ãƒ¼ãƒ–
 	for( i = 3; i < 8; i++ ) {
 		mmu.CPU_MEM_TYPE[i] = CPU_MEM_TYPE[i];
 		mmu.CPU_MEM_PAGE[i] = CPU_MEM_PAGE[i];
@@ -2269,11 +2269,11 @@ void	NES::WriteState( FILE* fp )
 
 	// Write File
 	if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
-		// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 	}
 	if( ::fwrite( &mmu, sizeof(MMUSTAT), 1, fp ) != 1 ) {
-		// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 	}
 
@@ -2281,14 +2281,14 @@ void	NES::WriteState( FILE* fp )
 	for( i = 3; i < 8; i++ ) {
 		if( mmu.CPU_MEM_TYPE[i] != BANKTYPE_ROM ) {
 			if( ::fwrite( CPU_MEM_BANK[i], 8*1024, 1, fp ) != 1 ) {
-				// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 			}
 		}
 	}
-	// WRITE VRAM MEMORY(í‚É4K•ª‚·‚×‚Ä‘‚«‚Ş)
+	// WRITE VRAM MEMORY(å¸¸ã«4Kåˆ†ã™ã¹ã¦æ›¸ãè¾¼ã‚€)
 	if( ::fwrite( VRAM, 4*1024, 1, fp ) != 1 ) {
-		// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 	}
 
@@ -2296,7 +2296,7 @@ void	NES::WriteState( FILE* fp )
 	for( i = 0; i < 8; i++ ) {
 		if( CRAM_USED[i] != 0 ) {
 			if( ::fwrite( &CRAM[0x1000*i], 4*1024, 1, fp ) != 1 ) {
-				// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 			}
 		}
@@ -2319,11 +2319,11 @@ void	NES::WriteState( FILE* fp )
 		mapper->SaveState( mmc.mmcdata );
 		// Write File
 		if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
-			// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 			throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 		}
 		if( ::fwrite( &mmc, sizeof(MMCSTAT), 1, fp ) != 1 ) {
-			// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 			throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 		}
 	}
@@ -2349,12 +2349,12 @@ void	NES::WriteState( FILE* fp )
 //DEBUGOUT( "SV pad1bit=%08X Strobe=%d\n", pad->pad1bit, pad->GetStrobe()?1:0 );
 
 	if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
-		// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 	}
 
 	if( ::fwrite( &ctr, sizeof(CTRSTAT), 1, fp ) != 1 ) {
-		// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 	}
 	}
@@ -2374,12 +2374,12 @@ void	NES::WriteState( FILE* fp )
 	apu->SaveState( snd.snddata );
 
 	if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
-		// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 	}
 
 	if( ::fwrite( &snd, sizeof(SNDSTAT), 1, fp ) != 1 ) {
-		// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 	}
 	}
@@ -2396,7 +2396,7 @@ void	NES::WriteState( FILE* fp )
 	::ZeroMemory( &hdr, sizeof(BLOCKHDR) );
 	::ZeroMemory( &dsk, sizeof(DISKDATA) );
 
-	// ‘Šˆá”‚ğƒJƒEƒ“ƒg
+	// ç›¸é•æ•°ã‚’ã‚«ã‚¦ãƒ³ãƒˆ
 	for( i = 16; i < DiskSize; i++ ) {
 		if( lpWrite[i] )
 			dsk.DifferentSize++;
@@ -2408,12 +2408,12 @@ void	NES::WriteState( FILE* fp )
 
 	// Write File
 	if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
-		// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 	}
 	// Write File
 	if( ::fwrite( &dsk, sizeof(DISKDATA), 1, fp ) != 1 ) {
-		// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+		// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 	}
 
@@ -2424,7 +2424,7 @@ void	NES::WriteState( FILE* fp )
 
 			// Write File
 			if( ::fwrite( &data, sizeof(DWORD), 1, fp ) != 1 ) {
-				// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 			}
 		}
@@ -2447,12 +2447,12 @@ void	NES::WriteState( FILE* fp )
 		exctr.data = pad->GetSyncExData();
 
 		if( ::fwrite( &hdr, sizeof(BLOCKHDR), 1, fp ) != 1 ) {
-			// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 			throw CApp::GetErrorString( IDS_ERROR_WRITE );
 		}
 
 		if( ::fwrite( &exctr, sizeof(EXCTRSTAT), 1, fp ) != 1 ) {
-			// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 			throw CApp::GetErrorString( IDS_ERROR_WRITE );
 		}
 	}
@@ -2554,7 +2554,7 @@ BOOL	NES::CommandParam( NESCOMMAND cmd, INT param )
 			break;
 
 		case	NESCMD_SOUND_MUTE:
-			return	apu->SetChannelMute( (BOOL)param ); // ƒŠƒ^[ƒ“’l‚Í•ÏXŒã‚Ìƒ~ƒ…[ƒgó‘Ô
+			return	apu->SetChannelMute( (BOOL)param ); // ãƒªã‚¿ãƒ¼ãƒ³å€¤ã¯å¤‰æ›´å¾Œã®ãƒŸãƒ¥ãƒ¼ãƒˆçŠ¶æ…‹
 	}
 
 	return	TRUE;
@@ -2590,7 +2590,7 @@ FILE*	fp = NULL;
 
 		if( !Config.emulator.bPNGsnapshot ) {
 			if( !(fp = ::fopen( tempstr.c_str(), "wb" )) ) {
-				// xxx ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ
+				// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 				LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
 				sprintf( szErrorString, szErrStr, tempstr.c_str() );
 				throw	szErrorString;
@@ -2625,22 +2625,22 @@ FILE*	fp = NULL;
 			DirectDraw.GetPaletteData( rgb );
 
 			if( ::fwrite( &bfh, sizeof(bfh), 1, fp ) != 1 ) {
-				// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 			}
 			if( ::fwrite( &bih, sizeof(bih), 1, fp ) != 1 ) {
-				// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 			}
 			if( ::fwrite( &rgb, sizeof(rgb), 1, fp ) != 1 ) {
-				// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 			}
 
 			lpScn += 8;
 			for( INT i = 239; i >= 0; i-- ) {
 				if( ::fwrite( &lpScn[(256+16)*i], 256, 1, fp ) != 1 ) {
-					// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 				}
 			}
@@ -2664,7 +2664,7 @@ FILE*	fp = NULL;
 	} catch(...) {
 		DEBUGOUT( "Snapshot error.\n" );
 		FCLOSE( fp );
-		// •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½
+		// ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
@@ -2692,16 +2692,16 @@ MOVIEFILEHDR	header;
 		} else 
 		if( header.BlockVersion >= 0x0300 ) {
 			if( rom->GetMapperNo() != 20 ) {
-			// FDSˆÈŠO
+			// FDSä»¥å¤–
 				if( header.Ext0 != rom->GetPROM_CRC() ) {
-					return	IDS_ERROR_ILLEGALMOVIECRC;	// ˆá‚¤‚¶‚á‚ñ
+					return	IDS_ERROR_ILLEGALMOVIECRC;	// é•ã†ã˜ã‚ƒã‚“
 				}
 			} else {
 			// FDS
 				if( header.Ext0 != rom->GetGameID() ||
 				    header.Ext1 != (WORD)rom->GetMakerID() ||
 				    header.Ext2 != (WORD)rom->GetDiskNo() )
-					return	IDS_ERROR_ILLEGALMOVIECRC;	// ˆá‚¤‚¶‚á‚ñ
+					return	IDS_ERROR_ILLEGALMOVIECRC;	// é•ã†ã˜ã‚ƒã‚“
 			}
 
 			if( header.RecordVersion != VIRTUANES_VERSION ) {
@@ -2729,13 +2729,13 @@ DEBUGOUT( "NES::MoviePlay\n" );
 	try {
 		if( !(m_fpMovie = ::fopen( fname, "rb+" )) ) {
 			DEBUGOUT( "Movie play error. File not found.\n" );
-			// ƒtƒ@ƒCƒ‹–³‚¢‚Å‚·
+			// ãƒ•ã‚¡ã‚¤ãƒ«ç„¡ã„ã§ã™
 			return	FALSE;
 		}
 
-		// “Ç‚İ‚İ
+		// èª­ã¿è¾¼ã¿
 		if( ::fread( &m_hedMovie, sizeof(m_hedMovie), 1, m_fpMovie ) != 1 ) {
-			// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 			throw	CApp::GetErrorString( IDS_ERROR_READ );
 		}
 
@@ -2747,18 +2747,18 @@ DEBUGOUT( "NES::MoviePlay\n" );
 				if( m_hedMovie.CRC != 0 ) {
 					if( CRC::Crc( sizeof(m_hedMovie)-sizeof(DWORD), (LPBYTE)&m_hedMovie ) != m_hedMovie.CRC ) {
 						FCLOSE( m_fpMovie );
-						return	FALSE;	// ˆá‚¤‚¶‚á‚ñ
+						return	FALSE;	// é•ã†ã˜ã‚ƒã‚“
 					}
 				}
-				// ‚¨‚Á‚¯`
+				// ãŠã£ã‘ï½
 			} else {
-				// æ¶IŒÃ‚¢‚Ì‚Åƒ_ƒ‚Á‚·B
+				// å…ˆç”Ÿï¼å¤ã„ã®ã§ãƒ€ãƒ¡ã£ã™ã€‚
 				FCLOSE( m_fpMovie );
 				return	FALSE;
 			}
 		}
 
-		// ƒQ[ƒ€ŒÅ—LƒIƒvƒVƒ‡ƒ“
+		// ã‚²ãƒ¼ãƒ å›ºæœ‰ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 		m_saveRenderMethod = (INT)GetRenderMethod();
 		m_saveIrqType      = GetIrqType();
 		m_saveFrameIRQ     = GetFrameIRQmode();
@@ -2774,21 +2774,21 @@ DEBUGOUT( "NES::MoviePlay\n" );
 		MovieOffset      = m_hedMovie.MovieOffset;
 
 		if( m_hedMovie.BlockVersion < 0x0400 ) {
-			// ƒXƒe[ƒg“Ç‚İ‚İ
+			// ã‚¹ãƒ†ãƒ¼ãƒˆèª­ã¿è¾¼ã¿
 			ReadState( m_fpMovie );
 		} else if( !(m_MovieControl & 0x40) ) {
-			// ƒXƒe[ƒg“Ç‚İ‚İ
+			// ã‚¹ãƒ†ãƒ¼ãƒˆèª­ã¿è¾¼ã¿
 			ReadState( m_fpMovie );
 		} else {
 			Reset();
 		}
 
 		if( ::fseek( m_fpMovie, MovieOffset, SEEK_SET ) ) {
-			// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 			throw	CApp::GetErrorString( IDS_ERROR_READ );
 		}
 
-		// ƒ€[ƒr[‚ª‹L˜^‚³‚ê‚Ä‚¢‚È‚¢H
+		// ãƒ ãƒ¼ãƒ“ãƒ¼ãŒè¨˜éŒ²ã•ã‚Œã¦ã„ãªã„ï¼Ÿ
 		if( m_MovieStepTotal == 0 ) {
 			MovieStop();
 			return	FALSE;
@@ -2804,7 +2804,7 @@ DEBUGOUT( "NES::MoviePlay\n" );
 	} catch(...) {
 		DEBUGOUT( "Movie play error.\n" );
 		FCLOSE( m_fpMovie );
-		// •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½
+		// ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
@@ -2825,7 +2825,7 @@ DEBUGOUT( "NES::MovieRec\n" );
 
 	try {
 		if( !(m_fpMovie = ::fopen( fname, "wb" )) ) {
-			// xxx ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ
+			// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
 			sprintf( szErrorString, szErrStr, fname );
 			throw	szErrorString;
@@ -2847,15 +2847,15 @@ DEBUGOUT( "NES::MovieRec\n" );
 		m_hedMovie.Control |= Config.movie.bRerecord?0x80:0x00;
 		m_MovieControl = m_hedMovie.Control;
 
-		// ƒQ[ƒ€ŒÅ—LƒIƒvƒVƒ‡ƒ“
+		// ã‚²ãƒ¼ãƒ å›ºæœ‰ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 		m_hedMovie.RenderMethod = (BYTE)GetRenderMethod();
 		m_hedMovie.IRQtype      = (BYTE)GetIrqType();
 		m_hedMovie.FrameIRQ     = GetFrameIRQmode()?0xFF:0;
 		m_hedMovie.VideoMode    = GetVideoMode()?0xFF:0;
 
-		// CRC,ID’l‚ğ‘‚«‚Ş(Œë“®ì–h~—p)
+		// CRC,IDå€¤ã‚’æ›¸ãè¾¼ã‚€(èª¤å‹•ä½œé˜²æ­¢ç”¨)
 		if( rom->GetMapperNo() != 20 ) {
-		// FDSˆÈŠO
+		// FDSä»¥å¤–
 			m_hedMovie.Ext0 = rom->GetPROM_CRC();
 		} else {
 		// FDS
@@ -2864,17 +2864,17 @@ DEBUGOUT( "NES::MovieRec\n" );
 			m_hedMovie.Ext2 = (WORD)rom->GetDiskNo();
 		}
 
-		// ƒ_ƒ~[‘‚«‚İ
+		// ãƒ€ãƒŸãƒ¼æ›¸ãè¾¼ã¿
 		if( ::fwrite( &m_hedMovie, sizeof(m_hedMovie), 1, m_fpMovie ) != 1 ) {
 			FCLOSE( m_fpMovie );
-			// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 			throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 		}
 
 		if( Config.movie.bResetRec ) {
-			Reset();	// ƒn[ƒhƒEƒFƒAƒŠƒZƒbƒg‚©‚ç‚Ì‹L˜^ŠJn
+			Reset();	// ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢ãƒªã‚»ãƒƒãƒˆã‹ã‚‰ã®è¨˜éŒ²é–‹å§‹
 		} else {
-			// ƒXƒe[ƒg‘‚«‚İ
+			// ã‚¹ãƒ†ãƒ¼ãƒˆæ›¸ãè¾¼ã¿
 			WriteState( m_fpMovie );
 		}
 
@@ -2891,7 +2891,7 @@ DEBUGOUT( "NES::MovieRec\n" );
 	} catch(...) {
 		DEBUGOUT( "Movie record error.\n" );
 		FCLOSE( m_fpMovie );
-		// •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½
+		// ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
@@ -2904,7 +2904,7 @@ BOOL	NES::MovieRecAppend( const char* fname )
 	if( rom->IsNSF() )
 		return	FALSE;
 
-	// ‹L˜^’†‚ÍˆÓ–¡‚ª–³‚¢‚¼
+	// è¨˜éŒ²ä¸­ã¯æ„å‘³ãŒç„¡ã„ã
 	if( IsMovieRec() )
 		return	FALSE;
 
@@ -2916,9 +2916,9 @@ DEBUGOUT( "NES::MovieAppendRec\n" );
 
 	try {
 		if( !(m_fpMovie = ::fopen( fname, "rb" )) ) {
-			// ƒtƒ@ƒCƒ‹‚ª–³‚¢‚Æ‚«
+			// ãƒ•ã‚¡ã‚¤ãƒ«ãŒç„¡ã„ã¨ã
 			if( !(m_fpMovie = ::fopen( fname, "wb" )) ) {
-				// xxx ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ
+				// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 				LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
 				sprintf( szErrorString, szErrStr, fname );
 				throw	szErrorString;
@@ -2939,23 +2939,23 @@ DEBUGOUT( "NES::MovieAppendRec\n" );
 			m_hedMovie.Control |= Config.movie.bResetRec?0x40:0x00;
 			m_MovieControl = m_hedMovie.Control;
 
-			// ƒQ[ƒ€ŒÅ—LƒIƒvƒVƒ‡ƒ“
+			// ã‚²ãƒ¼ãƒ å›ºæœ‰ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 			m_hedMovie.RenderMethod = (BYTE)GetRenderMethod();
 			m_hedMovie.IRQtype      = (BYTE)GetIrqType();
 			m_hedMovie.FrameIRQ     = GetFrameIRQmode()?0xFF:0;
 			m_hedMovie.VideoMode    = GetVideoMode()?0xFF:0;
 
-			// ƒ_ƒ~[‘‚«‚İ
+			// ãƒ€ãƒŸãƒ¼æ›¸ãè¾¼ã¿
 			if( ::fwrite( &m_hedMovie, sizeof(m_hedMovie), 1, m_fpMovie ) != 1 ) {
 				FCLOSE( m_fpMovie );
-				// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 			}
 
 			if( Config.movie.bResetRec ) {
-				Reset();	// ƒn[ƒhƒEƒFƒAƒŠƒZƒbƒg‚©‚ç‚Ì‹L˜^ŠJn
+				Reset();	// ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢ãƒªã‚»ãƒƒãƒˆã‹ã‚‰ã®è¨˜éŒ²é–‹å§‹
 			} else {
-				// ƒXƒe[ƒg‘‚«‚İ
+				// ã‚¹ãƒ†ãƒ¼ãƒˆæ›¸ãè¾¼ã¿
 				WriteState( m_fpMovie );
 			}
 			m_hedMovie.MovieOffset = ::ftell( m_fpMovie );
@@ -2964,20 +2964,20 @@ DEBUGOUT( "NES::MovieAppendRec\n" );
 			m_MovieVersion = 0x0400;
 		} else {
 			if( !(m_fpMovie = ::fopen( fname, "rb+" )) ) {
-				// xxx ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ
+				// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 				LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
 				sprintf( szErrorString, szErrStr, fname );
 				throw	szErrorString;
 			}
-			// “Ç‚İ‚İ
+			// èª­ã¿è¾¼ã¿
 			if( ::fseek( m_fpMovie, 0, SEEK_SET ) ) {
 				FCLOSE( m_fpMovie );
-				// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_READ );
 			}
 			if( ::fread( &m_hedMovie, sizeof(m_hedMovie), 1, m_fpMovie ) != 1 ) {
 				FCLOSE( m_fpMovie );
-				// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_READ );
 			}
 
@@ -2985,7 +2985,7 @@ DEBUGOUT( "NES::MovieAppendRec\n" );
 				FCLOSE( m_fpMovie );
 				return	FALSE;
 			}
-			// ŒÃ‚¢ƒo[ƒWƒ‡ƒ“‚ÍÌ‚Ä
+			// å¤ã„ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã¯æ¨ã¦
 			if( m_hedMovie.BlockVersion < 0x0300 ) {
 				FCLOSE( m_fpMovie );
 				return	FALSE;
@@ -2998,17 +2998,17 @@ DEBUGOUT( "NES::MovieAppendRec\n" );
 
 			if( ::fseek( m_fpMovie, m_hedMovie.StateEdOffset, SEEK_SET ) ) {
 				FCLOSE( m_fpMovie );
-				// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_READ );
 			}
 			if( !ReadState( m_fpMovie ) ) {
 				FCLOSE( m_fpMovie );
-				// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_READ );
 			}
 			if( ::fseek( m_fpMovie, m_hedMovie.StateEdOffset, SEEK_SET ) ) {
 				FCLOSE( m_fpMovie );
-				// ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_READ );
 			}
 		}
@@ -3021,7 +3021,7 @@ DEBUGOUT( "NES::MovieAppendRec\n" );
 	} catch(...) {
 		DEBUGOUT( "Movie record error.\n" );
 		FCLOSE( m_fpMovie );
-		// •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½
+		// ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ
 		throw	CApp::GetErrorString( IDS_ERROR_UNKNOWN );
 #endif
 	}
@@ -3043,24 +3043,24 @@ DEBUGOUT( "NES::MovieStop\n" );
 		m_hedMovie.StateEdOffset = ::ftell( m_fpMovie );
 		WriteState( m_fpMovie );
 
-//		// B‚è’¼‚µ‹Ö~‚Ìê‡‚Í’Ç‹L•s‰Â”\
+//		// æ’®ã‚Šç›´ã—ç¦æ­¢ã®å ´åˆã¯è¿½è¨˜ä¸å¯èƒ½
 //		if( m_MovieControl & 0x80 ) {
 //		} else {
 //			m_hedMovie.StateEdOffset = 0;
 //		}
 		if( ::fseek( m_fpMovie, 0, SEEK_SET ) ) {
 			FCLOSE( m_fpMovie );
-			// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 			throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 		}
 
-		// CRC ‘‚«‚İ
+		// CRC æ›¸ãè¾¼ã¿
 		m_hedMovie.CRC = CRC::Crc( sizeof(m_hedMovie)-sizeof(DWORD), (LPBYTE)&m_hedMovie );
 
-		// ÅI“I‚Èƒwƒbƒ_‘‚«‚İ
+		// æœ€çµ‚çš„ãªãƒ˜ãƒƒãƒ€æ›¸ãè¾¼ã¿
 		if( ::fwrite( &m_hedMovie, sizeof(m_hedMovie), 1, m_fpMovie ) != 1 ) {
 			FCLOSE( m_fpMovie );
-			// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 			throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 		}
 
@@ -3072,7 +3072,7 @@ DEBUGOUT( "NES::MovieStop\n" );
 		FCLOSE( m_fpMovie );
 		m_bMoviePlay = FALSE;
 
-		// ƒQ[ƒ€ŒÅ—LƒIƒvƒVƒ‡ƒ“‚ğŒ³‚É–ß‚·
+		// ã‚²ãƒ¼ãƒ å›ºæœ‰ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’å…ƒã«æˆ»ã™
 		SetRenderMethod( (RENDERMETHOD)m_saveRenderMethod );
 		SetIrqType     ( m_saveIrqType );
 		SetFrameIRQmode( m_saveFrameIRQ );
@@ -3090,11 +3090,11 @@ void	NES::GetMovieInfo( WORD& wRecVersion, WORD& wVersion, DWORD& dwRecordFrames
 	dwRecordTimes  = m_hedMovie.RecordTimes;
 }
 
-// –ˆƒtƒŒ[ƒ€ŒÄ‚Ño‚·
+// æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å‘¼ã³å‡ºã™
 void	NES::Movie()
 {
 	if( !m_fpMovie && !(m_bMoviePlay||m_bMovieRec) ) {
-		m_CommandRequest = 0;	// ƒRƒŒ“ü‚ê‚È‚¢‚Æ€‚Ê
+		m_CommandRequest = 0;	// ã‚³ãƒ¬å…¥ã‚Œãªã„ã¨æ­»ã¬
 		return;
 	}
 
@@ -3105,7 +3105,7 @@ void	NES::Movie()
 	DWORD	dwData;
 
 	if( m_bMovieRec ) {
-		// Å‰‚©‚çŠg’£ºİÄÛ°×‚ªİ’è‚³‚ê‚Ä‚¢‚½ê‡
+		// æœ€åˆã‹ã‚‰æ‹¡å¼µï½ºï¾ï¾„ï¾›ï½°ï¾—ãŒè¨­å®šã•ã‚Œã¦ã„ãŸå ´åˆ
 		if( m_MovieStep == 0 ) {
 			if( exctr == PAD::EXCONTROLLER_ZAPPER
 			 || exctr == PAD::EXCONTROLLER_PADDLE
@@ -3117,46 +3117,46 @@ void	NES::Movie()
 			 || exctr == PAD::EXCONTROLLER_MAHJANG
 			 || exctr == PAD::EXCONTROLLER_EXCITINGBOXING
 			 || exctr == PAD::EXCONTROLLER_OEKAKIDS_TABLET ) {
-				// ƒRƒ}ƒ“ƒhID
+				// ã‚³ãƒãƒ³ãƒ‰ID
 				Data = 0xF0;
-				// ‘‚«‚İ
+				// æ›¸ãè¾¼ã¿
 				if( ::fwrite( &Data, sizeof(Data), 1, m_fpMovie ) != 1 ) {
 					MovieStop();
-					// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 				}
-				// í—Ş
+				// ç¨®é¡
 				wData = (WORD)(0x0100|(pad->GetExController()&0x0FF));
-				// ‘‚«‚İ
+				// æ›¸ãè¾¼ã¿
 				if( ::fwrite( &wData, sizeof(wData), 1, m_fpMovie ) != 1 ) {
 					MovieStop();
-					// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 				}
 			}
 		}
 
 		if( m_CommandRequest ) {
-			// ƒRƒ}ƒ“ƒhID
+			// ã‚³ãƒãƒ³ãƒ‰ID
 			Data = 0xF0;
-			// ‘‚«‚İ
+			// æ›¸ãè¾¼ã¿
 			if( ::fwrite( &Data, sizeof(Data), 1, m_fpMovie ) != 1 ) {
 				MovieStop();
-				// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 			}
-			// ƒRƒ}ƒ“ƒh
+			// ã‚³ãƒãƒ³ãƒ‰
 			wData = (WORD)m_CommandRequest;
-			// ‘‚«‚İ
+			// æ›¸ãè¾¼ã¿
 			if( ::fwrite( &wData, sizeof(wData), 1, m_fpMovie ) != 1 ) {
 				MovieStop();
-				// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 			}
 		}
 		m_CommandRequest = 0;
 
-		// Šg’£ºİÄÛ°×
+		// æ‹¡å¼µï½ºï¾ï¾„ï¾›ï½°ï¾—
 		if( exctr == PAD::EXCONTROLLER_ZAPPER
 		 || exctr == PAD::EXCONTROLLER_PADDLE
 		 || exctr == PAD::EXCONTROLLER_CRAZYCLIMBER
@@ -3167,21 +3167,21 @@ void	NES::Movie()
 		 || exctr == PAD::EXCONTROLLER_MAHJANG
 		 || exctr == PAD::EXCONTROLLER_EXCITINGBOXING
 		 || exctr == PAD::EXCONTROLLER_OEKAKIDS_TABLET ) {
-			// Šg’£ƒRƒ“ƒgƒ[ƒ‰ƒf[ƒ^ID
+			// æ‹¡å¼µã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ‡ãƒ¼ã‚¿ID
 			Data = 0xF3;
-			// ‘‚«‚İ
+			// æ›¸ãè¾¼ã¿
 			if( ::fwrite( &Data, sizeof(Data), 1, m_fpMovie ) != 1 ) {
 				MovieStop();
-				// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 			}
-			// ƒf[ƒ^
+			// ãƒ‡ãƒ¼ã‚¿
 			dwData = pad->GetSyncExData();
 
-			// ‘‚«‚İ
+			// æ›¸ãè¾¼ã¿
 			if( ::fwrite( &dwData, sizeof(dwData), 1, m_fpMovie ) != 1 ) {
 				MovieStop();
-				// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 				throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 			}
 		}
@@ -3190,10 +3190,10 @@ void	NES::Movie()
 		for( INT i = 0; i < 4; i++ ) {
 			Data = (BYTE)(dwData>>(i*8));
 			if( m_MovieControl & (1<<i) ) {
-				// ‘‚«‚İ
+				// æ›¸ãè¾¼ã¿
 				if( ::fwrite( &Data, sizeof(Data), 1, m_fpMovie ) != 1 ) {
 					MovieStop();
-					// ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½
+					// ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ
 					throw	CApp::GetErrorString( IDS_ERROR_WRITE );
 				}
 			}
@@ -3209,70 +3209,70 @@ void	NES::Movie()
 
 		PadBuf[0] = PadBuf[1] = PadBuf[2] = PadBuf[3] = 0;
 
-		// ƒ€[ƒr[Ä¶I—¹H
+		// ãƒ ãƒ¼ãƒ“ãƒ¼å†ç”Ÿçµ‚äº†ï¼Ÿ
 		if( m_MovieStep >= m_MovieStepTotal ) {
 			if( !Config.movie.bLoopPlay ) {
 				MovieStop();
 				return;
 			} else {
-				// ˆê’UÄ¶’†‚¶‚á‚È‚¢‚Á‚Ä–‚É‚·‚é
+				// ä¸€æ—¦å†ç”Ÿä¸­ã˜ã‚ƒãªã„ã£ã¦äº‹ã«ã™ã‚‹
 				m_bMoviePlay = FALSE;
 				m_MovieStep = 0;
 				::fseek( m_fpMovie, m_hedMovie.StateStOffset, SEEK_SET );
-				// ƒXƒe[ƒg“Ç‚İ‚İ
+				// ã‚¹ãƒ†ãƒ¼ãƒˆèª­ã¿è¾¼ã¿
 				ReadState( m_fpMovie );
 				::fseek( m_fpMovie, m_hedMovie.MovieOffset, SEEK_SET );
-				// Ä¶’†‚Á‚Ä–‚É‚·‚é
+				// å†ç”Ÿä¸­ã£ã¦äº‹ã«ã™ã‚‹
 				m_bMoviePlay = TRUE;
 			}
 		}
 
 		do {
-			// “Ç‚İ‚İ
+			// èª­ã¿è¾¼ã¿
 			if( ::fread( &Data, sizeof(Data), 1, m_fpMovie ) != 1 ) {
-				// I—¹H
+				// çµ‚äº†ï¼Ÿ
 				MovieStop();
 				return;
 			}
 
-			// ƒRƒ}ƒ“ƒhH
+			// ã‚³ãƒãƒ³ãƒ‰ï¼Ÿ
 			if( (Data & 0xF0) == 0xF0 ) {
 				if( Data == 0xF0 ) {
-					// “Ç‚İ‚İ
+					// èª­ã¿è¾¼ã¿
 					if( ::fread( &wData, sizeof(wData), 1, m_fpMovie ) != 1 ) {
-						// I—¹H
+						// çµ‚äº†ï¼Ÿ
 						MovieStop();
 						return;
 					}
 					if( wData < 0x0100 ) {
 						Command( (NESCOMMAND)((INT)wData) );
 					} else {
-						// Šg’£ºİÄÛ°×
+						// æ‹¡å¼µï½ºï¾ï¾„ï¾›ï½°ï¾—
 						CommandParam( NESCMD_EXCONTROLLER, ((INT)wData) & 0x00FF );
 					}
 				} else 
 				if( Data == 0xF3 ) {
-					// “Ç‚İ‚İ
+					// èª­ã¿è¾¼ã¿
 					if( ::fread( &dwData, sizeof(dwData), 1, m_fpMovie ) != 1 ) {
-						// I—¹H
+						// çµ‚äº†ï¼Ÿ
 						MovieStop();
 						return;
 					}
 					pad->SetSyncExData( dwData );
 				} else {
-					// ƒf[ƒ^‚Ô‚Á‰ó‚ê‚Ä‚éHI—¹‚¶‚á
+					// ãƒ‡ãƒ¼ã‚¿ã¶ã£å£Šã‚Œã¦ã‚‹ï¼Ÿçµ‚äº†ã˜ã‚ƒ
 					MovieStop();
 					return;
 				}
 			} else {
-				// –¢g—pƒvƒŒƒCƒ„[•ª‚·‚Á”ò‚Î‚µ
+				// æœªä½¿ç”¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åˆ†ã™ã£é£›ã°ã—
 				while( !(m_MovieControl & (1<<num)) && (num < 4) ) {
 					PadBuf[num] = 0;
 					num++;
 				}
 				PadBuf[num] = Data;
 				num++;
-				// –¢g—pƒvƒŒƒCƒ„[•ª‚·‚Á”ò‚Î‚µ
+				// æœªä½¿ç”¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åˆ†ã™ã£é£›ã°ã—
 				while( !(m_MovieControl & (1<<num)) && (num < 4) ) {
 					PadBuf[num] = 0;
 					num++;
@@ -3283,7 +3283,7 @@ void	NES::Movie()
 		dwData = (((DWORD)PadBuf[3])<<24)|(((DWORD)PadBuf[2])<<16)|(((DWORD)PadBuf[1])<<8)|((DWORD)PadBuf[0]);
 		pad->SetSyncData( dwData );
 
-		// ƒJƒEƒ“ƒ^‘‚â‚·
+		// ã‚«ã‚¦ãƒ³ã‚¿å¢—ã‚„ã™
 		m_MovieStep++;
 	}
 
@@ -3628,7 +3628,7 @@ DEBUGOUT( "NES::TapePlay\n" );
 
 	if( !(m_fpTape = ::fopen( fname, "rb" )) ) {
 		DEBUGOUT( "Tape play error. File not found.\n" );
-		// ƒtƒ@ƒCƒ‹–³‚¢‚Å‚·
+		// ãƒ•ã‚¡ã‚¤ãƒ«ç„¡ã„ã§ã™
 		return	FALSE;
 	}
 
@@ -3654,7 +3654,7 @@ DEBUGOUT( "NES::TapeRec\n" );
 
 	if( !(m_fpTape = ::fopen( fname, "wb" )) ) {
 		DEBUGOUT( "Tape rec error. File not found.\n" );
-		// ƒtƒ@ƒCƒ‹–³‚¢‚Å‚·
+		// ãƒ•ã‚¡ã‚¤ãƒ«ç„¡ã„ã§ã™
 		return	FALSE;
 	}
 
@@ -3689,7 +3689,7 @@ void	NES::Tape( INT cycles )
 		return;
 
 	m_TapeCycles += (nescfg->CpuClock / 32000.0);
-//	m_TapeCycles += (nescfg->CpuClock / 22050.0);	// ’x‚·‚¬‚Äƒ_ƒ‚Á‚Û‚¢
+//	m_TapeCycles += (nescfg->CpuClock / 22050.0);	// é…ã™ãã¦ãƒ€ãƒ¡ã£ã½ã„
 
 	if( m_bTapePlay ) {
 		INT	data = ::fgetc( m_fpTape );
@@ -3714,7 +3714,7 @@ void	NES::Barcode( INT cycles )
 	if( m_bBarcode ) {
 		if( (m_BarcodeCycles+=cycles) > 1000 ) {
 			m_BarcodeCycles = 0;
-			// ’â~H
+			// åœæ­¢ï¼Ÿ
 			if( m_BarcodeData[m_BarcodePtr] != 0xFF ) {
 				m_BarcodeOut = m_BarcodeData[m_BarcodePtr++];
 			} else {
@@ -3762,23 +3762,23 @@ void	NES::SetBarcodeData( LPBYTE code, INT len )
 
 	INT	i, j, count = 0;;
 
-	// ”’l‚É•ÏŠ·
+	// æ•°å€¤ã«å¤‰æ›
 	for( i = 0; i < len; i++ ) {
 		code[i] = code[i]-'0';
 	}
 
-	// ƒŒƒtƒgƒ}[ƒWƒ“
+	// ãƒ¬ãƒ•ãƒˆãƒãƒ¼ã‚¸ãƒ³
 	for( i = 0; i < 32; i++ ) {
 		m_BarcodeData[count++] = 0x08;
 	}
-	// ƒŒƒtƒgƒK[ƒhƒo[
+	// ãƒ¬ãƒ•ãƒˆã‚¬ãƒ¼ãƒ‰ãƒãƒ¼
 	m_BarcodeData[count++] = 0x00;
 	m_BarcodeData[count++] = 0x08;
 	m_BarcodeData[count++] = 0x00;
 
 	if( len == 13 ) {
 #if	0
-		// ƒ`ƒFƒbƒNƒfƒBƒWƒbƒg‚ÌÄŒvZ
+		// ãƒã‚§ãƒƒã‚¯ãƒ‡ã‚£ã‚¸ãƒƒãƒˆã®å†è¨ˆç®—
 		INT	sum = 0;
 		for( i = 0; i < 12; i++ ) {
 			sum += (i&1)?(code[i]*3):code[i];
@@ -3794,80 +3794,80 @@ void	NES::SetBarcodeData( LPBYTE code, INT len )
 //		code[12] = cs;
 // test end
 #endif
-		// ¶‘¤6ƒLƒƒƒ‰ƒNƒ^
+		// å·¦å´6ã‚­ãƒ£ãƒ©ã‚¯ã‚¿
 		for( i = 0; i < 6; i++ ) {
 			if( prefix_parity_type[code[0]][i] ) {
-				// ‹ô”ƒpƒŠƒeƒB
+				// å¶æ•°ãƒ‘ãƒªãƒ†ã‚£
 				for( j = 0; j < 7; j++ ) {
 					m_BarcodeData[count++] = data_left_even[code[i+1]][j]?0x00:0x08;
 				}
 			} else {
-				// Šï”ƒpƒŠƒeƒB
+				// å¥‡æ•°ãƒ‘ãƒªãƒ†ã‚£
 				for( j = 0; j < 7; j++ ) {
 					m_BarcodeData[count++] = data_left_odd[code[i+1]][j]?0x00:0x08;
 				}
 			}
 		}
 
-		// ƒZƒ“ƒ^[ƒo[
+		// ã‚»ãƒ³ã‚¿ãƒ¼ãƒãƒ¼
 		m_BarcodeData[count++] = 0x08;
 		m_BarcodeData[count++] = 0x00;
 		m_BarcodeData[count++] = 0x08;
 		m_BarcodeData[count++] = 0x00;
 		m_BarcodeData[count++] = 0x08;
 
-		// ‰E‘¤5ƒLƒƒƒ‰ƒNƒ^‚Æƒ`ƒFƒbƒNƒfƒBƒWƒbƒg
+		// å³å´5ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ã¨ãƒã‚§ãƒƒã‚¯ãƒ‡ã‚£ã‚¸ãƒƒãƒˆ
 		for( i = 7; i < 13; i++ ) {
-			// ‹ô”ƒpƒŠƒeƒB
+			// å¶æ•°ãƒ‘ãƒªãƒ†ã‚£
 			for( j = 0; j < 7; j++ ) {
 				m_BarcodeData[count++] = data_right[code[i]][j]?0x00:0x08;
 			}
 		}
 	} else
 	if( len == 8 ) {
-		// ƒ`ƒFƒbƒNƒfƒBƒWƒbƒg‚ÌÄŒvZ
+		// ãƒã‚§ãƒƒã‚¯ãƒ‡ã‚£ã‚¸ãƒƒãƒˆã®å†è¨ˆç®—
 		INT	sum = 0;
 		for( i = 0; i < 7; i++ ) {
 			sum += (i&1)?code[i]:(code[i]*3);
 		}
 		code[7] = (10-(sum%10))%10;
 
-		// ¶‘¤4ƒLƒƒƒ‰ƒNƒ^
+		// å·¦å´4ã‚­ãƒ£ãƒ©ã‚¯ã‚¿
 		for( i = 0; i < 4; i++ ) {
-			// Šï”ƒpƒŠƒeƒB
+			// å¥‡æ•°ãƒ‘ãƒªãƒ†ã‚£
 			for( j = 0; j < 7; j++ ) {
 				m_BarcodeData[count++] = data_left_odd[code[i]][j]?0x00:0x08;
 			}
 		}
 
-		// ƒZƒ“ƒ^[ƒo[
+		// ã‚»ãƒ³ã‚¿ãƒ¼ãƒãƒ¼
 		m_BarcodeData[count++] = 0x08;
 		m_BarcodeData[count++] = 0x00;
 		m_BarcodeData[count++] = 0x08;
 		m_BarcodeData[count++] = 0x00;
 		m_BarcodeData[count++] = 0x08;
 
-		// ‰E‘¤3ƒLƒƒƒ‰ƒNƒ^‚Æƒ`ƒFƒbƒNƒfƒBƒWƒbƒg
+		// å³å´3ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ã¨ãƒã‚§ãƒƒã‚¯ãƒ‡ã‚£ã‚¸ãƒƒãƒˆ
 		for( i = 4; i < 8; i++ ) {
-			// ‹ô”ƒpƒŠƒeƒB
+			// å¶æ•°ãƒ‘ãƒªãƒ†ã‚£
 			for( j = 0; j < 7; j++ ) {
 				m_BarcodeData[count++] = data_right[code[i]][j]?0x00:0x08;
 			}
 		}
 	}
 
-	// ƒ‰ƒCƒgƒK[ƒhƒo[
+	// ãƒ©ã‚¤ãƒˆã‚¬ãƒ¼ãƒ‰ãƒãƒ¼
 	m_BarcodeData[count++] = 0x00;
 	m_BarcodeData[count++] = 0x08;
 	m_BarcodeData[count++] = 0x00;
-	// ƒ‰ƒCƒgƒ}[ƒWƒ“
+	// ãƒ©ã‚¤ãƒˆãƒãƒ¼ã‚¸ãƒ³
 	for( i = 0; i < 32; i++ ) {
 		m_BarcodeData[count++] = 0x08;
 	}
-	// I—¹ƒ}[ƒN
+	// çµ‚äº†ãƒãƒ¼ã‚¯
 	m_BarcodeData[count++] = 0xFF;
 
-	// “]‘—ŠJn
+	// è»¢é€é–‹å§‹
 	m_bBarcode      = TRUE;
 	m_BarcodeCycles = 0;
 	m_BarcodePtr    = 0;

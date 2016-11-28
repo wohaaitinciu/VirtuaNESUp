@@ -1,4 +1,4 @@
-/*----------------------------------------------------------------------*/
+ï»¿/*----------------------------------------------------------------------*/
 /*                                                                      */
 /*      NES Mapeers Factory                                             */
 /*                                                           Norix      */
@@ -420,7 +420,7 @@ Mapper*	CreateMapper( NES* parent, INT no,BOOL bUnif)
 			case  BMC_8157:
 				return new Mapper8157(parent);
 
-			case CHINA_ER_SAN2://°ÔÍõµÄ´óÂ½
+			case CHINA_ER_SAN2://éœ¸çŽ‹çš„å¤§é™†
 				g_bSan2 = TRUE;
 				return new Mapper019(parent);
 
@@ -435,14 +435,14 @@ Mapper*	CreateMapper( NES* parent, INT no,BOOL bUnif)
 			case S74LS374N:
 				return new Sachen(parent,150);
 
-			//ÐÂdumpµÄ
-			case UNL_LH09://»ùÓÚmapper42±àÐ´
+			//æ–°dumpçš„
+			case UNL_LH09://åŸºäºŽmapper42ç¼–å†™
 				return new MapperUNL_LH09(parent);
 
 			case UNL_LH10:
 				return new MapperUNL_LH10(parent);
 
-			case UNL_LE05://»ùÓÚmapper42±àÐ´
+			case UNL_LE05://åŸºäºŽmapper42ç¼–å†™
 				return new MapperUNL_LE05(parent);
 			case UNL_BB:
 				return new MapperUNL_BB(parent);

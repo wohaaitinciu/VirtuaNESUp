@@ -1,4 +1,4 @@
-/*
+﻿/*
 void	Mapper134::Reset()
 {
 	SetPROM_32K_Bank( 0 );

@@ -1,4 +1,4 @@
-#include "unif.h"
+О╩©#include "unif.h"
 #include <string.h>
 
 const BOARDINFO BoardInfo[]=
@@ -390,7 +390,7 @@ const BOARDINFO BoardInfo[]=
                                     
                                 
 int NES_ROM_get_unifBoardID(char *unif_board)
-{//©иртсе╩╞кЦ╥╗
+{//Е▐╞Д╩╔Д╪≤Е▄√Г╝≈ФЁ∙
 	int iCount=0;
 	while(1)
 	{

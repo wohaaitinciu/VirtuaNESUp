@@ -1,5 +1,5 @@
-//
-// ƒƒCƒ“ƒEƒCƒ“ƒhƒEƒNƒ‰ƒX
+ï»¿//
+// ãƒ¡ã‚¤ãƒ³ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹
 //
 //
 #define WIN32_LEAN_AND_MEAN
@@ -60,9 +60,9 @@ BYTE	CMainFrame::m_KeyBuf[256+64*8];
 BYTE	CMainFrame::m_KeyOld[256+64*8];
 BYTE	CMainFrame::m_KeyCnt[256*64*8];
 
-// ƒƒbƒZ[ƒWƒ}ƒbƒv
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒãƒƒãƒ—
 WND_MESSAGE_BEGIN(CMainFrame)
-// ƒƒbƒZ[ƒW
+// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 WND_ON_MESSAGE( WM_CREATE,	OnCreate )
 WND_ON_MESSAGE( WM_CLOSE,	OnClose )
 WND_ON_MESSAGE( WM_DESTROY,	OnDestroy )
@@ -103,7 +103,7 @@ WND_ON_MESSAGE( WM_NETPLAY_CLOSE, OnNetPlayClose )
 WND_ON_MESSAGE( WM_NETPLAY_ERROR, OnNetPlayError )
 WND_ON_MESSAGE( WM_VNS_CHATPOPUP, OnNetPlayChatPopup )
 
-// ƒRƒ}ƒ“ƒh
+// ã‚³ãƒãƒ³ãƒ‰
 WND_COMMAND_BEGIN()
 WND_ON_COMMAND( ID_EXIT, OnExit )
 WND_ON_COMMAND( ID_HTMLHELP, OnHelp )
@@ -208,10 +208,10 @@ WND_MESSAGE_END()
 
 BOOL	CMainFrame::Create( HWND hWndParent )
 {
-	// NESƒIƒuƒWƒFƒNƒg
+	// NESã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	Nes = NULL;
 
-	// ƒƒ“ƒo•Ï”
+	// ãƒ¡ãƒ³ãƒå¤‰æ•°
 	m_hMenu = NULL;
 
 	WNDCLASSEX	wcl;
@@ -246,17 +246,17 @@ BOOL	CMainFrame::Create( HWND hWndParent )
 			hWndParent,
 			NULL,
 			CApp::GetInstance(),
-			(LPVOID)this		// This ‚ğ–„‚ß‚Şˆ×
+			(LPVOID)this		// This ã‚’åŸ‹ã‚è¾¼ã‚€ç‚º
 		);
 	if( !hWnd ) {
 //		DEBUGOUT( "CreateWindow faild.\n" );
 		return	FALSE;
 	}
 
-	// ƒƒCƒ“ƒEƒCƒ“ƒhƒE‚Æ‚µ‚Ä“o˜^
+	// ãƒ¡ã‚¤ãƒ³ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã¨ã—ã¦ç™»éŒ²
 	CApp::SetHWnd( hWnd );
 
-	// ƒXƒe[ƒgƒXƒƒbƒg
+	// ã‚¹ãƒ†ãƒ¼ãƒˆã‚¹ãƒ­ãƒƒãƒˆ
 	m_nStateSlot = 0;
 
 	return	TRUE;
@@ -297,7 +297,7 @@ WNDMSG	CMainFrame::OnCreate( WNDMSGPARAM )
 		hResult = -1L;
 		return	TRUE;
 	}
-	// DirectDrawµÌß¼®İ‚Ìİ’è
+	// DirectDrawï½µï¾Œï¾Ÿï½¼ï½®ï¾ã®è¨­å®š
 	DirectDraw.SetFlipMode     ( Config.graphics.bSyncDraw );
 	DirectDraw.SetAspectMode   ( Config.graphics.bAspect );
 	DirectDraw.SetAllLineMode  ( Config.graphics.bAllLine );
@@ -311,79 +311,79 @@ WNDMSG	CMainFrame::OnCreate( WNDMSGPARAM )
 	DirectDraw.SetDoubleSize( Config.graphics.bDoubleSize );
 	DirectDraw.SetGraphicsFilter( Config.graphics.nGraphicsFilter );
 
-	// DirectDrawƒT[ƒtƒFƒX‚Ì\’z
+	// DirectDrawã‚µãƒ¼ãƒ•ã‚§ã‚¹ã®æ§‹ç¯‰
 	if( !DirectDraw.InitialSurface( FALSE ) ) {
 		hResult = -1L;
 		return	TRUE;
 	}
 
-	// ƒpƒŒƒbƒgƒtƒ@ƒCƒ‹‚Ìƒ[ƒh
+	// ãƒ‘ãƒ¬ãƒƒãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ­ãƒ¼ãƒ‰
 	if( Config.graphics.bPaletteFile ) {
 		string	pathstr = CPathlib::CreatePath( CApp::GetModulePath(), Config.graphics.szPaletteFile );
 		DirectDraw.SetPaletteFile( pathstr.c_str() );
 	}
 
-	// DirectSoundµÌß¼®İ‚Ìİ’è
+	// DirectSoundï½µï¾Œï¾Ÿï½¼ï½®ï¾ã®è¨­å®š
 	DirectSound.SetSamplingRate( Config.sound.nRate, Config.sound.nBits );
 	DirectSound.SetBufferSize( Config.sound.nBufferSize );
 
-	// ExtraSoundFile‚Ìƒ[ƒh
+	// ExtraSoundFileã®ãƒ­ãƒ¼ãƒ‰
 	for( INT i = 0; i < ESF_FILE_MAX; i++ ) {
 		string	pathstr = CPathlib::CreatePath( CApp::GetModulePath(), Config.extsound.szExtSoundFile[i] );
 		DirectSound.LoadEsf( pathstr.c_str(), i );
 	}
 
-	// DirectInputµÌß¼®İ‚Ìİ’è
+	// DirectInputï½µï¾Œï¾Ÿï½¼ï½®ï¾ã®è¨­å®š
 	DirectInput.SetJoyAxisMode( Config.general.JoyAxisSetting );
 
-	// DirectSoundƒoƒbƒtƒ@‚Ì\’z
+	// DirectSoundãƒãƒƒãƒ•ã‚¡ã®æ§‹ç¯‰
 	if( !DirectSound.InitialBuffer() ) {
 		hResult = -1L;
 		return	TRUE;
 	}
 
-	// ƒpƒŒƒbƒgƒe[ƒuƒ‹‚ÌŒvZ
+	// ãƒ‘ãƒ¬ãƒƒãƒˆãƒ†ãƒ¼ãƒ–ãƒ«ã®è¨ˆç®—
 	DirectDraw.CalcPaletteTable();
 
-	// ƒlƒbƒgƒvƒŒƒC
+	// ãƒãƒƒãƒˆãƒ—ãƒ¬ã‚¤
 	NetPlay.Initialize( m_hWnd );
 
-	// ƒƒjƒ…[‚Ìƒ[ƒh
+	// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®ãƒ­ãƒ¼ãƒ‰
 	m_hMenu = CApp::LoadMenu( IDR_MENU );
 	CApp::SetMenu( m_hMenu );
 	::SetMenu( m_hWnd, m_hMenu );
-	m_bMenu = TRUE;		// ƒƒjƒ…[•\¦’†ƒtƒ‰ƒO
+	m_bMenu = TRUE;		// ãƒ¡ãƒ‹ãƒ¥ãƒ¼è¡¨ç¤ºä¸­ãƒ•ãƒ©ã‚°
 
-	// ƒƒjƒ…[‚ÉƒAƒNƒZƒ‰ƒŒ[ƒ^ƒL[–¼‚Ì’Ç‰Á
+	// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ã‚­ãƒ¼åã®è¿½åŠ 
 	OnRebuildMenu();
 
-	// ƒEƒCƒ“ƒhƒEˆÊ’u‚Ìİ’è
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ä½ç½®ã®è¨­å®š
 	RECT	rc = Config.general.rcWindowPos;
 	if( !((rc.right-rc.left) <= 0 || (rc.bottom-rc.top) <= 0) ) {
 		if( (m_bZoomed = Config.general.bWindowZoom) ) {
 			CApp::SetCmdShow( SW_SHOWMAXIMIZED );
 		}
-		// •Û‘¶‚³‚ê‚Ä‚¢‚½ƒEƒCƒ“ƒhƒEƒTƒCƒY‚É‚·‚é
+		// ä¿å­˜ã•ã‚Œã¦ã„ãŸã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã«ã™ã‚‹
 		m_WindowRect = rc;
 		::SetWindowPos( m_hWnd, HWND_NOTOPMOST, rc.left, rc.top,
 				rc.right-rc.left, rc.bottom-rc.top, 0 );
 	} else {
 		m_bZoomed = FALSE;
-		// ƒfƒtƒHƒ‹ƒgƒTƒCƒY‚ğ’²®‚·‚é
+		// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚µã‚¤ã‚ºã‚’èª¿æ•´ã™ã‚‹
 		OnSetWindowSize();
 	}
 
-	// ƒEƒCƒ“ƒhƒEƒXƒ^ƒCƒ‹‚Ì•Û‘¶
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¹ã‚¿ã‚¤ãƒ«ã®ä¿å­˜
 	m_StyleBackup   = ::GetWindowLong( m_hWnd, GWL_STYLE );
 	m_ExStyleBackup = ::GetWindowLong( m_hWnd, GWL_EXSTYLE );
 
-	// IMEg—p‹Ö~:D
+	// IMEä½¿ç”¨ç¦æ­¢:D
 	::ImmAssociateContext( m_hWnd, NULL );
 
-	// Drag&Drop‚Ì‹–‰Â
+	// Drag&Dropã®è¨±å¯
 	::DragAcceptFiles( m_hWnd, TRUE );
 
-	// ƒtƒ‰ƒO—Ş
+	// ãƒ•ãƒ©ã‚°é¡
 	m_bActivate = TRUE;
 	m_bActivateApp = TRUE;
 	m_bForcus = TRUE;
@@ -429,47 +429,47 @@ WNDMSG	CMainFrame::OnClose( WNDMSGPARAM )
 {
 //	DEBUGOUT( "CMainFrame::OnClose\n" );
 
-	// ƒlƒbƒgƒvƒŒƒC
+	// ãƒãƒƒãƒˆãƒ—ãƒ¬ã‚¤
 	NetPlay.Release();
 
-	// ƒGƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“I—¹
+	// ã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†
 	Emu.Stop();
 	DELETEPTR( Nes );
 
-	// ƒL[ƒXƒŒƒbƒhI—¹
+	// ã‚­ãƒ¼ã‚¹ãƒ¬ãƒƒãƒ‰çµ‚äº†
 	m_bKeyThreadExit = TRUE;
 
-	// ƒ^ƒCƒ}[‚ÌI—¹
+	// ã‚¿ã‚¤ãƒãƒ¼ã®çµ‚äº†
 	::KillTimer( m_hWnd, m_uTimerID );
 //	::KillTimer( m_hWnd, m_uKeyTimerID );
 	m_uTimerID = 0;
 	m_uKeyTimerID = 0;
 
-	// ƒEƒCƒ“ƒhƒE”jŠü
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ç ´æ£„
 	::DestroyWindow( m_hWnd );
 
-	// ƒT[ƒ`ƒ_ƒCƒAƒƒOI—¹
+	// ã‚µãƒ¼ãƒãƒ€ã‚¤ã‚¢ãƒ­ã‚°çµ‚äº†
 	m_SearchDlg.Destroy();
 
-	// ƒ‰ƒ“ƒ`ƒƒ[I—¹
+	// ãƒ©ãƒ³ãƒãƒ£ãƒ¼çµ‚äº†
 	m_LauncherDlg.Destroy();
 
-	// ƒ`ƒƒƒbƒgI—¹
+	// ãƒãƒ£ãƒƒãƒˆçµ‚äº†
 	m_ChatDlg.Destroy();
 
-	// ƒpƒ^[ƒ“ƒrƒ…ƒAI—¹
+	// ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒ“ãƒ¥ã‚¢çµ‚äº†
 	m_PatternView.Destroy();
 	m_NameTableView.Destroy();
 	m_PaletteView.Destroy();
 	m_MemoryView.Destroy();
 
-	// ƒo[ƒR[ƒh“ü—Íƒ_ƒCƒAƒƒOI—¹
+	// ãƒãƒ¼ã‚³ãƒ¼ãƒ‰å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°çµ‚äº†
 	m_DatachBarcodeDlg.Destroy();
 
-	// ƒpƒŒƒbƒg•ÒW‚ÌI—¹
+	// ãƒ‘ãƒ¬ãƒƒãƒˆç·¨é›†ã®çµ‚äº†
 	m_PaletteEdit.Destroy();
 
-	// ƒEƒCƒ“ƒhƒEˆÊ’u‚Ì•Û‘¶
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ä½ç½®ã®ä¿å­˜
 	Config.general.bWindowZoom = m_bZoomed;
 	Config.general.rcWindowPos = m_WindowRect;
 
@@ -490,7 +490,7 @@ WNDMSG	CMainFrame::OnGetMinMaxInfo( WNDMSGPARAM )
 {
 	MINMAXINFO* lpMMI = (MINMAXINFO*)lParam;
 
-	// Å¬ƒTƒCƒY‚¾‚¯
+	// æœ€å°ã‚µã‚¤ã‚ºã ã‘
 	lpMMI->ptMinTrackSize.x = 128;
 	lpMMI->ptMinTrackSize.y = 128;
 //	lpMMI->ptMaxTrackSize.x = 65535;
@@ -508,21 +508,21 @@ WNDMSG	CMainFrame::OnActivate( WNDMSGPARAM )
 		if( m_bActivate ) {
 //		DEBUGOUT( "Inactivate.\n" );
 			m_bActivate = FALSE;
-			// ƒoƒbƒNƒOƒ‰ƒEƒ“ƒh“®ìON‚©ƒlƒbƒgƒvƒŒƒC’†‚Íƒ|[ƒY‚µ‚È‚¢
+			// ãƒãƒƒã‚¯ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰å‹•ä½œONã‹ãƒãƒƒãƒˆãƒ—ãƒ¬ã‚¤ä¸­ã¯ãƒãƒ¼ã‚ºã—ãªã„
 			if( !(Config.emulator.bBackground || NetPlay.IsConnect()) ) {
 				Emu.Pause();
 			}
 		}
-		// DirectInput–³Œø‰»
+		// DirectInputç„¡åŠ¹åŒ–
 		DirectInput.Unacquire();
 	} else if( !lParam ) {
 //		DEBUGOUT( "Activate.\n" );
 		m_bActivate = TRUE;
-		// ƒoƒbƒNƒOƒ‰ƒEƒ“ƒh“®ìON‚©ƒlƒbƒgƒvƒŒƒC’†‚ÍƒŒƒWƒ…[ƒ€‚µ‚È‚¢
+		// ãƒãƒƒã‚¯ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰å‹•ä½œONã‹ãƒãƒƒãƒˆãƒ—ãƒ¬ã‚¤ä¸­ã¯ãƒ¬ã‚¸ãƒ¥ãƒ¼ãƒ ã—ãªã„
 		if( !(Config.emulator.bBackground || NetPlay.IsConnect()) ) {
 			Emu.Resume();
 		}
-		// DirectInput—LŒø
+		// DirectInputæœ‰åŠ¹
 		DirectInput.Acquire();
 	}
 #else
@@ -552,7 +552,7 @@ WNDMSG	CMainFrame::OnActivateApp( WNDMSGPARAM )
 	if( (BOOL)wParam ) {
 //		DEBUGOUT( "CMainFrame::OnActivateApp:Active\n" );
 		m_bActivateApp = TRUE;
-		// ƒoƒbƒNƒOƒ‰ƒEƒ“ƒh“®ìON‚©ƒlƒbƒgƒvƒŒƒC’†‚ÍƒŒƒWƒ…[ƒ€‚µ‚È‚¢
+		// ãƒãƒƒã‚¯ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰å‹•ä½œONã‹ãƒãƒƒãƒˆãƒ—ãƒ¬ã‚¤ä¸­ã¯ãƒ¬ã‚¸ãƒ¥ãƒ¼ãƒ ã—ãªã„
 		if( !(Config.emulator.bBackground || NetPlay.IsConnect()) ) {
 			Emu.Resume();
 		}
@@ -561,7 +561,7 @@ WNDMSG	CMainFrame::OnActivateApp( WNDMSGPARAM )
 //		DEBUGOUT( "CMainFrame::OnActivateApp:Inactive\n" );
 		if( m_bActivateApp ) {
 			m_bActivateApp = FALSE;
-			// ƒoƒbƒNƒOƒ‰ƒEƒ“ƒh“®ìON‚©ƒlƒbƒgƒvƒŒƒC’†‚Íƒ|[ƒY‚µ‚È‚¢
+			// ãƒãƒƒã‚¯ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰å‹•ä½œONã‹ãƒãƒƒãƒˆãƒ—ãƒ¬ã‚¤ä¸­ã¯ãƒãƒ¼ã‚ºã—ãªã„
 			if( !(Config.emulator.bBackground || NetPlay.IsConnect()) ) {
 				Emu.Pause();
 			}
@@ -574,7 +574,7 @@ WNDMSG	CMainFrame::OnActivateApp( WNDMSGPARAM )
 		m_bActivateApp = TRUE;
 		if( !m_bActivate ) {
 			m_bActivate = TRUE;
-			// ƒoƒbƒNƒOƒ‰ƒEƒ“ƒh“®ìON‚©ƒlƒbƒgƒvƒŒƒC’†‚ÍƒŒƒWƒ…[ƒ€‚µ‚È‚¢
+			// ãƒãƒƒã‚¯ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰å‹•ä½œONã‹ãƒãƒƒãƒˆãƒ—ãƒ¬ã‚¤ä¸­ã¯ãƒ¬ã‚¸ãƒ¥ãƒ¼ãƒ ã—ãªã„
 			if( !(Config.emulator.bBackground || NetPlay.IsConnect()) ) {
 				Emu.Resume();
 			}
@@ -585,7 +585,7 @@ WNDMSG	CMainFrame::OnActivateApp( WNDMSGPARAM )
 		m_bActivateApp = FALSE;
 		if( m_bActivate ) {
 			m_bActivate = FALSE;
-			// ƒoƒbƒNƒOƒ‰ƒEƒ“ƒh“®ìON‚©ƒlƒbƒgƒvƒŒƒC’†‚Íƒ|[ƒY‚µ‚È‚¢
+			// ãƒãƒƒã‚¯ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰å‹•ä½œONã‹ãƒãƒƒãƒˆãƒ—ãƒ¬ã‚¤ä¸­ã¯ãƒãƒ¼ã‚ºã—ãªã„
 			if( !(Config.emulator.bBackground || NetPlay.IsConnect()) ) {
 				Emu.Pause();
 			}
@@ -726,16 +726,16 @@ WNDMSG	CMainFrame::OnDisplayChange( WNDMSGPARAM )
 {
 //	DEBUGOUT( "CMainFrame::OnDisplayChange\n" );
 
-	// ƒtƒ‹ƒXƒNƒŠ[ƒ“‚È‚ç‚Î©•ª‚Åƒ`ƒFƒ“ƒW’†‚à‚µ‚­‚ÍALT+TABØ‚è‘Ö‚¦’†
+	// ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãªã‚‰ã°è‡ªåˆ†ã§ãƒã‚§ãƒ³ã‚¸ä¸­ã‚‚ã—ãã¯ALT+TABåˆ‡ã‚Šæ›¿ãˆä¸­
 	if( !Config.general.bScreenMode ) {
-		// ŠëŒ¯‚È‚Ì‚ÅƒXƒŒƒbƒh‚ğƒ|[ƒY
+		// å±é™ºãªã®ã§ã‚¹ãƒ¬ãƒƒãƒ‰ã‚’ãƒãƒ¼ã‚º
 		Emu.Pause();
 		DirectDraw.OnChangeDisplayMode();
 
-		// Ä•`‰æ
+		// å†æç”»
 		::InvalidateRect( m_hWnd, NULL, TRUE );
 
-		// ƒXƒŒƒbƒh‚ğƒŒƒWƒ…[ƒ€
+		// ã‚¹ãƒ¬ãƒƒãƒ‰ã‚’ãƒ¬ã‚¸ãƒ¥ãƒ¼ãƒ 
 		Emu.Resume();
 	}
 
@@ -760,7 +760,7 @@ WNDMSG	CMainFrame::OnQueryNewPalette( WNDMSGPARAM )
 WNDMSG	CMainFrame::OnMenuChar( WNDMSGPARAM )
 {
 //	DEBUGOUT( "CMainFrame::OnMenuChar\n" );
-	// ƒLƒ“ƒLƒ“‚¤‚é‚³‚¢‚©‚ç•Â‚¶‚éc‚Æ‰R‚ğ‚Â‚­
+	// ã‚­ãƒ³ã‚­ãƒ³ã†ã‚‹ã•ã„ã‹ã‚‰é–‰ã˜ã‚‹â€¦ã¨å˜˜ã‚’ã¤ã
 	hResult = MAKELONG(0,MNC_CLOSE);
 	return	TRUE;
 }
@@ -781,15 +781,15 @@ WNDMSG	CMainFrame::OnKeyDown( WNDMSGPARAM )
 
 WNDMSG	CMainFrame::OnSize( WNDMSGPARAM )
 {
-	// Å‘å‰»•\¦“™
-	// WM_SYSCOMMAND‚Å‚à—Ç‚¢‚Ì‚¾‚ªCƒLƒƒƒvƒVƒ‡ƒ“‚ğƒ_ƒuƒ‹ƒNƒŠƒbƒN‚µ‚½‚Æ‚«‚É—ˆ‚È‚¢‚Ì‚Å...
+	// æœ€å¤§åŒ–è¡¨ç¤ºç­‰
+	// WM_SYSCOMMANDã§ã‚‚è‰¯ã„ã®ã ãŒï¼Œã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ã‚’ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯ã—ãŸã¨ãã«æ¥ãªã„ã®ã§...
 	switch( wParam ) {
 		case	SIZE_MAXIMIZED:
 			m_bZoomed = TRUE;
 			{
 			WINDOWPLACEMENT wpl;
 			::GetWindowPlacement( m_hWnd, &wpl );
-			m_WindowRect = wpl.rcNormalPosition;	// Œ³‚ÌˆÊ’u‚ğƒRƒs[
+			m_WindowRect = wpl.rcNormalPosition;	// å…ƒã®ä½ç½®ã‚’ã‚³ãƒ”ãƒ¼
 			}
 			break;
 		case	SIZE_RESTORED:
@@ -804,15 +804,15 @@ WNDMSG	CMainFrame::OnSize( WNDMSGPARAM )
 
 WNDMSG	CMainFrame::OnSysCommand( WNDMSGPARAM )
 {
-	// ƒGƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“’†‚Ì‚İ
+	// ã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ä¸­ã®ã¿
 	if( Emu.IsRunning() ) {
-		// ƒXƒNƒŠ[ƒ“ƒZ[ƒo[‚Ì‹N“®‚Ì—}~
+		// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚»ãƒ¼ãƒãƒ¼ã®èµ·å‹•ã®æŠ‘æ­¢
 		if( wParam == SC_SCREENSAVE ) {
 //			DEBUGOUT( "CMainFrame::OnSysCommand  SC_SCREENSAVE\n" );
 			hResult = 1L;
 			return	TRUE;
 		}
-		// ƒfƒBƒXƒvƒŒƒC“dŒ¹ƒIƒt‚Ì—}~
+		// ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤é›»æºã‚ªãƒ•ã®æŠ‘æ­¢
 		if( wParam == SC_MONITORPOWER ) {
 //			DEBUGOUT( "CMainFrame::OnSysCommand  SC_MONITORPOWER\n" );
 			hResult = 1L;
@@ -869,7 +869,7 @@ WNDMSG	CMainFrame::OnTimer( WNDMSGPARAM )
 //	DEBUGOUT( "CMainFrame::OnTimer bCursor=%s bForcus=%s\n", m_bCursor?"TRUE":"FALSE", m_bForcus?"TRUE":"FALSE" );
 
 	if( wParam == 0x0001 ) {
-	// ƒ}ƒEƒXƒJ[ƒ\ƒ‹—pƒ^ƒCƒ}[
+	// ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ç”¨ã‚¿ã‚¤ãƒãƒ¼
 		RECT	rc;
 		POINT	pt;
 		::GetWindowRect( m_hWnd, &rc );
@@ -883,8 +883,8 @@ WNDMSG	CMainFrame::OnTimer( WNDMSGPARAM )
 			}
 		}
 	} else if( wParam == 0x0100 ) {
-	// ƒL[ƒ`ƒFƒbƒN—pƒ^ƒCƒ}[
-		// ƒAƒNƒeƒBƒuƒEƒCƒ“ƒhƒE‚Å‚È‚¢‚âƒ_ƒCƒAƒƒO“™‚ªo‚Ä‚¢‚é‚ÍƒLƒƒƒ“ƒZƒ‹
+	// ã‚­ãƒ¼ãƒã‚§ãƒƒã‚¯ç”¨ã‚¿ã‚¤ãƒãƒ¼
+		// ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã§ãªã„æ™‚ã‚„ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ç­‰ãŒå‡ºã¦ã„ã‚‹æ™‚ã¯ã‚­ãƒ£ãƒ³ã‚»ãƒ«
 ////		if( m_bActivate && m_bKeyEnable )
 ////		if( m_bKeyEnable )
 //			OnKeyControl();
@@ -908,29 +908,29 @@ WNDMSG	CMainFrame::OnErrorMessage( WNDMSGPARAM )
 {
 //	DEBUGOUT( "CMainFrame::OnErrorMessage\n" );
 
-	// ƒ`ƒƒƒbƒgI—¹
+	// ãƒãƒ£ãƒƒãƒˆçµ‚äº†
 	m_ChatDlg.Destroy();
 
-	// ƒT[ƒ`ƒ_ƒCƒAƒƒOI—¹
+	// ã‚µãƒ¼ãƒãƒ€ã‚¤ã‚¢ãƒ­ã‚°çµ‚äº†
 	m_SearchDlg.Destroy();
 
-	// ƒpƒ^[ƒ“ƒrƒ…ƒAI—¹
+	// ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒ“ãƒ¥ã‚¢çµ‚äº†
 	m_PatternView.Destroy();
 	m_NameTableView.Destroy();
 	m_PaletteView.Destroy();
 	m_MemoryView.Destroy();
 
-	// ƒo[ƒR[ƒh“ü—Íƒ_ƒCƒAƒƒOI—¹
+	// ãƒãƒ¼ã‚³ãƒ¼ãƒ‰å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°çµ‚äº†
 	m_DatachBarcodeDlg.Destroy();
 
-	// NetPlayØ’f
+	// NetPlayåˆ‡æ–­
 	NetPlay.Disconnect();
 
-	// ƒGƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“I—¹
+	// ã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†
 	Emu.Stop();
 	DELETEPTR( Nes );
 
-	// ƒLƒƒƒvƒVƒ‡ƒ“‚ğ•Ï‚¦‚é
+	// ã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ã‚’å¤‰ãˆã‚‹
 	::SetWindowText( m_hWnd, VIRTUANES_CAPTION );
 
 	if( Config.general.bScreenMode ) {
@@ -960,7 +960,7 @@ WNDCMD	CMainFrame::OnHelp( WNDCMDPARAM )
 
 	string	sHelp = CPathlib::MakePath( CApp::GetModulePath(), "virtuanes.chm" );
 
-	// –Ê“|‚È‚ñ‚ÅShellExecute‚Å‘ã—p
+	// é¢å€’ãªã‚“ã§ShellExecuteã§ä»£ç”¨
 	::ShellExecute( HWND_DESKTOP, "open", sHelp.c_str(), NULL, NULL, SW_SHOWNORMAL );
 //	::HtmlHelp( m_hWnd, "virtuanes.chm", HH_DISPLAY_TOPIC, NULL ); 
 }
@@ -1033,29 +1033,29 @@ WNDCMD	CMainFrame::OnFileClose( WNDCMDPARAM )
 {
 //	DEBUGOUT( "CMainFrame::OnFileClose\n" );
 
-	// ƒ`ƒƒƒbƒgI—¹
+	// ãƒãƒ£ãƒƒãƒˆçµ‚äº†
 	m_ChatDlg.Destroy();
 
-	// ƒT[ƒ`ƒ_ƒCƒAƒƒOI—¹
+	// ã‚µãƒ¼ãƒãƒ€ã‚¤ã‚¢ãƒ­ã‚°çµ‚äº†
 	m_SearchDlg.Destroy();
 
-	// ƒpƒ^[ƒ“ƒrƒ…ƒAI—¹
+	// ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒ“ãƒ¥ã‚¢çµ‚äº†
 	m_PatternView.Destroy();
 	m_NameTableView.Destroy();
 	m_PaletteView.Destroy();
 	m_MemoryView.Destroy();
 
-	// ƒo[ƒR[ƒh“ü—Íƒ_ƒCƒAƒƒOI—¹
+	// ãƒãƒ¼ã‚³ãƒ¼ãƒ‰å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°çµ‚äº†
 	m_DatachBarcodeDlg.Destroy();
 
 	if( Emu.IsRunning() ) {
 		Emu.Stop();
 		DELETEPTR( Nes );
 
-		// ƒLƒƒƒvƒVƒ‡ƒ“‚ğ•Ï‚¦‚é
+		// ã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ã‚’å¤‰ãˆã‚‹
 		::SetWindowText( m_hWnd, VIRTUANES_CAPTION );
 
-		// Ä•`‰æ
+		// å†æç”»
 		::InvalidateRect( m_hWnd, NULL, TRUE );
 	}
 
@@ -1127,7 +1127,7 @@ WNDMSG	CMainFrame::OnNetPlayChatPopup( WNDMSGPARAM )
 		} else {
 			DirectDraw.SetFullScreenGDI( TRUE );
 		}
-		// ƒ_ƒCƒAƒƒO‚ª‰æ–ÊŠO‚È‚ç‚Î’†‰›‚ÉˆÚ“®‚·‚é:)
+		// ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãŒç”»é¢å¤–ãªã‚‰ã°ä¸­å¤®ã«ç§»å‹•ã™ã‚‹:)
 		RECT	rcParent, rc;
 		::GetWindowRect( m_hWnd, &rcParent );
 		::GetWindowRect( m_ChatDlg.m_hWnd, &rc );
@@ -1216,7 +1216,7 @@ WNDMSG	CMainFrame::OnDropFiles( WNDMSGPARAM )
 
 	INT	ret;
 	if( (ret = ROM::IsRomFile( szFile )) >= 0 ) {
-DEBUGOUT( "ROMƒtƒ@ƒCƒ‹ CHK=%d\n", ret );
+DEBUGOUT( "ROMãƒ•ã‚¡ã‚¤ãƒ« CHK=%d\n", ret );
 		if( ret == IDS_ERROR_ILLEGALHEADER ) {
 			if( ::MessageBox( m_hWnd, CApp::GetErrorString(ret), "VirtuaNES", MB_ICONWARNING|MB_YESNO ) != IDYES )
 				return	TRUE;
@@ -1231,7 +1231,7 @@ DEBUGOUT( "ROMƒtƒ@ƒCƒ‹ CHK=%d\n", ret );
 
 	if( Emu.IsRunning() && !NetPlay.IsConnect() ) {
 		if( (ret = NES::IsStateFile( szFile, Nes->rom )) >= 0 ) {
-DEBUGOUT( "ƒXƒe[ƒgƒtƒ@ƒCƒ‹ CHK=%d\n", ret );
+DEBUGOUT( "ã‚¹ãƒ†ãƒ¼ãƒˆãƒ•ã‚¡ã‚¤ãƒ« CHK=%d\n", ret );
 			if( ret == IDS_ERROR_ILLEGALSTATECRC ) {
 				if( Config.emulator.bCrcCheck ) {
 					if( ::MessageBox( m_hWnd, CApp::GetErrorString(ret), "VirtuaNES", MB_ICONWARNING|MB_YESNO ) != IDYES )
@@ -1241,7 +1241,7 @@ DEBUGOUT( "ƒXƒe[ƒgƒtƒ@ƒCƒ‹ CHK=%d\n", ret );
 			Emu.EventParam2( CEmuThread::EV_STATE_LOAD, (INT)szFile, -1 );
 		} else
 		if( (ret = NES::IsMovieFile( szFile, Nes->rom )) >= 0 ) {
-DEBUGOUT( "ƒ€[ƒr[ƒtƒ@ƒCƒ‹ CHK=%d\n", ret );
+DEBUGOUT( "ãƒ ãƒ¼ãƒ“ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ« CHK=%d\n", ret );
 			if( ret == IDS_ERROR_ILLEGALMOVIEOLD ) {
 				::MessageBox( m_hWnd, CApp::GetErrorString(ret), "VirtuaNES", MB_ICONHAND|MB_OK );
 				return	TRUE;
@@ -1267,19 +1267,19 @@ DEBUGOUT( "ƒ€[ƒr[ƒtƒ@ƒCƒ‹ CHK=%d\n", ret );
 
 void	CMainFrame::OnEmulationStart( LPCSTR szFile, BOOL bChecked )
 {
-	// ƒT[ƒ`ƒ_ƒCƒAƒƒOI—¹
+	// ã‚µãƒ¼ãƒãƒ€ã‚¤ã‚¢ãƒ­ã‚°çµ‚äº†
 	m_SearchDlg.Destroy();
 
-	// ƒo[ƒR[ƒh“ü—Íƒ_ƒCƒAƒƒOI—¹
+	// ãƒãƒ¼ã‚³ãƒ¼ãƒ‰å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°çµ‚äº†
 	m_DatachBarcodeDlg.Destroy();
 
-	// ƒpƒ^[ƒ“ƒrƒ…ƒAI—¹
+	// ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒ“ãƒ¥ã‚¢çµ‚äº†
 //	m_PatternView.Destroy();
 //	m_NameTableView.Destroy();
 //	m_PaletteView.Destroy();
 //	m_MemoryView.Destroy();
 
-	// ƒGƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“I—¹
+	// ã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†
 //	Emu.Stop();
 //	DELETEPTR( Nes );
 
@@ -1287,9 +1287,9 @@ void	CMainFrame::OnEmulationStart( LPCSTR szFile, BOOL bChecked )
 		if( !bChecked ) {
 			INT	ret;
 			if( (ret = ROM::IsRomFile( szFile )) != 0 ) {
-				// ’v–½“I‚ÈƒGƒ‰[
+				// è‡´å‘½çš„ãªã‚¨ãƒ©ãƒ¼
 				if( ret == IDS_ERROR_OPEN ) {
-					// xxx ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ
+					// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 					::wsprintf( szErrorString, CApp::GetErrorString(ret), szFile );
 					throw	szErrorString;
 				}
@@ -1300,7 +1300,7 @@ void	CMainFrame::OnEmulationStart( LPCSTR szFile, BOOL bChecked )
 					throw	CApp::GetErrorString(ret);
 				}
 
-				// YES/NOƒ`ƒFƒbƒN
+				// YES/NOãƒã‚§ãƒƒã‚¯
 				if( ret == IDS_ERROR_ILLEGALHEADER ) {
 					if( ::MessageBox( m_hWnd, CApp::GetErrorString(ret), "VirtuaNES", MB_ICONWARNING|MB_YESNO ) != IDYES )
 						return;
@@ -1310,7 +1310,7 @@ void	CMainFrame::OnEmulationStart( LPCSTR szFile, BOOL bChecked )
 			}
 		}
 
-		// ƒGƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“I—¹
+		// ã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†
 		Emu.Stop();
 		DELETEPTR( Nes );
 
@@ -1326,17 +1326,17 @@ void	CMainFrame::OnEmulationStart( LPCSTR szFile, BOOL bChecked )
 				}
 			}
 
-			// ƒLƒƒƒvƒVƒ‡ƒ“‚ğ•Ï‚¦‚é
+			// ã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ã‚’å¤‰ãˆã‚‹
 			{
 			string	str = VIRTUANES_CAPTION;
 				str = str + " - " + Nes->rom->GetRomName();
 				::SetWindowText( m_hWnd, str.c_str() );
 			}
 
-			// ƒGƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“ƒXƒŒƒbƒhƒXƒ^[ƒg
+			// ã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã‚¹ãƒ¬ãƒƒãƒ‰ã‚¹ã‚¿ãƒ¼ãƒˆ
 			Emu.Start( m_hWnd, Nes );
 		} else {
-			// xxx ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ
+			// xxx ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“
 			LPCSTR	szErrStr = CApp::GetErrorString( IDS_ERROR_OPEN );
 			sprintf( szErrorString, szErrStr, szFile );
 			throw	szErrorString;
@@ -1346,7 +1346,7 @@ void	CMainFrame::OnEmulationStart( LPCSTR szFile, BOOL bChecked )
 		PostMessage( m_hWnd, WM_VNS_ERRORMSG, 0, (LPARAM)szErrorString );
 #ifndef	_DEBUG
 	} catch(...) {
-		// •s–¾‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½
+		// ä¸æ˜ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ
 		::strcpy( szErrorString, CApp::GetErrorString( IDS_ERROR_UNKNOWN ) );
 		PostMessage( m_hWnd, WM_VNS_ERRORMSG, 0, (LPARAM)szErrorString );
 #endif
@@ -1362,7 +1362,7 @@ WNDCMD	CMainFrame::OnRomInfo( WNDCMDPARAM )
 
 	CRomInfoDlg dlg;
 
-	// ƒƒ“ƒo‚Ìİ’è
+	// ãƒ¡ãƒ³ãƒã®è¨­å®š
 	::strcpy( dlg.m_szName, Nes->rom->GetRomName() );
 	dlg.m_bUnif   = Nes->rom->IsUnifMapper();
 	dlg.m_nMapper = Nes->rom->GetMapperNo();
@@ -1398,10 +1398,10 @@ WNDCMD	CMainFrame::OnWaveRecord( WNDCMDPARAM )
 		return;
 
 	if( Emu.IsWaveRecord() ) {
-	// ˜^‰¹’†‚¾‚Á‚½‚ç~‚ß‚é
+	// éŒ²éŸ³ä¸­ã ã£ãŸã‚‰æ­¢ã‚ã‚‹
 		Emu.Event( CEmuThread::EV_WAVEREC_STOP );
 	} else {
-	// ‰‚ß‚Ä‚È‚ç
+	// åˆã‚ã¦ãªã‚‰
 		string	pathstr, tempstr;
 		if( Config.path.bWavePath ) {
 			pathstr = CPathlib::CreatePath( CApp::GetModulePath(), Config.path.szWavePath );
@@ -1457,7 +1457,7 @@ WNDCMD	CMainFrame::OnLauncher( WNDCMDPARAM )
 		} else {
 			DirectDraw.SetFullScreenGDI( TRUE );
 		}
-		// ƒ_ƒCƒAƒƒO‚ğ’†‰›‚ÉˆÚ“®‚·‚é:)
+		// ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ä¸­å¤®ã«ç§»å‹•ã™ã‚‹:)
 		RECT	rcParent, rc;
 		::GetWindowRect( m_hWnd, &rcParent );
 		::GetWindowRect( m_LauncherDlg.m_hWnd, &rc );
@@ -1530,7 +1530,7 @@ WNDCMD	CMainFrame::OnNetPlayChat( WNDCMDPARAM )
 		} else {
 			DirectDraw.SetFullScreenGDI( TRUE );
 		}
-		// ƒ_ƒCƒAƒƒO‚ª‰æ–ÊŠO‚È‚ç‚Î’†‰›‚ÉˆÚ“®‚·‚é:)
+		// ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãŒç”»é¢å¤–ãªã‚‰ã°ä¸­å¤®ã«ç§»å‹•ã™ã‚‹:)
 		RECT	rcParent, rc;
 		::GetWindowRect( m_hWnd, &rcParent );
 		::GetWindowRect( m_ChatDlg.m_hWnd, &rc );
@@ -1567,7 +1567,7 @@ WNDCMD	CMainFrame::OnSearch( WNDCMDPARAM )
 		} else {
 			DirectDraw.SetFullScreenGDI( TRUE );
 		}
-		// ƒ_ƒCƒAƒƒO‚ğ’†‰›‚ÉˆÚ“®‚·‚é:)
+		// ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ä¸­å¤®ã«ç§»å‹•ã™ã‚‹:)
 		RECT	rcParent, rc;
 		::GetWindowRect( m_hWnd, &rcParent );
 		::GetWindowRect( m_SearchDlg.m_hWnd, &rc );
@@ -1682,7 +1682,7 @@ WNDCMD	CMainFrame::OnDatachBacode( WNDCMDPARAM )
 		} else {
 			DirectDraw.SetFullScreenGDI( TRUE );
 		}
-		// ƒ_ƒCƒAƒƒO‚ğ’†‰›‚ÉˆÚ“®‚·‚é:)
+		// ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ä¸­å¤®ã«ç§»å‹•ã™ã‚‹:)
 		RECT	rcParent, rc;
 		::GetWindowRect( m_hWnd, &rcParent );
 		::GetWindowRect( m_DatachBarcodeDlg.m_hWnd, &rc );
@@ -1723,7 +1723,7 @@ WNDCMD	CMainFrame::OnGraphicsCfg( WNDCMDPARAM )
 	if( dlg.DoModal( m_hWnd ) == IDOK ) {
 		Emu.Pause();
 
-		// ƒT[ƒtƒFƒX‚ğƒŠƒrƒ‹ƒh‚·‚é•K—v‚ª‚ ‚é‚©‚Ìƒ`ƒFƒbƒN
+		// ã‚µãƒ¼ãƒ•ã‚§ã‚¹ã‚’ãƒªãƒ“ãƒ«ãƒ‰ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã‹ã®ãƒã‚§ãƒƒã‚¯
 		BOOL	bRebuildDirectDraw = FALSE;
 		BOOL	bRebuildSurface = FALSE;
 		BOOL	bMenuOFF = FALSE;
@@ -1733,7 +1733,7 @@ WNDCMD	CMainFrame::OnGraphicsCfg( WNDCMDPARAM )
 		if( DirectDraw.GetSystemMemory() != Config.graphics.bSystemMemory )
 			bRebuildSurface = TRUE;
 
-		// DirectDrawµÌß¼®İ‚Ìİ’è
+		// DirectDrawï½µï¾Œï¾Ÿï½¼ï½®ï¾ã®è¨­å®š
 		DirectDraw.SetFlipMode     ( Config.graphics.bSyncDraw );
 		DirectDraw.SetAspectMode   ( Config.graphics.bAspect );
 		DirectDraw.SetAllLineMode  ( Config.graphics.bAllLine );
@@ -1749,7 +1749,7 @@ WNDCMD	CMainFrame::OnGraphicsCfg( WNDCMDPARAM )
 		DirectDraw.SetWindowVSyncMode( Config.graphics.bWindowVSync );
 
 		if( Config.general.bScreenMode ) {
-			// ƒXƒNƒŠ[ƒ“ƒ‚[ƒh‚Ì•ÏX‚ª‚ ‚Á‚½ê‡
+			// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰ã®å¤‰æ›´ãŒã‚ã£ãŸå ´åˆ
 			if( !DirectDraw.IsNowDisplayMode( Config.graphics.dwDisplayWidth,
 							  Config.graphics.dwDisplayHeight,
 							  Config.graphics.dwDisplayDepth,
@@ -1757,7 +1757,7 @@ WNDCMD	CMainFrame::OnGraphicsCfg( WNDCMDPARAM )
 				if( !bRebuildDirectDraw )
 					DirectDraw.BeginDisplayChange();
 
-				// ƒXƒNƒŠ[ƒ“ƒ‚[ƒh‚Ìİ’è
+				// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰ã®è¨­å®š
 				DirectDraw.SetDisplayMode( Config.graphics.dwDisplayWidth,
 							   Config.graphics.dwDisplayHeight,
 							   Config.graphics.dwDisplayDepth,
@@ -1770,10 +1770,10 @@ WNDCMD	CMainFrame::OnGraphicsCfg( WNDCMDPARAM )
 				::SetWindowPos( m_hWnd, HWND_NOTOPMOST, 0, 0, ::GetSystemMetrics(SM_CXSCREEN),
 						::GetSystemMetrics(SM_CYSCREEN), SWP_SHOWWINDOW );
 
-				// ƒpƒŒƒbƒg
+				// ãƒ‘ãƒ¬ãƒƒãƒˆ
 				::PostMessage( m_hWnd, WM_QUERYNEWPALETTE, 0, 0 );
 
-				// ƒT[ƒtƒFƒX‚ÍÄ\’z‚³‚ê‚½‚Ì‚Å“ñ“x‚Ís‚í‚È‚¢
+				// ã‚µãƒ¼ãƒ•ã‚§ã‚¹ã¯å†æ§‹ç¯‰ã•ã‚ŒãŸã®ã§äºŒåº¦ã¯è¡Œã‚ãªã„
 				bRebuildSurface = FALSE;
 
 				bMenuOFF = TRUE;
@@ -1860,7 +1860,7 @@ WNDCMD	CMainFrame::OnShortcutCfg( WNDCMDPARAM )
 	if( dlg.DoModal( m_hWnd ) == IDOK ) {
 		::SetMenu( m_hWnd, NULL );
 		::DestroyMenu( m_hMenu );
-		// ƒƒjƒ…[‚ÌÄƒ[ƒh
+		// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å†ãƒ­ãƒ¼ãƒ‰
 		m_hMenu = CApp::LoadMenu( IDR_MENU );
 		CApp::SetMenu( m_hMenu );
 		::SetMenu( m_hWnd, m_hMenu );
@@ -1883,7 +1883,7 @@ WNDCMD	CMainFrame::OnLanguageCfg( WNDCMDPARAM )
 	CLanguageDlg dlg;
 
 	if( dlg.DoModal( m_hWnd ) == IDOK ) {
-		// ƒ‰ƒ“ƒ`ƒƒ[‹N“®’†‚È‚ç‚Î•Â‚¶‚é
+		// ãƒ©ãƒ³ãƒãƒ£ãƒ¼èµ·å‹•ä¸­ãªã‚‰ã°é–‰ã˜ã‚‹
 		BOOL	bLauncher = FALSE;
 		BOOL	bLauncherVisible = FALSE;
 		if( m_LauncherDlg.m_hWnd && ::IsWindow(m_LauncherDlg.m_hWnd) ) {
@@ -1892,7 +1892,7 @@ WNDCMD	CMainFrame::OnLanguageCfg( WNDCMDPARAM )
 			m_LauncherDlg.Destroy();
 		}
 
-		// ƒ`ƒƒƒbƒgƒ_ƒCƒAƒƒO‚Í•Â‚¶‚é
+		// ãƒãƒ£ãƒƒãƒˆãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã¯é–‰ã˜ã‚‹
 		BOOL	bChat = FALSE;
 		BOOL	bChatVisible = FALSE;
 		if( m_ChatDlg.m_hWnd && ::IsWindow(m_ChatDlg.m_hWnd) ) {
@@ -1901,23 +1901,23 @@ WNDCMD	CMainFrame::OnLanguageCfg( WNDCMDPARAM )
 			m_ChatDlg.Destroy();
 		}
 
-		// ƒT[ƒ`ƒ_ƒCƒAƒƒO‚Í•Â‚¶‚é
+		// ã‚µãƒ¼ãƒãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã¯é–‰ã˜ã‚‹
 		if( m_SearchDlg.m_hWnd && ::IsWindow(m_SearchDlg.m_hWnd) ) {
 			m_SearchDlg.Destroy();
 		}
 
-		// ƒo[ƒR[ƒh“ü—Íƒ_ƒCƒAƒƒO‚Í•Â‚¶‚é
+		// ãƒãƒ¼ã‚³ãƒ¼ãƒ‰å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã¯é–‰ã˜ã‚‹
 		if( m_DatachBarcodeDlg.m_hWnd && ::IsWindow(m_DatachBarcodeDlg.m_hWnd) ) {
 			m_DatachBarcodeDlg.Destroy();
 		}
 
-		// ƒƒjƒ…[‚Ì”jŠü
+		// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®ç ´æ£„
 		::SetMenu( m_hWnd, NULL );
 		::DestroyMenu( m_hMenu );
 
-		// Œ³‚Ìƒvƒ‰ƒOƒCƒ“‚ÌŠJ•ú
+		// å…ƒã®ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®é–‹æ”¾
 		::FreeLibrary( CApp::GetPlugin() );
-		// V‚µ‚¢ƒvƒ‰ƒOƒCƒ“‚Ìƒ[ƒh
+		// æ–°ã—ã„ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®ãƒ­ãƒ¼ãƒ‰
 		HINSTANCE hPlugin;
 		if( !(hPlugin = ::LoadLibrary( CPlugin::GetPluginPath() )) ) {
 			::MessageBox( m_hWnd, "Language plug-in load failed.", "VirtuaNES", MB_ICONERROR|MB_OK );
@@ -1925,14 +1925,14 @@ WNDCMD	CMainFrame::OnLanguageCfg( WNDCMDPARAM )
 			return;
 		}
 		CApp::SetPlugin( hPlugin );
-		// ƒƒjƒ…[‚ÌÄƒ[ƒh
+		// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å†ãƒ­ãƒ¼ãƒ‰
 		m_hMenu = CApp::LoadMenu( IDR_MENU );
 		CApp::SetMenu( m_hMenu );
 		::SetMenu( m_hWnd, m_hMenu );
 
 		OnRebuildMenu();
 
-		// ƒ‰ƒ“ƒ`ƒƒ[Ä‹N“®
+		// ãƒ©ãƒ³ãƒãƒ£ãƒ¼å†èµ·å‹•
 		if( bLauncher ) {
 			m_LauncherDlg.Create( NULL );
 			if( bLauncherVisible ) {
@@ -1940,7 +1940,7 @@ WNDCMD	CMainFrame::OnLanguageCfg( WNDCMDPARAM )
 			}
 		}
 
-		// ƒ`ƒƒƒbƒgÄ‹N“®
+		// ãƒãƒ£ãƒƒãƒˆå†èµ·å‹•
 		if( bChat ) {
 			m_ChatDlg.Create( NULL );
 			if( bChatVisible ) {
@@ -1989,7 +1989,7 @@ WNDCMD	CMainFrame::OnPaletteEditCfg( WNDCMDPARAM )
 		} else {
 			DirectDraw.SetFullScreenGDI( TRUE );
 		}
-		// ƒ_ƒCƒAƒƒO‚ğ’†‰›‚ÉˆÚ“®‚·‚é:)
+		// ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ä¸­å¤®ã«ç§»å‹•ã™ã‚‹:)
 		RECT	rcParent, rc;
 		::GetWindowRect( m_hWnd, &rcParent );
 		::GetWindowRect( m_PaletteEdit.m_hWnd, &rc );
@@ -2011,7 +2011,7 @@ WNDCMD	CMainFrame::OnFullScreen( WNDCMDPARAM )
 
 	m_bKeyEnable = FALSE;
 
-	// ŠëŒ¯‚È‚Ì‚Å...
+	// å±é™ºãªã®ã§...
 	Emu.Pause();
 
 	Config.general.bScreenMode = !Config.general.bScreenMode;
@@ -2020,13 +2020,13 @@ WNDCMD	CMainFrame::OnFullScreen( WNDCMDPARAM )
 	if( !Config.general.bScreenMode ) {
 	// FullScreen to Window mode
 		DirectDraw.BeginDisplayChange();
-		// ˆÊ’u‚Ì•œ‹A
+		// ä½ç½®ã®å¾©å¸°
 		::SetWindowLong( m_hWnd, GWL_STYLE, m_StyleBackup );
 		::SetWindowLong( m_hWnd, GWL_EXSTYLE, m_ExStyleBackup );
 		::SetWindowPlacement( m_hWnd, &m_WindowPlacement );
 	} else {
 	// Window to FullScreen mode
-		// ˆÊ’u‚Ì•Û‘¶
+		// ä½ç½®ã®ä¿å­˜
 //		m_bZoomed = ::IsZoomed( m_hWnd );
 		m_WindowPlacement.length = sizeof(m_WindowPlacement);
 		::GetWindowPlacement( m_hWnd, &m_WindowPlacement );
@@ -2036,7 +2036,7 @@ WNDCMD	CMainFrame::OnFullScreen( WNDCMDPARAM )
 		::SetWindowLong( m_hWnd, GWL_STYLE, WS_POPUP );
 		::SetWindowLong( m_hWnd, GWL_EXSTYLE, 0 );
 
-		// ƒXƒNƒŠ[ƒ“ƒ‚[ƒh‚Ìİ’è
+		// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰ã®è¨­å®š
 		DirectDraw.SetDisplayMode( Config.graphics.dwDisplayWidth,
 					   Config.graphics.dwDisplayHeight,
 					   Config.graphics.dwDisplayDepth,
@@ -2069,7 +2069,7 @@ WNDCMD	CMainFrame::OnFullScreen( WNDCMDPARAM )
 				::GetSystemMetrics(SM_CYSCREEN), SWP_SHOWWINDOW );
 	}
 
-	// ŠëŒ¯‚È‚Ì‚Å...
+	// å±é™ºãªã®ã§...
 	Emu.Resume();
 
 	m_bKeyEnable = TRUE;
@@ -2079,7 +2079,7 @@ WNDCMD	CMainFrame::OnZoom( WNDCMDPARAM )
 {
 //	DEBUGOUT( "CMainFrame::OnZoom %d\n", uID-ID_ZOOMx1 );
 
-	// ƒtƒ‹ƒXƒNƒŠ[ƒ“‚Í–³‹
+	// ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³æ™‚ã¯ç„¡è¦–
 	if( Config.general.bScreenMode )
 		return;
 
@@ -2136,7 +2136,7 @@ void PpuDump(void)
 	//PAL
 	FILE *fp=fopen(exePath,"w+b");
 	if(fp==NULL){
-		MessageBox(NULL,"DUMP PPU ³ö´í","³ö´í",0);
+		MessageBox(NULL,"DUMP PPU ï½³î“›ãƒ»,"ï½³î“›ãƒ»,0);
 		return;}
 	
 	for(int i=0; i<12; i++){
@@ -2159,7 +2159,7 @@ void CpuDump(void)
 	//PAL
 	FILE *fp=fopen(exePath,"w+b");
 	if(fp==NULL){
-		MessageBox(NULL,"DUMP CPU ³ö´í","³ö´í",0);
+		MessageBox(NULL,"DUMP CPU ï½³î“›ãƒ»,"ï½³î“›ãƒ»,0);
 		return;}
 	
 	for(int i=0; i<8; i++){
@@ -2612,7 +2612,7 @@ _Movie_Play_Failed:;
 
 				Emu.EventParam( CEmuThread::EV_MOVIE_RECAPPEND, (INT)szFile );
 			} else {
-				// V‹Kì¬‚Æ“¯‚¶
+				// æ–°è¦ä½œæˆã¨åŒã˜
 				Emu.EventParam( CEmuThread::EV_MOVIE_REC, (INT)szFile );
 			}
 		}
@@ -2636,7 +2636,7 @@ void	CMainFrame::OnMovieInfo( WNDCMDPARAM )
 
 	CMovieInfoDlg dlg;
 
-	// ƒƒ“ƒo‚Ìİ’è
+	// ãƒ¡ãƒ³ãƒã®è¨­å®š
 	Nes->GetMovieInfo( dlg.m_wRecVersion, dlg.m_wVersion, dlg.m_dwFrames, dlg.m_dwRerecordTimes );
 
 	if( !m_bMenu )
@@ -2791,7 +2791,7 @@ void	CMainFrame::OnChangeMenu( BOOL bFlag )
 
 void	CMainFrame::OnSetWindowSize()
 {
-	// ƒEƒCƒ“ƒhƒEƒ‚[ƒh‚Ì‚¾‚¯
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰ã®æ™‚ã ã‘
 	if( Config.general.bScreenMode )
 		return;
 
@@ -2814,7 +2814,7 @@ void	CMainFrame::OnSetWindowSize()
 	::SetWindowPos( m_hWnd, HWND_NOTOPMOST, rcW.left, rcW.top,
 			rcW.right-rcW.left, rcW.bottom-rcW.top, SWP_NOZORDER );
 
-	// ƒƒjƒ…[‚ªÜ‚è•Ô‚³‚ê‚é‚Æc‚ª¬‚³‚­‚È‚é–‚ª‚ ‚é‚Ì‚ÅÄC³
+	// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãŒæŠ˜ã‚Šè¿”ã•ã‚Œã‚‹ã¨ç¸¦ãŒå°ã•ããªã‚‹äº‹ãŒã‚ã‚‹ã®ã§å†ä¿®æ­£
 	::GetClientRect( m_hWnd, &rcC );
 	if( (rcC.bottom-rcC.top) != height ) {
 		::GetWindowRect( m_hWnd, &rcW );
@@ -2827,13 +2827,13 @@ void	CMainFrame::OnSetWindowSize()
 	}
 
 
-	// Å‘å•\¦‚ÉƒTƒCƒY‚ğ•ÏX‚µ‚½ê‡‚ÌÅ‘å•\¦‚Ì‰ğœ‹y‚Ñƒ{ƒ^ƒ“‚ÌÄ•`‰æ
+	// æœ€å¤§è¡¨ç¤ºæ™‚ã«ã‚µã‚¤ã‚ºã‚’å¤‰æ›´ã—ãŸå ´åˆã®æœ€å¤§è¡¨ç¤ºã®è§£é™¤åŠã³ãƒœã‚¿ãƒ³ã®å†æç”»
 	LONG	style = ::GetWindowLong( m_hWnd, GWL_STYLE );
 	style &= ~WS_MAXIMIZE;
 	::SetWindowLong( m_hWnd, GWL_STYLE, style );
 	::RedrawWindow( m_hWnd, NULL, NULL, RDW_FRAME|RDW_INVALIDATE );
 
-	// ˆÊ’u•Û‘¶‚µ‚È‚¨‚µ
+	// ä½ç½®ä¿å­˜ã—ãªãŠã—
 	m_bZoomed = FALSE;
 	::GetWindowRect( m_hWnd, &m_WindowRect );
 }
@@ -2924,13 +2924,13 @@ void	CMainFrame::OnUpdateMenu( HMENU hMenu, UINT uID )
 		case	ID_QUICKSAVE_SLOT4:	case	ID_QUICKSAVE_SLOT5:
 		case	ID_QUICKSAVE_SLOT6:	case	ID_QUICKSAVE_SLOT7:
 		case	ID_QUICKSAVE_SLOT8:	case	ID_QUICKSAVE_SLOT9:
-			// “ú•\¦(Œ‹\–Ê“|‚—)
+			// æ—¥æ™‚è¡¨ç¤º(çµæ§‹é¢å€’ï½—)
 			{
 			CHAR	szMenuString[256];
 			CHAR*	pToken;
-			const UCHAR seps[] = " \t\0";	// ƒZƒpƒŒ[ƒ^
+			const UCHAR seps[] = " \t\0";	// ã‚»ãƒ‘ãƒ¬ãƒ¼ã‚¿
 
-			// ID”Ô†‚©‚çƒCƒ“ƒfƒbƒNƒX‚ğ’T‚·
+			// IDç•ªå·ã‹ã‚‰ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’æ¢ã™
 			INT i ;
 			for( i = 0; CConfig::ShortcutKeyID[i*3+0] != uID; i++ );
 
@@ -3179,7 +3179,7 @@ void	CMainFrame::OnKeyControl()
 {
 BYTE	KeyInp[256+64*8];
 
-	// 20ms–¢–‚Å‚Íó‚¯•t‚¯‚È‚¢‚æ‚¤‚É‚·‚é
+	// 20msæœªæº€ã§ã¯å—ã‘ä»˜ã‘ãªã„ã‚ˆã†ã«ã™ã‚‹
 	if( (::timeGetTime()-m_dwKeyTime) < 20 )
 		return;
 	m_dwKeyTime = ::timeGetTime();
@@ -3187,13 +3187,13 @@ BYTE	KeyInp[256+64*8];
 	::memset( KeyInp, 0x00, sizeof(KeyInp) );
 
 	if( !m_bKeyEnable ) {
-		// ƒgƒŠƒK‚ğ”­¶‚³‚¹‚È‚¢‚æ‚¤‚É‚·‚éˆ×
+		// ãƒˆãƒªã‚¬ã‚’ç™ºç”Ÿã•ã›ãªã„ã‚ˆã†ã«ã™ã‚‹ç‚º
 		::memset( m_KeyBuf, 0x80, sizeof(m_KeyBuf) );
 //DEBUGOUT( "Key Disable\n" );
 		return;
 	}
 
-	// ƒgƒŠƒK•ƒŠƒs[ƒg¶¬
+	// ãƒˆãƒªã‚¬ï¼†ãƒªãƒ”ãƒ¼ãƒˆç”Ÿæˆ
 	BYTE*	pSw  = (BYTE*)DirectInput.m_Sw;
 	BYTE*	pOld = (BYTE*)m_KeyBuf;
 	BYTE*	pCnt = (BYTE*)m_KeyCnt;
@@ -3216,10 +3216,10 @@ BYTE	KeyInp[256+64*8];
 
 //DEBUGOUT( "LMENU:%02X RMENU:%02X ENTER:%02X\n", m_KeyBuf[DIK_LMENU], m_KeyBuf[DIK_RMENU], KeyInp[DIK_RETURN] );
 
-	// ƒCƒxƒ“ƒg”­M
+	// ã‚¤ãƒ™ãƒ³ãƒˆç™ºä¿¡
 	BOOL	bAltOnly = FALSE;
 	if( Emu.IsRunning() ) {
-		// ƒtƒ@ƒ~ƒŠ[ƒx[ƒVƒbƒNƒL[ƒ{[ƒh‚Ì
+		// ãƒ•ã‚¡ãƒŸãƒªãƒ¼ãƒ™ãƒ¼ã‚·ãƒƒã‚¯ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®æ™‚
 		if( Emu.GetExController() == PAD::EXCONTROLLER_KEYBOARD ||
 			Emu.GetExController() == PAD::EXCONTROLLER_SUPOR_KEYBOARD )
 			bAltOnly = TRUE;
@@ -3275,7 +3275,7 @@ void _cdecl CMainFrame::KeyThreadProc( LPVOID lpParam )
 	while( !m_bKeyThreadExit ) {
 		::Sleep( 20 );
 
-		// ƒGƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“’†ˆÈŠO‚±‚Á‚¿‚Å‚â‚ç‚È‚¢
+		// ã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ä¸­ä»¥å¤–ã“ã£ã¡ã§ã‚„ã‚‰ãªã„
 		if( Emu.IsRunning() ) {
 			continue;
 		} else {

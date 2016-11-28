@@ -1,4 +1,4 @@
-class	Mapper175 : public Mapper
+﻿class	Mapper175 : public Mapper
 {
 public:
 	Mapper175( NES* parent ) : Mapper(parent) {}

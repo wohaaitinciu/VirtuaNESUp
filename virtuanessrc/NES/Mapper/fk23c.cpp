@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////
 // MapperFk23c  WaiXing San Guo Zhi - Xiong Ba Tian Xia (C)             //
 //////////////////////////////////////////////////////////////////////////
 
@@ -100,7 +100,7 @@ void MapperFk23c::fk23c_UpdatePrg2p(unsigned int A,unsigned int V)
 
 void MapperFk23c::fk23c_UpdateChr2p(unsigned int A,unsigned int V)
 {
-	if(VROM_1K_SIZE==0) return;//ÔÝÊ±Ã»ÓÐºÃµÄ½â¾ö·½·¨
+	if(VROM_1K_SIZE==0) return;//æš‚æ—¶æ²¡æœ‰å¥½çš„è§£å†³æ–¹æ³•
 
 	if (!(exRegs[0] & 0x40U) && (!(exRegs[3] & 0x2U) || (A != 0x400 && A != 0xC00)))
 		SetVROM_1K_Bank( A>>10, (exRegs[2] & 0x7FU) << 3 | V );
